@@ -32,7 +32,7 @@ return function(args)
 		},
 	}
 
-	lib.updateTable(cfg, args or {})
+	lib.updateCfg(cfg, args or {})
 
 	local data = {
 		cfg = cfg,
@@ -45,5 +45,5 @@ return function(args)
 		end
 	}
 
-	return type(cfg.customInit) == 'function' and cfg.customInit(data) or data
+	return type(cfg.init) == 'function' and cfg.init(data) or data
 end

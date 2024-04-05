@@ -14,15 +14,14 @@ return {
 		local oishiline = { modules = {} }
 
 		local modules = {
-			filename = require('modules.filename')
+			mode = require('modules.mode'),
+			filename = require('modules.filename'),
 		}
 
 		local cfg = {
 			modules = args.modules or {
-				{
-					module = 'filename',
-					args = nil,
-				},
+				{ module = 'filename' },
+				{ module = 'mode' },
 			},
 		}
 
