@@ -3,7 +3,7 @@ return function(args)
 
 	local cfg = {
 		fmt = {
-			str = '%f%w%h%m%r',
+			str = '%P',
 
 			highlight = {
 				fg = 'yellow',
@@ -36,9 +36,9 @@ return function(args)
 
 	local data = {
 		cfg = cfg,
-		leftSep = lib.colorStr(cfg.sep.left.str, 'OishilineFilenameLeftSep', cfg.sep.left.highlight),
-		fmt = lib.colorStr(cfg.fmt.str, 'OishilineFilenameFmt', cfg.fmt.highlight),
-		rightSep = lib.colorStr(cfg.sep.right.str, 'OishilineFilenameRightSep', cfg.sep.right.highlight),
+		leftSep = lib.colorStr(cfg.sep.left.str, 'OishilineProgressLeftSep', cfg.sep.left.highlight),
+		fmt = lib.colorStr(cfg.fmt.str, 'OishilineProgressFmt', cfg.fmt.highlight),
+		rightSep = lib.colorStr(cfg.sep.right.str, 'OishilineProgressRightSep', cfg.sep.right.highlight),
 
 		run = function(data)
 			return string.format('%s%s%s', data.leftSep, data.fmt, data.rightSep)

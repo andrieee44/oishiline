@@ -13,20 +13,17 @@ return {
 		args = args or {}
 		local oishiline = { modules = {} }
 
-		local modules = {
-			mode = require('modules.mode'),
-			filename = require('modules.filename'),
-		}
-
 		local cfg = {
 			modules = args.modules or {
-				{ module = 'filename' },
 				{ module = 'mode' },
+				{ module = 'filename' },
+				{ module = 'progress' },
+				{ module = 'location' },
 			},
 		}
 
 		for i, v in ipairs(cfg.modules) do
-			oishiline.modules[i] = modules[v.module](v.args)
+			oishiline.modules[i] = require(string.format('modules.%s', v.module))(v.args)
 		end
 
 		vim.g.oishiline = oishiline

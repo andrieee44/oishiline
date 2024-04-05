@@ -78,7 +78,7 @@ return function(args)
 		run = function(data)
 			local mode = data.modes[vim.api.nvim_get_mode().mode]
 			return string.format('%s%%#%s#%s%s', data.leftSep, 'OishilineModeFmt', mode, data.rightSep)
-		end
+		end,
 	}
 
 	return type(cfg.init) == 'function' and cfg.init(data) or data
