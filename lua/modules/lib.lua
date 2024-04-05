@@ -5,7 +5,7 @@ return {
 		end
 	end,
 
-	colorText = function(text, name, value)
+	colorStr = function(text, name, value)
 		vim.api.nvim_set_hl(0, name, value)
 		return string.format('%%#%s#%s', name, text)
 	end,

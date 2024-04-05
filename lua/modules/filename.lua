@@ -1,45 +1,52 @@
 local lib = require('modules.lib')
 
-return {
-	init = function(self, args)
-		local cfg = {
-			fmt = {
-				text = '%f%w%h%m%r',
+return function(args)
+	local cfg = {
+		fmt = {
+			str = '%f%w%h%m%r',
+
+			highlight = {
+				fg = 'yellow',
+				bg = 'black',
+			},
+		},
+
+		sep = {
+			left = {
+				str = '<',
 
 				highlight = {
-					fg = 'yellow',
+					fg = 'red',
 					bg = 'black',
 				},
 			},
 
-			sep = {
-				left = {
-					text = '<',
+			right = {
+				str = '>',
 
-					highlight = {
-						fg = 'red',
-						bg = 'black',
-					},
+				highlight = {
+					fg = 'cyan',
+					bg = 'black',
 				},
+			},
+		},
 
-				right = {
-					text = '>',
+		customInit = function(data)
+			return data
+		end,
+	}
 
-					highlight = {
-						fg = 'cyan',
-						bg = 'black',
-					},
-				},
-			}
-		}
+	lib.updateTable(cfg, args or {})
 
-		lib.updateTable(cfg, args or {})
-		self.leftSep = lib.colorText(cfg.sep.left.text, 'OishilineFilenameLeftSep', cfg.sep.left.highlight)
-		self.fmt = lib.colorText(cfg.fmt.text, 'OishilineFilenameFmt', cfg.fmt.highlight)
-		self.rightSep = lib.colorText(cfg.sep.right.text, 'OishilineFilenameRightSep', cfg.sep.right.highlight)
-	end,
+	local data = {
+		leftSep = lib.colorStr(cfg.sep.left.str, 'OishilineFilenameLeftSep', cfg.sep.left.highlight),
+		fmt = lib.colorStr(cfg.fmt.str, 'OishilineFilenameFmt', cfg.fmt.highlight),
+		rightSep = lib.colorStr(cfg.sep.right.str, 'OishilineFilenameRightSep', cfg.sep.right.highlight),
 
-	run = function(self)
-		return string.format('%s%s%s', self.leftSep, self.fmt, self.rightSep)
-	end,
-}
+		run = function(data)
+			return string.format('%s%s%s', data.leftSep, data.fmt, data.rightSep)
+		end
+	}
+
+	return cfg.customInit(data)
+end
