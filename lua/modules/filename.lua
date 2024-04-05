@@ -1,6 +1,6 @@
-local lib = require('modules.lib')
-
 return function(args)
+	local lib = require('modules.lib')
+
 	local cfg = {
 		fmt = {
 			str = '%f%w%h%m%r',
@@ -30,15 +30,12 @@ return function(args)
 				},
 			},
 		},
-
-		customInit = function(data)
-			return data
-		end,
 	}
 
 	lib.updateTable(cfg, args or {})
 
 	local data = {
+		cfg = cfg,
 		leftSep = lib.colorStr(cfg.sep.left.str, 'OishilineFilenameLeftSep', cfg.sep.left.highlight),
 		fmt = lib.colorStr(cfg.fmt.str, 'OishilineFilenameFmt', cfg.fmt.highlight),
 		rightSep = lib.colorStr(cfg.sep.right.str, 'OishilineFilenameRightSep', cfg.sep.right.highlight),
@@ -48,5 +45,5 @@ return function(args)
 		end
 	}
 
-	return cfg.customInit(data)
+	return type(cfg.customInit) == 'function' and cfg.customInit(data) or data
 end
