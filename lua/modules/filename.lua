@@ -3,7 +3,7 @@ return function(args)
 
 	local cfg = {
 		fmt = {
-			str = '%f%w%h%m%r',
+			str = '%f%( %w%h%m%r%)',
 
 			highlight = {
 				fg = 'yellow',

@@ -2,9 +2,11 @@ return function(args)
 	local lib = require('modules.lib')
 
 	local cfg = {
-		highlight = {
-			fg = 'yellow',
-			bg = 'black',
+		fmt = {
+			highlight = {
+				fg = 'yellow',
+				bg = 'black',
+			},
 		},
 
 		sep = {
@@ -29,7 +31,7 @@ return function(args)
 	}
 
 	lib.updateCfg(cfg, args or {})
-	vim.api.nvim_set_hl(0, 'OishilineModeFmt', cfg.highlight)
+	vim.api.nvim_set_hl(0, 'OishilineModeFmt', cfg.fmt.highlight)
 
 	local data = {
 		cfg = cfg,
