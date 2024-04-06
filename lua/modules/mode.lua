@@ -78,7 +78,8 @@ return function(args)
 		},
 
 		run = function(data)
-			local mode = data.modes[vim.api.nvim_get_mode().mode]
+			local modeCode = vim.fn.mode()
+			local mode = data.modes[modeCode] or modeCode
 			return string.format('%s%%#%s#%s%s', data.leftSep, 'OishilineModeFmt', mode, data.rightSep)
 		end,
 	}
