@@ -19,6 +19,8 @@ return {
 				{ module = 'filename' },
 				{ module = 'progress' },
 				{ module = 'location' },
+				{ module = 'encoding' },
+				{ module = 'format' },
 			},
 		}
 
