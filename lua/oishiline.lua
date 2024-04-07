@@ -21,6 +21,7 @@ return {
 				{ module = 'location' },
 				{ module = 'encoding' },
 				{ module = 'format' },
+				{ module = 'type' },
 			},
 		}
 
