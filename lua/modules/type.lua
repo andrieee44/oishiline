@@ -37,14 +37,14 @@ return function(args)
 		cfg = cfg,
 		leftSep = lib.colorStr(cfg.sep.left.str, 'OishilineTypeLeftSep', cfg.sep.left.highlight),
 		rightSep = lib.colorStr(cfg.sep.right.str, 'OishilineTypeRightSep', cfg.sep.right.highlight),
-		hasDevicons = pcall(require, 'nvim-web-devicons'),
 
 		run = function(data)
 			local type = vim.bo.filetype
+			local ok, devicons = pcall(require, 'nvim-web-devicons')
 
-			if data.hasDevicons then
+			if ok then
 				local basename = string.gsub(vim.api.nvim_buf_get_name(0), '.*/', '')
-				type = string.format('%s %s', require('nvim-web-devicons').get_icon(basename, type), type)
+				type = string.format('%s %s', devicons.get_icon(basename, type), type)
 			end
 
 			return string.format('%s%%#%s#%s%s', data.leftSep, 'OishilineTypeFmt', type, data.rightSep)
