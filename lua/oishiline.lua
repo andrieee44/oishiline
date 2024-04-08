@@ -16,6 +16,7 @@ return {
 		local cfg = {
 			modules = args.modules or {
 				{ module = 'mode' },
+				{ module = 'branch' },
 				{ module = 'filename' },
 				{ module = 'progress' },
 				{ module = 'location' },
