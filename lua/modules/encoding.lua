@@ -39,8 +39,8 @@ return function(args)
 		rightSep = lib.colorStr(cfg.sep.right.str, 'OishilineEncodingRightSep', cfg.sep.right.highlight),
 
 		run = function(data)
-			return string.format('%s%%#%s#%s%s', data.leftSep, 'OishilineEncodingFmt', vim.bo.fileencoding, data
-			.rightSep)
+			local encoding = vim.bo.fileencoding
+			return string.format('%s%%#%s#%s%s', data.leftSep, 'OishilineEncodingFmt', encoding, data.rightSep)
 		end,
 	}
 

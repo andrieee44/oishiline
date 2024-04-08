@@ -45,7 +45,8 @@ return function(args)
 		},
 
 		run = function(data)
-			return string.format('%s%%#%s#%s%s', data.leftSep, 'OishilineFormatFmt', data.icons[vim.bo.fileformat], data.rightSep)
+			local icon = data.icons[vim.bo.fileformat]
+			return string.format('%s%%#%s#%s%s', data.leftSep, 'OishilineFormatFmt', icon, data.rightSep)
 		end,
 	}
 
