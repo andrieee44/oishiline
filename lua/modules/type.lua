@@ -40,11 +40,10 @@ return function(args)
 
 		run = function(data)
 			local type = vim.bo.filetype
-			local ok, devicons = pcall(require, 'nvim-web-devicons')
 
-			if ok then
+			if package.loaded['nvim-web-devicons'] then
 				local basename = string.gsub(vim.api.nvim_buf_get_name(0), '.*/', '')
-				type = string.format('%s %s', devicons.get_icon(basename, type), type)
+				type = string.format('%s %s', require('nvim-web-devicons').get_icon(basename, type), type)
 			end
 
 			return string.format('%s%%#%s#%s%s', data.leftSep, 'OishilineTypeFmt', type, data.rightSep)
