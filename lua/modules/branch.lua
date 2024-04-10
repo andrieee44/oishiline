@@ -39,7 +39,7 @@ return function(args)
 		rightSep = lib.colorStr(cfg.sep.right.str, 'OishilineBranchRightSep', cfg.sep.right.highlight),
 
 		run = function(data)
-			local stdout = io.popen("git branch --show-current 2> /dev/null")
+			local stdout = io.popen('git branch --show-current 2> /dev/null')
 
 			if stdout == nil then
 				return

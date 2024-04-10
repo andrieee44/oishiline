@@ -28,15 +28,6 @@ return function(args)
 				},
 			},
 		},
-	}
-
-	lib.updateCfg(cfg, args or {})
-	vim.api.nvim_set_hl(0, 'OishilineModeFmt', cfg.fmt.highlight)
-
-	local data = {
-		cfg = cfg,
-		leftSep = lib.colorStr(cfg.sep.left.str, 'OishilineModeLeftSep', cfg.sep.left.highlight),
-		rightSep = lib.colorStr(cfg.sep.right.str, 'OishilineModeRightSep', cfg.sep.right.highlight),
 
 		modes = {
 			['n']     = 'NORMAL',
@@ -76,10 +67,19 @@ return function(args)
 			['!']     = 'SHELL',
 			['t']     = 'TERMINAL',
 		},
+	}
+
+	lib.updateCfg(cfg, args or {})
+	vim.api.nvim_set_hl(0, 'OishilineModeFmt', cfg.fmt.highlight)
+
+	local data = {
+		cfg = cfg,
+		leftSep = lib.colorStr(cfg.sep.left.str, 'OishilineModeLeftSep', cfg.sep.left.highlight),
+		rightSep = lib.colorStr(cfg.sep.right.str, 'OishilineModeRightSep', cfg.sep.right.highlight),
 
 		run = function(data)
 			local modeCode = vim.api.nvim_get_mode().mode
-			local mode = data.modes[modeCode] or modeCode
+			local mode = data.cfg.modes[modeCode] or modeCode
 			return string.format('%s%%#%s#%s%s', data.leftSep, 'OishilineModeFmt', mode, data.rightSep)
 		end,
 	}

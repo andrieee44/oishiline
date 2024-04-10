@@ -28,6 +28,12 @@ return function(args)
 				},
 			},
 		},
+
+		icons = {
+			unix = vim.opt.termguicolors and '' or 'unix',
+			dos = vim.opt.termguicolors and '' or 'dos',
+			mac = vim.opt.termguicolors and '' or 'mac',
+		},
 	}
 
 	lib.updateCfg(cfg, args or {})
@@ -38,14 +44,8 @@ return function(args)
 		leftSep = lib.colorStr(cfg.sep.left.str, 'OishilineFormatLeftSep', cfg.sep.left.highlight),
 		rightSep = lib.colorStr(cfg.sep.right.str, 'OishilineFormatRightSep', cfg.sep.right.highlight),
 
-		icons = {
-			unix = vim.opt.termguicolors and '' or 'unix',
-			dos = vim.opt.termguicolors and '' or 'dos',
-			mac = vim.opt.termguicolors and '' or 'mac',
-		},
-
 		run = function(data)
-			local icon = data.icons[vim.bo.fileformat]
+			local icon = data.cfg.icons[vim.bo.fileformat] or vim.bo.fileformat
 			return string.format('%s%%#%s#%s%s', data.leftSep, 'OishilineFormatFmt', icon, data.rightSep)
 		end,
 	}
