@@ -18,6 +18,7 @@ return {
 				{ module = 'mode' },
 				{ module = 'branch' },
 				{ module = 'filename' },
+				{ module = 'diff' },
 				{ module = 'progress' },
 				{ module = 'location' },
 				{ module = 'encoding' },
