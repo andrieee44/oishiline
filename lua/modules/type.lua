@@ -3,9 +3,18 @@ return function(args)
 
 	local cfg = {
 		fmt = {
-			highlight = {
-				fg = 'yellow',
-				bg = 'black',
+			icon = {
+				highlight = {
+					fg = 'cyan',
+					bg = 'black',
+				},
+			},
+
+			text = {
+				highlight = {
+					fg = 'yellow',
+					bg = 'black',
+				},
 			},
 		},
 
@@ -31,7 +40,8 @@ return function(args)
 	}
 
 	lib.updateCfg(cfg, args or {})
-	vim.api.nvim_set_hl(0, 'OishilineTypeFmt', cfg.fmt.highlight)
+	vim.api.nvim_set_hl(0, 'OishilineTypeFmtIcon', cfg.fmt.icon.highlight)
+	vim.api.nvim_set_hl(0, 'OishilineTypeFmtText', cfg.fmt.text.highlight)
 
 	local data = {
 		cfg = cfg,
@@ -43,7 +53,11 @@ return function(args)
 
 			if package.loaded['nvim-web-devicons'] then
 				local basename = string.gsub(vim.api.nvim_buf_get_name(0), '.*/', '')
-				type = string.format('%s %s', require('nvim-web-devicons').get_icon(basename, type), type)
+				local icon = require('nvim-web-devicons').get_icon(basename, type)
+
+				if icon ~= nil then
+					type = string.format('%%#%s#%s %%#%s#%s', 'OishilineTypeFmtIcon', icon, 'OishilineTypeFmtText', type)
+				end
 			end
 
 			return string.format('%s%%#%s#%s%s', data.leftSep, 'OishilineTypeFmt', type, data.rightSep)
