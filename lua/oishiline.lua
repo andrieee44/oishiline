@@ -32,6 +32,6 @@ return {
 		end
 
 		vim.g.oishiline = oishiline
-		vim.opt_global.statusline = '%!v:lua.require(\'oishiline\').statusline()'
+		vim.opt_global.statusline = '%{%v:lua.require(\'oishiline\').statusline()%}'
 	end,
 }
