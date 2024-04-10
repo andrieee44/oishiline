@@ -46,9 +46,9 @@ return function(args)
 				return
 			end
 
-			local result = stdout.read(stdout)
-			local added = string.match(result, '^%d+')
-			local modified = string.match(result, '^%d+%s+(%d+)')
+			local numstat = stdout.read(stdout, 'a')
+			local added = string.match(numstat, '^%d+')
+			local modified = string.match(numstat, '^%d+%s+(%d+)')
 
 			return string.format('%s%%#%s#%s%s', data.leftSep, 'OishilineDiffFmt', string.format('%s %s', added, modified), data.rightSep)
 		end,
