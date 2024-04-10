@@ -3,9 +3,18 @@ return function(args)
 
 	local cfg = {
 		fmt = {
-			highlight = {
-				fg = 'yellow',
-				bg = 'black',
+			added = {
+				highlight = {
+					fg = 'cyan',
+					bg = 'black',
+				},
+			},
+
+			deleted = {
+				highlight = {
+					fg = 'red',
+					bg = 'black',
+				},
 			},
 		},
 
@@ -31,7 +40,8 @@ return function(args)
 	}
 
 	lib.updateCfg(cfg, args or {})
-	vim.api.nvim_set_hl(0, 'OishilineDiffFmt', cfg.fmt.highlight)
+	vim.api.nvim_set_hl(0, 'OishilineDiffFmtAdded', cfg.fmt.added.highlight)
+	vim.api.nvim_set_hl(0, 'OishilineDiffFmtDeleted', cfg.fmt.deleted.highlight)
 
 	local data = {
 		cfg = cfg,
@@ -39,18 +49,27 @@ return function(args)
 		rightSep = lib.colorStr(cfg.sep.right.str, 'OishilineDiffRightSep', cfg.sep.right.highlight),
 
 		run = function(data)
-			local cmd = string.format('git diff --numstat -- \'%s\' 2> /dev/null', vim.api.nvim_buf_get_name(0))
+			local path = string.match(vim.api.nvim_buf_get_name(0), '.*/')
+			local filename = vim.api.nvim_buf_get_name(0)
+			local cmd = string.format('git -C \'%s\' diff --numstat -- \'%s\' 2> /dev/null', path, filename)
 			local stdout = io.popen(cmd)
 
 			if stdout == nil then
-				return
+				return ''
 			end
 
-			local numstat = stdout.read(stdout, 'a')
-			local added = string.match(numstat, '^%d+')
-			local modified = string.match(numstat, '^%d+%s+(%d+)')
+			local numstat = stdout.read(stdout)
 
-			return string.format('%s%%#%s#%s%s', data.leftSep, 'OishilineDiffFmt', string.format('%s %s', added, modified), data.rightSep)
+			if numstat == nil then
+				return ''
+			end
+
+			local added = string.match(numstat, '^%d+')
+			local deleted = string.match(numstat, '^%d+%s+(%d+)')
+			local addedColor = string.format('%%#%s#%s', 'OishilineDiffFmtAdded', added ~= '0' and added or '')
+			local deletedColor = string.format('%%#%s#%s', 'OishilineDiffFmtDeleted', deleted ~= '0' and deleted or '')
+
+			return string.format('%s%s%s%s', data.leftSep, addedColor, deletedColor, data.rightSep)
 		end,
 	}
 
