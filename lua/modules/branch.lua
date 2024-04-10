@@ -39,13 +39,21 @@ return function(args)
 		rightSep = lib.colorStr(cfg.sep.right.str, 'OishilineBranchRightSep', cfg.sep.right.highlight),
 
 		run = function(data)
-			local stdout = io.popen('git branch --show-current 2> /dev/null')
+			local path = string.match(vim.api.nvim_buf_get_name(0), '.*/')
+			local cmd = string.format('git -C \'%s\' branch --show-current 2> /dev/null', path)
+			local stdout = io.popen(cmd)
 
 			if stdout == nil then
-				return
+				return ''
 			end
 
-			return string.format('%s%%#%s#%s%s', data.leftSep, 'OishilineBranchFmt', stdout.read(stdout), data.rightSep)
+			local branch = stdout.read(stdout)
+
+			if branch == nil then
+				return ''
+			end
+
+			return string.format('%s%%#%s#%s%s', data.leftSep, 'OishilineBranchFmt', branch, data.rightSep)
 		end,
 	}
 
