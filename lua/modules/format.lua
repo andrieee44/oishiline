@@ -30,9 +30,9 @@ return function(args)
 		},
 
 		icons = {
-			unix = vim.opt.termguicolors and '' or 'unix',
-			dos = vim.opt.termguicolors and '' or 'dos',
-			mac = vim.opt.termguicolors and '' or 'mac',
+			unix = vim.opt.termguicolors._value and '' or 'unix',
+			dos = vim.opt.termguicolors._value and '' or 'dos',
+			mac = vim.opt.termguicolors._value and '' or 'mac',
 		},
 	}
 
