@@ -2,8 +2,8 @@ return {
 	statusline = function()
 		local results = {}
 
-		for i, v in ipairs(vim.g.oishiline.modules) do
-			results[i] = v.run(v)
+		for i, v in ipairs(vim.g.oishiline) do
+			results[i] = v()
 		end
 
 		return table.concat(results)
@@ -11,24 +11,22 @@ return {
 
 	setup = function(args)
 		args = args or {}
-		local oishiline = { modules = {} }
+		local oishiline = {}
 
-		local cfg = {
-			modules = args.modules or {
-				{ module = 'mode' },
-				{ module = 'branch' },
-				{ module = 'filename' },
-				{ module = 'diff' },
-				{ module = 'progress' },
-				{ module = 'location' },
-				{ module = 'encoding' },
-				{ module = 'format' },
-				{ module = 'type' },
-			},
+		local modules = args.modules or {
+			--{ 'mode' },
+			{ 'branch' },
+			--{ 'filename' },
+			--{ 'diff' },
+			--{ 'progress' },
+			--{ 'location' },
+			--{ 'encoding' },
+			--{ 'format' },
+			--{ 'type' },
 		}
 
-		for i, v in ipairs(cfg.modules) do
-			oishiline.modules[i] = require(string.format('modules.%s', v.module))(v.args)
+		for i, v in ipairs(modules) do
+			oishiline[i] = require(string.format('modules.%s', v[1]))(v[2])
 		end
 
 		vim.g.oishiline = oishiline
