@@ -17,7 +17,6 @@ return {
 			{ 'mode' },
 			{ 'branch' },
 			{ 'filename' },
-			--{ 'diff' },
 			--{ 'diagnostics' },
 			--{ 'encoding' },
 			--{ 'format' },
