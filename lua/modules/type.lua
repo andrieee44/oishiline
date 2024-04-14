@@ -4,7 +4,9 @@ return function(colors)
 
 	local leftSep = lib.mkHlStr(lib.gui('', ' '), lib.hlName(module, 'Left'), {
 		fg = colors.cyan,
+		ctermfg = 'cyan',
 		bg = colors.brightBlack,
+		ctermbg = 'black',
 	})
 
 	return function()

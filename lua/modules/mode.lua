@@ -4,22 +4,30 @@ return function(colors)
 
 	local fmt = lib.mkHl(lib.hlName(module, 'Fmt'), {
 		fg = colors.black,
+		ctermfg = 'black',
 		bg = colors.cyan,
+		ctermbg = 'cyan',
 		bold = true,
 	})
 
 	local rightSep = lib.mkHlStr(lib.gui('', ' '), lib.hlName(module, 'Right'), {
 		fg = colors.cyan,
+		ctermfg = 'cyan',
 		bg = colors.black,
+		ctermbg = 'black',
 	})
 
 	local rightSep2 = lib.mkHlStr(lib.gui('', ' '), lib.hlName(module, 'Right2'), {
 		fg = colors.black,
+		ctermfg = 'black',
 		bg = colors.cyan,
+		ctermbg = 'cyan',
 		bold = true,
 	}, {
 		fg = colors.black,
+		ctermfg = 'black',
 		bg = colors.brightBlack,
+		ctermbg = 'black',
 	})
 
 	local modes = {

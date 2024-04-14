@@ -4,11 +4,15 @@ return function(colors)
 
 	local fmt = lib.mkHl(lib.hlName(module, 'Fmt'), {
 		fg = colors.black,
+		ctermfg = 'black',
 		bg = colors.cyan,
+		ctermbg = 'cyan',
 		bold = true,
 	}, {
 		fg = colors.white,
+		ctermfg = 'white',
 		bg = colors.brightBlack,
+		ctermbg = 'black',
 	})
 
 	return function()

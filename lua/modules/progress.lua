@@ -4,7 +4,9 @@ return function(colors)
 
 	local fmt = lib.mkHlStr(' %P', lib.hlName(module, 'Fmt'), {
 		fg = colors.black,
+		ctermfg = 'black',
 		bg = colors.cyan,
+		ctermbg = 'cyan',
 		bold = true,
 	})
 

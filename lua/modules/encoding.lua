@@ -4,12 +4,16 @@ return function(colors)
 
 	local fmt = lib.mkHl(lib.hlName(module, 'Fmt'), {
 		fg = colors.white,
+		ctermfg = 'white',
 		bg = colors.brightBlack,
+		ctermbg = 'black',
 	})
 
 	local leftSep = lib.mkHlStr(lib.gui('', ' '), lib.hlName(module, 'Left'), {
 		fg = colors.brightBlack,
+		ctermfg = 'black',
 		bg = colors.black,
+		ctermbg = 'black',
 	})
 
 	return function()
