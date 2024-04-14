@@ -14,7 +14,7 @@ return function(colors)
 
 	return function()
 		local left = lib.colorStr(leftSep.str, leftSep)
-		local right = lib.colorStr(lib.gui('', '|'), fmt)
+		local right = lib.colorStr(lib.gui('', '|'), fmt)
 
 		local encoding = string.format(' %s', vim.bo.fileencoding)
 

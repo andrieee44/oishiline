@@ -6,16 +6,10 @@ return function(colors)
 		fg = colors.black,
 		bg = colors.cyan,
 		bold = true,
-	}, {
-		fg = colors.white,
-		bg = colors.brightBlack,
 	})
 
 	local rightSep = lib.mkHlStr(lib.gui('', ' '), lib.hlName(module, 'Right'), {
 		fg = colors.cyan,
-		bg = colors.black,
-	}, {
-		fg = colors.brightBlack,
 		bg = colors.black,
 	})
 

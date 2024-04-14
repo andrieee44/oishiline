@@ -34,8 +34,8 @@ return {
 
 		local rightModules = args.rightModules or {
 			'encoding',
-			--'format',
-			--'type',
+			'format',
+			'type',
 			--'location',
 			--'progress',
 		}
