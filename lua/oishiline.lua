@@ -36,8 +36,8 @@ return {
 			'encoding',
 			'format',
 			'type',
-			--'location',
-			--'progress',
+			'progress',
+			'location',
 		}
 
 		local colors = args.colors or {
