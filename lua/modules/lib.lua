@@ -1,14 +1,3 @@
-local function updateCfg(cfg, args)
-	for k, v in pairs(args) do
-		if type(v) == 'table' then
-			cfg[k] = cfg[k] or {}
-			updateCfg(cfg[k], v)
-		else
-			cfg[k] = v
-		end
-	end
-end
-
 local function mkHl(name, args, altArgs)
 	local alt = string.format('%s%s', name, 'Alt')
 
@@ -22,7 +11,6 @@ local function mkHl(name, args, altArgs)
 end
 
 return {
-	updateCfg = updateCfg,
 	mkHl = mkHl,
 
 	run = function(cmd)

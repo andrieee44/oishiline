@@ -1,4 +1,4 @@
-return function(args)
+return function()
 	local lib = require('modules.lib')
 	local module = 'Branch'
 
@@ -29,8 +29,6 @@ return function(args)
 			bg = '#4C566A',
 		}),
 	}
-
-	lib.updateCfg(cfg, args or {})
 
 	return function()
 		local left = lib.colorStr(cfg.left.str, cfg.left)
