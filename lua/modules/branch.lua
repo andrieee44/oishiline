@@ -1,38 +1,30 @@
-return function()
+return function(colors)
 	local lib = require('modules.lib')
 	local module = 'Branch'
 
 	local cfg = {
 		hl = lib.mkHl(lib.hlName(module, 'Fmt'), {
-			fg = '#2E3440',
-			bg = '#88C0D0',
+			fg = colors.black,
+			bg = colors.cyan,
 			bold = true,
 		}, {
-			fg = '#E5E9F0',
-			bg = '#4C566A',
-		}),
-
-		left = lib.mkHlStr('', lib.hlName(module, 'Left'), {
-			fg = '#2E3440',
-			bg = '#88C0D0',
-		}, {
-			fg = '#E5E9F0',
-			bg = '#4C566A',
+			fg = colors.white,
+			bg = colors.brightBlack,
 		}),
 
 		right = lib.mkHlStr(lib.gui('', '|'), lib.hlName(module, 'Right'), {
-			fg = '#2E3440',
-			bg = '#88C0D0',
+			fg = colors.black,
+			bg = colors.cyan,
 			bold = true,
 		}, {
-			fg = '#E5E9F0',
-			bg = '#4C566A',
+			fg = colors.white,
+			bg = colors.brightBlack,
 		}),
 	}
 
 	return function()
-		local left = lib.colorStr(cfg.left.str, cfg.left)
 		local right = lib.colorStr(cfg.right.str, cfg.right)
+
 		local path = string.match(vim.api.nvim_buf_get_name(0), '.*/')
 		local cmd = string.format('git -C \'%s\' branch --show-current 2> /dev/null', path)
 		local branch = lib.run(cmd)
@@ -41,6 +33,6 @@ return function()
 			return ''
 		end
 
-		return string.format('%s %s %s', left, lib.colorStr(branch, cfg.hl), right)
+		return string.format(' %s %s', lib.colorStr(branch, cfg.hl), right)
 	end
 end

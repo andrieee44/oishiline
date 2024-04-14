@@ -27,8 +27,8 @@ return {
 
 		local leftModules = args.leftModules or {
 			'mode',
-			--'branch',
-			--'filename',
+			'branch',
+			'filename',
 			--'diagnostics',
 		}
 

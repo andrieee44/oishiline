@@ -23,6 +23,7 @@ return function(colors)
 		sep = lib.mkHlStr(lib.gui('', ' '), lib.hlName(module, 'Sep'), {
 			fg = colors.black,
 			bg = colors.cyan,
+			bold = true,
 		}, {
 			fg = colors.black,
 			bg = colors.brightBlack,
