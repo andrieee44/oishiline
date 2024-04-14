@@ -20,7 +20,13 @@ return function(args)
 			bg = '#4C566A',
 		}),
 
-		right = lib.mkHlStr(lib.gui('', ' '), lib.hlName(module, 'Right'), { fg = '#88C0D0' }, { fg = '#4C566A' }),
+		right = lib.mkHlStr(lib.gui('', ' '), lib.hlName(module, 'Right'), {
+			fg = '#88C0D0',
+			bg = '#2E3440',
+		}, {
+			fg = '#4C566A',
+			bg = '#E5E9F0',
+		}),
 	}
 
 	lib.updateCfg(cfg, args or {})
