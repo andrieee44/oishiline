@@ -1,48 +1,23 @@
-return function(args)
+return function(colors)
 	local lib = require('modules.lib')
+	local module = 'Encoding'
 
-	local cfg = {
-		fmt = {
-			highlight = {
-				fg = 'yellow',
-				bg = 'black',
-			},
-		},
+	local fmt = lib.mkHl(lib.hlName(module, 'Fmt'), {
+		fg = colors.white,
+		bg = colors.brightBlack,
+	})
 
-		sep = {
-			left = {
-				str = '<',
+	local leftSep = lib.mkHlStr(lib.gui('', ' '), lib.hlName(module, 'Left'), {
+		fg = colors.brightBlack,
+		bg = colors.black,
+	})
 
-				highlight = {
-					fg = 'red',
-					bg = 'black',
-				},
-			},
+	return function()
+		local left = lib.colorStr(leftSep.str, leftSep)
+		local right = lib.colorStr(lib.gui('', '|'), fmt)
 
-			right = {
-				str = '>',
+		local encoding = string.format(' %s', vim.bo.fileencoding)
 
-				highlight = {
-					fg = 'cyan',
-					bg = 'black',
-				},
-			},
-		},
-	}
-
-	lib.updateCfg(cfg, args or {})
-	vim.api.nvim_set_hl(0, 'OishilineEncodingFmt', cfg.fmt.highlight)
-
-	local data = {
-		cfg = cfg,
-		leftSep = lib.colorStr(cfg.sep.left.str, 'OishilineEncodingLeftSep', cfg.sep.left.highlight),
-		rightSep = lib.colorStr(cfg.sep.right.str, 'OishilineEncodingRightSep', cfg.sep.right.highlight),
-
-		run = function(data)
-			local encoding = vim.bo.fileencoding
-			return string.format('%s%%#%s#%s%s', data.leftSep, 'OishilineEncodingFmt', encoding, data.rightSep)
-		end,
-	}
-
-	return type(cfg.init) == 'function' and cfg.init(data) or data
+		return string.format('%s%s %s', left, lib.colorStr(encoding, fmt), right)
+	end
 end

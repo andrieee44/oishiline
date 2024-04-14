@@ -1,12 +1,16 @@
 local function mkHl(name, args, altArgs)
-	local alt = string.format('%s%s', name, 'Alt')
+	local alt = nil
 
 	vim.api.nvim_set_hl(0, name, args)
-	vim.api.nvim_set_hl(0, alt, altArgs)
+
+	if altArgs then
+		alt = string.format('%s%s', name, 'Alt')
+		vim.api.nvim_set_hl(0, alt, altArgs)
+	end
 
 	return {
 		hl = name,
-		alt = alt,
+		alt = alt or name,
 	}
 end
 
