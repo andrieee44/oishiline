@@ -1,5 +1,6 @@
 return function(args)
 	local lib = require('modules.lib')
+
 	local cfg = {
 		errorHl = {
 			fg = 'yellow',

@@ -28,6 +28,14 @@ return function(args)
 			bg = '#2E3440',
 		}),
 
+		sep = lib.mkHlStr(lib.gui('', ' '), lib.hlName(module, 'Sep'), {
+			fg = '#2E3440',
+			bg = '#88C0D0',
+		}, {
+			fg = '#2E3440',
+			bg = '#4C566A',
+		}),
+
 		modes = {
 			['n'] = 'NORMAL',
 			['niI'] = 'NORMAL',
@@ -73,9 +81,10 @@ return function(args)
 	return function()
 		local left = lib.colorStr(cfg.left.str, cfg.left)
 		local right = lib.colorStr(cfg.right.str, cfg.right)
+		local sep = lib.colorStr(cfg.sep.str, cfg.sep)
 		local modeCode = vim.api.nvim_get_mode().mode
 		local mode = cfg.modes[modeCode] or modeCode
 
-		return string.format('%s %s %s', left, lib.colorStr(mode, cfg.hl), right)
+		return string.format('%s %s %s%s', left, lib.colorStr(mode, cfg.hl), right, sep)
 	end
 end

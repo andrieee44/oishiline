@@ -1,49 +1,41 @@
 return function(args)
 	local lib = require('modules.lib')
+	local module = 'Filename'
 
 	local cfg = {
-		fmt = {
-			str = '%f%( %w%h%m%r%)',
+		fmt = lib.mkHlStr('%f%( %w%h%m%r%)', lib.hlName(module, 'Fmt'), {
+			fg = '#2E3440',
+			bg = '#88C0D0',
+			bold = true,
+		}, {
+			fg = '#E5E9F0',
+			bg = '#4C566A',
+		}),
 
-			highlight = {
-				fg = 'yellow',
-				bg = 'black',
-			},
-		},
+		left = lib.mkHlStr('', lib.hlName(module, 'Left'), {
+			fg = '#2E3440',
+			bg = '#88C0D0',
+		}, {
+			fg = '#E5E9F0',
+			bg = '#4C566A',
+		}),
 
-		sep = {
-			left = {
-				str = '<',
-
-				highlight = {
-					fg = 'red',
-					bg = 'black',
-				},
-			},
-
-			right = {
-				str = '>',
-
-				highlight = {
-					fg = 'cyan',
-					bg = 'black',
-				},
-			},
-		},
+		right = lib.mkHlStr('', lib.hlName(module, 'Right'), {
+			fg = '#88C0D0',
+			bg = '#2E3440',
+		}, {
+			fg = '#4C566A',
+			bg = '#2E3440',
+		}),
 	}
 
 	lib.updateCfg(cfg, args or {})
 
-	local data = {
-		cfg = cfg,
-		leftSep = lib.colorStr(cfg.sep.left.str, 'OishilineFilenameLeftSep', cfg.sep.left.highlight),
-		fmt = lib.colorStr(cfg.fmt.str, 'OishilineFilenameFmt', cfg.fmt.highlight),
-		rightSep = lib.colorStr(cfg.sep.right.str, 'OishilineFilenameRightSep', cfg.sep.right.highlight),
+	return function()
+		local left = lib.colorStr(cfg.left.str, cfg.left)
+		local fmt = lib.colorStr(cfg.fmt.str, cfg.fmt)
+		local right = lib.colorStr(cfg.right.str, cfg.right)
 
-		run = function(data)
-			return string.format('%s%s%s', data.leftSep, data.fmt, data.rightSep)
-		end,
-	}
-
-	return type(cfg.init) == 'function' and cfg.init(data) or data
+		return string.format('%s %s %s', left, fmt, right)
+	end
 end

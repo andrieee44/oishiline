@@ -16,7 +16,7 @@ return {
 		local modules = args.modules or {
 			{ 'mode' },
 			{ 'branch' },
-			--{ 'filename' },
+			{ 'filename' },
 			--{ 'diff' },
 			--{ 'progress' },
 			--{ 'location' },

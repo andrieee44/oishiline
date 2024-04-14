@@ -12,7 +12,7 @@ return function(args)
 			bg = '#4C566A',
 		}),
 
-		left = lib.mkHlStr(lib.gui('', ' '), lib.hlName(module, 'Left'), {
+		left = lib.mkHlStr('', lib.hlName(module, 'Left'), {
 			fg = '#2E3440',
 			bg = '#88C0D0',
 		}, {
@@ -20,12 +20,13 @@ return function(args)
 			bg = '#4C566A',
 		}),
 
-		right = lib.mkHlStr(lib.gui('', ' '), lib.hlName(module, 'Right'), {
-			fg = '#88C0D0',
-			bg = '#2E3440',
+		right = lib.mkHlStr(lib.gui('', '|'), lib.hlName(module, 'Right'), {
+			fg = '#2E3440',
+			bg = '#88C0D0',
+			bold = true,
 		}, {
-			fg = '#4C566A',
-			bg = '#2E3440',
+			fg = '#E5E9F0',
+			bg = '#4C566A',
 		}),
 	}
 
