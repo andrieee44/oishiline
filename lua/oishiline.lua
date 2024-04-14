@@ -14,7 +14,7 @@ return {
 		local oishiline = {}
 
 		local modules = args.modules or {
-			--{ 'mode' },
+			{ 'mode' },
 			{ 'branch' },
 			--{ 'filename' },
 			--{ 'diff' },

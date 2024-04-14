@@ -1,5 +1,3 @@
-local gui = vim.opt.termguicolors._value
-
 local function updateCfg(cfg, args)
 	for k, v in pairs(args) do
 		if type(v) == 'table' then
@@ -37,12 +35,8 @@ return {
 		return stdout.read(stdout)
 	end,
 
-	pipe = function(str)
-		return gui and str or '|'
-	end,
-
-	space = function(str)
-		return gui and str or ' '
+	gui = function(guiStr, str)
+		return vim.opt.termguicolors._value and guiStr or str
 	end,
 
 	colorStr = function(str, hl)
