@@ -18,11 +18,12 @@ return {
 			{ 'branch' },
 			{ 'filename' },
 			--{ 'diff' },
-			--{ 'progress' },
-			--{ 'location' },
+			--{ 'diagnostics' },
 			--{ 'encoding' },
 			--{ 'format' },
 			--{ 'type' },
+			--{ 'location' },
+			--{ 'progress' },
 		}
 
 		for i, v in ipairs(modules) do

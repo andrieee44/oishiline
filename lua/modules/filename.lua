@@ -20,7 +20,7 @@ return function(args)
 			bg = '#4C566A',
 		}),
 
-		right = lib.mkHlStr('', lib.hlName(module, 'Right'), {
+		right = lib.mkHlStr(lib.gui('', ' '), lib.hlName(module, 'Right'), {
 			fg = '#88C0D0',
 			bg = '#2E3440',
 		}, {
