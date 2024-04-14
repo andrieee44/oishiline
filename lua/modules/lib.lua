@@ -46,7 +46,9 @@ return {
 	end,
 
 	colorStr = function(str, hl)
-		return string.format('%%#%s#%s', true and hl.hl or hl.alt, str)
+		local active = tonumber(vim.g.actual_curwin) == vim.api.nvim_get_current_win()
+
+		return string.format('%%#%s#%s', active and hl.hl or hl.alt, str)
 	end,
 
 	hlName = function(module, name)

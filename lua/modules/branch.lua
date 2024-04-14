@@ -4,28 +4,28 @@ return function(args)
 
 	local cfg = {
 		hl = lib.mkHl(lib.hlName(module, 'Fmt'), {
-			fg = 'black',
-			bg = 'cyan',
+			fg = '#2E3440',
+			bg = '#88C0D0',
 			bold = true,
 		}, {
-			fg = 'black',
-			bg = 'cyan',
+			fg = '#E5E9F0',
+			bg = '#4C566A',
 		}),
 
 		left = lib.mkHlStr(lib.pipe(''), lib.hlName(module, 'Left'), {
-			fg = 'black',
-			bg = 'cyan',
+			fg = '#2E3440',
+			bg = '#88C0D0',
 		}, {
-			fg = 'cyan',
-			bg = 'black',
+			fg = '#E5E9F0',
+			bg = '#4C566A',
 		}),
 
 		right = lib.mkHlStr(lib.space(''), lib.hlName(module, 'Right'), {
-			fg = 'cyan',
-			bg = 'black',
+			fg = '#88C0D0',
+			bg = '#2E3440',
 		}, {
-			fg = 'cyan',
-			bg = 'black',
+			fg = '#4C566A',
+			bg = '#2E3440',
 		}),
 	}
 
