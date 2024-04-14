@@ -9,7 +9,7 @@ return function(colors)
 		ctermbg = 'black',
 	})
 
-	local leftSep = lib.mkHlStr(lib.gui('', ' '), lib.hlName(module, 'Left'), {
+	local leftSep = lib.mkHlStr(lib.gui('', ''), lib.hlName(module, 'Left'), {
 		fg = colors.brightBlack,
 		ctermfg = 'black',
 		bg = colors.black,

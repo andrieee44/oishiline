@@ -2,7 +2,7 @@ return function(colors)
 	local lib = require('modules.lib')
 	local module = 'Type'
 
-	local leftSep = lib.mkHlStr(lib.gui('', ' '), lib.hlName(module, 'Left'), {
+	local leftSep = lib.mkHlStr(lib.gui('', ''), lib.hlName(module, 'Left'), {
 		fg = colors.cyan,
 		ctermfg = 'cyan',
 		bg = colors.brightBlack,
@@ -13,7 +13,7 @@ return function(colors)
 		local type = vim.bo.filetype
 		local icon = nil
 
-		if package.loaded['nvim-web-devicons'] then
+		if vim.opt.termguicolors._value and package.loaded['nvim-web-devicons'] then
 			local basename = string.gsub(vim.api.nvim_buf_get_name(0), '.*/', '')
 
 			icon = require('nvim-web-devicons').get_icon(basename, type)

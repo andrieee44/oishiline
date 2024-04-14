@@ -17,7 +17,7 @@ return function(colors)
 		ctermbg = 'black',
 	})
 
-	local rightSep2 = lib.mkHlStr(lib.gui('', ' '), lib.hlName(module, 'Right2'), {
+	local rightSep2 = lib.mkHlStr(lib.gui('', ''), lib.hlName(module, 'Right2'), {
 		fg = colors.black,
 		ctermfg = 'black',
 		bg = colors.cyan,
