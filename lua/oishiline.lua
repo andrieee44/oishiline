@@ -64,11 +64,11 @@ return {
 		}
 
 		for i, v in ipairs(leftModules) do
-			oishiline.leftModules[i] = require(string.format('modules.%s', v))(colors)
+			oishiline.leftModules[i] = require(string.format('oishiline.modules.%s', v))(colors)
 		end
 
 		for i, v in ipairs(rightModules) do
-			oishiline.rightModules[i] = require(string.format('modules.%s', v))(colors)
+			oishiline.rightModules[i] = require(string.format('oishiline.modules.%s', v))(colors)
 		end
 
 		vim.g.oishiline = oishiline
