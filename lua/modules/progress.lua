@@ -1,6 +1,6 @@
 return function(colors)
 	local lib = require('modules.lib')
-	local module = 'Location'
+	local module = 'Progress'
 
 	local fmt = lib.mkHlStr(' %P', lib.hlName(module, 'Fmt'), {
 		fg = colors.black,
