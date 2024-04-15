@@ -1,74 +1,48 @@
-return function(args)
+return function(colors)
 	local lib = require('modules.lib')
-	local module = 'Diagnostic'
+	local module = 'Diagnostics'
 	local severity = vim.diagnostic.severity
-	local reverse = {}
+	local signs = {}
 
-	local cfg = {
-		[severity.ERROR] = lib.mkHl(lib.hlName(module, 'Error'), {
-			fg = '#2E3440',
-			bg = '#BF616A',
-			bold = true,
-		}, {
-			fg = '#2E3440',
-			bg = '#BF616A',
-			bold = true,
-		}),
-
-		[severity.WARN] = lib.mkHl(lib.hlName(module, 'Warn'), {
-			fg = '#2E3440',
-			bg = '#EBCB8B',
-			bold = true,
-		}, {
-			fg = '#2E3440',
-			bg = '#EBCB8B',
-			bold = true,
-		}),
-
-		[severity.INFO] = lib.mkHl(lib.hlName(module, 'Info'), {
-			fg = '#2E3440',
-			bg = '#88C0D0',
-			bold = true,
-		}, {
-			fg = '#2E3440',
-			bg = '#88C0D0',
-			bold = true,
-		}),
-
-		[severity.HINT] = lib.mkHl(lib.hlName(module, 'Hint'), {
-			fg = '#2E3440',
-			bg = '#B48EAD',
-			bold = true,
-		}, {
-			fg = '#2E3440',
-			bg = '#B48EAD',
-			bold = true,
-		}),
+	local signNames = {
+		[severity.ERROR] = 'Error',
+		[severity.WARN] = 'Warn',
+		[severity.INFO] = 'Info',
+		[severity.HINT] = 'Hint',
 	}
 
-	lib.updateCfg(cfg, args or {})
-
-	for i, v in ipairs(cfg) do
-		reverse[i] = {
-			hl = lib.mkHl(string.format('%s%s', v.hl, 'Reverse'), {
-				link = v.hl,
-				reverse = true,
-			}, {
-				link = v.hl,
-				reverse = true,
-			}),
-
-			alt = lib.mkHl(string.format('%s%s', v.alt, 'Reverse'), {
-				link = v.alt,
-				reverse = true,
-			}, {
-				link = v.alt,
-				reverse = true,
-			}),
-		}
+	for k, v in pairs(signNames) do
+		signs[k] = vim.fn.sign_getdefined(string.format('DiagnosticSign%s', v))[1].text
 	end
 
+	local severityBg = {
+		[severity.ERROR] = {
+			bg = colors.red,
+			ctermbg = 'red',
+		},
+
+		[severity.WARN] = {
+			bg = colors.yellow,
+			ctermbg = 'yellow',
+		},
+
+		[severity.INFO] = {
+			bg = colors.blue,
+			ctermbg = 'blue',
+		},
+
+		[severity.HINT] = {
+			bg = colors.cyan,
+			ctermbg = 'cyan',
+		},
+	}
+
 	return function()
+		local diagnostics = vim.diagnostic.get(0)
+		local results = {}
+		local j, last = 1, 0
+		local init = false
+
 		local count = {
 			[severity.ERROR] = 0,
 			[severity.WARN] = 0,
@@ -76,22 +50,67 @@ return function(args)
 			[severity.HINT] = 0,
 		}
 
-		local results = {}
-		local first = true
+		if #diagnostics == 0 then
+			return ''
+		end
 
-		for _, v in pairs(vim.diagnostic.get(0)) do
+		for _, v in pairs(diagnostics) do
 			count[v.severity] = count[v.severity] + 1
 		end
 
 		for i, v in ipairs(count) do
-			if first then
-				table.insert(results, string.format('%s', lib.colorStr(lib.gui('', ' '), cfg[i])))
-				first = false
+			if v == 0 then
+				goto CONTINUE
 			end
 
-			table.insert(results, string.format('%s', lib.colorStr(tostring(v), cfg[i])))
-			table.insert(results, string.format('%s', lib.colorStr(lib.gui('', ' '), reverse[i])))
+			if init then
+				local sep = lib.mkHlStr(lib.gui('', ''), lib.hlName(module, string.format('%sSep', signNames[i])), {
+					fg = severityBg[last].bg,
+					ctermfg = severityBg[last].ctermbg,
+					bg = severityBg[i].bg,
+					ctermbg = severityBg[i].ctermbg,
+				})
+
+				results[j] = lib.colorStr(sep.str, sep)
+				j = j + 1
+			end
+
+			if not init then
+				local initHl = lib.mkHlStr(lib.gui('', ''), lib.hlName(module, 'Init'), {
+					fg = colors.black,
+					ctermfg = 'black',
+					bg = severityBg[i].bg,
+					ctermbg = severityBg[i].ctermbg,
+				})
+
+				results[j] = lib.colorStr(initHl.str, initHl)
+				j = j + 1
+				init = true
+			end
+
+			local sign = lib.mkHlStr(string.format(' %s%d ', signs[i], v), lib.hlName(module, signNames[i]), {
+				fg = colors.black,
+				ctermfg = 'black',
+				bg = severityBg[i].bg,
+				ctermbg = severityBg[i].ctermbg,
+				bold = true,
+			})
+
+			results[j] = lib.colorStr(sign.str, sign)
+			j = j + 1
+			last = i
+
+			::CONTINUE::
 		end
+
+		local lastHl = lib.mkHlStr(lib.gui('', ''), lib.hlName(module, 'Last'), {
+			fg = severityBg[last].bg,
+			ctermfg = severityBg[last].ctermbg,
+			bg = colors.black,
+			ctermbg = 'black',
+		})
+
+		results[j] = lib.colorStr(lastHl.str, lastHl)
 
 		return table.concat(results)
 	end

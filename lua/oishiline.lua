@@ -29,7 +29,7 @@ return {
 			'mode',
 			'branch',
 			'filename',
-			--'diagnostics',
+			'diagnostics',
 		}
 
 		local rightModules = args.rightModules or {
