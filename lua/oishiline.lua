@@ -1,18 +1,22 @@
 return {
 	statusline = function()
 		local results = {}
+		local i = 1
 
 		for _, v in ipairs(vim.g.oishiline.leftModules) do
-			table.insert(results, v())
+			results[i] = v()
+			i = i + 1
 		end
 
-		table.insert(results, '%=%(')
+		results[i] = '%=%('
+		i = i + 1
 
 		for _, v in ipairs(vim.g.oishiline.rightModules) do
-			table.insert(results, v())
+			results[i] = v()
+			i = i + 1
 		end
 
-		table.insert(results, '%)')
+		results[i] = '%)'
 
 		return table.concat(results)
 	end,
