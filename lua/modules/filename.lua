@@ -28,9 +28,8 @@ return function(colors)
 	})
 
 	return function()
-		local fmt = lib.colorStr(fmt.str, fmt)
 		local right = lib.colorStr(rightSep.str, rightSep)
 
-		return string.format(' %s %s', fmt, right)
+		return string.format(' %s %s', lib.colorStr(fmt.str, fmt), right)
 	end
 end
