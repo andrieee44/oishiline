@@ -23,8 +23,8 @@ return function(colors)
 	}, {
 		fg = colors.brightBlack,
 		ctermfg = 'black',
-		bg = colors.white,
-		ctermbg = 'white',
+		bg = colors.black,
+		ctermbg = 'black',
 	})
 
 	return function()
