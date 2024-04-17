@@ -10,8 +10,14 @@ return function(colors)
 	})
 
 	return function()
+		local left =lib.colorStr(leftSep.str, leftSep)
+
 		local type = vim.bo.filetype
 		local icon = nil
+
+		if type == '' then
+			return left
+		end
 
 		if vim.opt.termguicolors._value and package.loaded['nvim-web-devicons'] then
 			local basename = string.gsub(vim.api.nvim_buf_get_name(0), '.*/', '')
@@ -23,6 +29,6 @@ return function(colors)
 			type = string.format('%s %s', icon, type)
 		end
 
-		return string.format(' %s %s', type, lib.colorStr(leftSep.str, leftSep))
+		return string.format('%s %s %s', lib.gui('', '|'), type, left)
 	end
 end

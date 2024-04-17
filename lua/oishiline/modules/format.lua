@@ -8,8 +8,6 @@ return function(_)
 	}
 
 	return function()
-		local icon = icons[vim.bo.fileformat] or vim.bo.fileformat
-
-		return string.format(' %s %s', icon, lib.gui('', '|'))
+		return string.format(' %s ', icons[vim.bo.fileformat] or vim.bo.fileformat)
 	end
 end
