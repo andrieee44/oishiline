@@ -18,10 +18,13 @@ return function(colors)
 
 	return function()
 		local left = lib.colorStr(leftSep.str, leftSep)
-		local right = lib.colorStr(lib.gui('', '|'), fmt)
 
-		local encoding = string.format(' %s', vim.bo.fileencoding)
+		local encoding = vim.bo.fileencoding
 
-		return string.format('%s%s %s', left, lib.colorStr(encoding, fmt), right)
+		if encoding == '' then
+			return string.format('%s%s', left, lib.colorStr('', fmt))
+		end
+
+		return string.format('%s%s %s', left, lib.colorStr(string.format(' %s', encoding), fmt), lib.gui('', '|'))
 	end
 end
