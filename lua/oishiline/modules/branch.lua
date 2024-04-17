@@ -24,6 +24,6 @@ return function(colors)
 			return ''
 		end
 
-		return string.format(' %s %s', lib.colorStr(branch, fmt), lib.colorStr(lib.gui('', '|'), fmt))
+		return string.format(' %s%s %s', lib.colorStr(lib.gui(' ', ''), fmt), branch, lib.gui('', '|'))
 	end
 end
