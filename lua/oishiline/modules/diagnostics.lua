@@ -12,7 +12,8 @@ return function(colors)
 	}
 
 	for k, v in pairs(signNames) do
-		signs[k] = vim.fn.sign_getdefined(string.format('DiagnosticSign%s', v))[1].text
+		local sign = vim.fn.sign_getdefined(string.format('DiagnosticSign%s', v))
+		signs[k] = sign[1] and sign[1].text or ''
 	end
 
 	local severityBg = {
