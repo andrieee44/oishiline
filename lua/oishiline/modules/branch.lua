@@ -9,9 +9,9 @@ return function(colors)
 		ctermbg = 'blue',
 		bold = true,
 	}, {
-		fg = colors.fg,
+		fg = colors.lightFg,
 		ctermfg = 'white',
-		bg = colors.alt_bg,
+		bg = colors.altBg,
 		ctermbg = 'black',
 	})
 

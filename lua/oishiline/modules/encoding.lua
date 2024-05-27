@@ -3,14 +3,14 @@ return function(colors)
 	local module = 'Encoding'
 
 	local fmt = lib.mkHl(lib.hlName(module, 'Fmt'), {
-		fg = colors.fg,
+		fg = colors.lightFg,
 		ctermfg = 'white',
-		bg = colors.alt_bg,
+		bg = colors.altBg,
 		ctermbg = 'black',
 	})
 
 	local leftSep = lib.mkHlStr(lib.gui('', ''), lib.hlName(module, 'Left'), {
-		fg = colors.alt_bg,
+		fg = colors.altBg,
 		ctermfg = 'black',
 		bg = colors.bg,
 		ctermbg = 'black',

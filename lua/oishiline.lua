@@ -44,12 +44,12 @@ return {
 			'location',
 		}
 
-		local colors = {
+		local colors = args.colors or {
 			bg = '#3B4252',
-			alt_bg = '#434C5E',
-			dark_fg = '#4C566A',
+			altBg = '#434C5E',
+			darkFg = '#4C566A',
 			fg = '#D8DEE9',
-			light_fg = '#E5E9F0',
+			lightFg = '#E5E9F0',
 			normal = '#81A1C1',
 			insert = '#A3BE8C',
 			visual = '#B48EAD',

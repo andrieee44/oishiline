@@ -63,7 +63,7 @@ return function(colors)
 	}, {
 		fg = colors.bg,
 		ctermfg = 'black',
-		bg = colors.alt_bg,
+		bg = colors.altBg,
 		ctermbg = 'black',
 	})
 

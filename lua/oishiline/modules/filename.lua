@@ -9,9 +9,9 @@ return function(colors)
 		ctermbg = 'blue',
 		bold = true,
 	}, {
-		fg = colors.fg,
+		fg = colors.lightFg,
 		ctermfg = 'white',
-		bg = colors.alt_bg,
+		bg = colors.altBg,
 		ctermbg = 'black',
 	})
 
@@ -21,7 +21,7 @@ return function(colors)
 		bg = colors.bg,
 		ctermbg = 'black',
 	}, {
-		fg = colors.alt_bg,
+		fg = colors.altBg,
 		ctermfg = 'black',
 		bg = colors.bg,
 		ctermbg = 'black',
