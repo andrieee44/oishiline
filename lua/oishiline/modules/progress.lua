@@ -3,10 +3,10 @@ return function(colors)
 	local module = 'Progress'
 
 	local fmt = lib.mkHlStr(' %P', lib.hlName(module, 'Fmt'), {
-		fg = colors.black,
+		fg = colors.bg,
 		ctermfg = 'black',
-		bg = colors.cyan,
-		ctermbg = 'cyan',
+		bg = colors.normal,
+		ctermbg = 'blue',
 		bold = true,
 	})
 

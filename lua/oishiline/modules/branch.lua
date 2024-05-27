@@ -3,15 +3,15 @@ return function(colors)
 	local module = 'Branch'
 
 	local fmt = lib.mkHl(lib.hlName(module, 'Fmt'), {
-		fg = colors.black,
+		fg = colors.bg,
 		ctermfg = 'black',
-		bg = colors.cyan,
-		ctermbg = 'cyan',
+		bg = colors.normal,
+		ctermbg = 'blue',
 		bold = true,
 	}, {
-		fg = colors.white,
+		fg = colors.fg,
 		ctermfg = 'white',
-		bg = colors.brightBlack,
+		bg = colors.alt_bg,
 		ctermbg = 'black',
 	})
 

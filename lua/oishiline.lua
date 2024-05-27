@@ -44,23 +44,18 @@ return {
 			'location',
 		}
 
-		local colors = args.colors or {
-			black = '#2E3440',
-			red = '#BF616A',
-			green = '#A3BE8C',
-			yellow = '#EBCB8B',
-			blue = '#81A1C1',
-			magenta = '#B48EAD',
-			cyan = '#88C0D0',
-			white = '#E5E9F0',
-			brightBlack = '#4C566A',
-			brightRed = '#BF616A',
-			brightGreen = '#A3BE8C',
-			brightYellow = '#EBCB8B',
-			brightBlue = '#81A1C1',
-			brightMagenta = '#B48EAD',
-			brightCyan = '#88C0D0',
-			brightWhite = '#8FBCBB',
+		local colors = {
+			bg = '#3B4252',
+			alt_bg = '#434C5E',
+			dark_fg = '#4C566A',
+			fg = '#D8DEE9',
+			light_fg = '#E5E9F0',
+			normal = '#81A1C1',
+			insert = '#A3BE8C',
+			visual = '#B48EAD',
+			replace = '#D08770',
+			command = '#81A1C1',
+			terminal = '#A3BE8C',
 		}
 
 		for i, v in ipairs(leftModules) do

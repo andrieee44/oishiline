@@ -78,7 +78,7 @@ return function(colors)
 
 			if not init then
 				local initHl = lib.mkHlStr(lib.gui('', ''), lib.hlName(module, 'Init'), {
-					fg = colors.black,
+					fg = colors.bg,
 					ctermfg = 'black',
 					bg = severityBg[i].bg,
 					ctermbg = severityBg[i].ctermbg,
@@ -90,7 +90,7 @@ return function(colors)
 			end
 
 			local sign = lib.mkHlStr(string.format(' %s%d ', signs[i], v), lib.hlName(module, signNames[i]), {
-				fg = colors.black,
+				fg = colors.bg,
 				ctermfg = 'black',
 				bg = severityBg[i].bg,
 				ctermbg = severityBg[i].ctermbg,
@@ -107,7 +107,7 @@ return function(colors)
 		local lastHl = lib.mkHlStr(lib.gui('', ''), lib.hlName(module, 'Last'), {
 			fg = severityBg[last].bg,
 			ctermfg = severityBg[last].ctermbg,
-			bg = colors.black,
+			bg = colors.bg,
 			ctermbg = 'black',
 		})
 
