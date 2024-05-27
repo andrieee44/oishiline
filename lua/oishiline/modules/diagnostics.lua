@@ -18,22 +18,22 @@ return function(colors)
 
 	local severityBg = {
 		[severity.ERROR] = {
-			bg = colors.red,
+			bg = lib.getHl("DiagnosticError").fg,
 			ctermbg = 'red',
 		},
 
 		[severity.WARN] = {
-			bg = colors.yellow,
+			bg = lib.getHl("DiagnosticWarn").fg,
 			ctermbg = 'yellow',
 		},
 
 		[severity.INFO] = {
-			bg = colors.blue,
+			bg = lib.getHl("DiagnosticInfo").fg,
 			ctermbg = 'blue',
 		},
 
 		[severity.HINT] = {
-			bg = colors.cyan,
+			bg = lib.getHl("DiagnosticHint").fg,
 			ctermbg = 'cyan',
 		},
 	}

@@ -50,4 +50,8 @@ return {
 			alt = hl.alt,
 		}
 	end,
+
+	getHl = function(name)
+		return vim.api.nvim_get_hl(0, { name = name })
+	end,
 }
