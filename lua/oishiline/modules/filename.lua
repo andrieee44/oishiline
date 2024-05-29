@@ -3,27 +3,27 @@ return function(colors)
 	local module = 'Filename'
 
 	local fmt = lib.mkHlStr('%f%( %w%h%m%r%)', lib.hlName(module, 'Fmt'), {
-		fg = colors.bg,
+		fg = colors.black,
 		ctermfg = 'black',
-		bg = colors.normal,
-		ctermbg = 'blue',
+		bg = colors.blue,
+		ctermbg = 'darkblue',
 		bold = true,
 	}, {
-		fg = colors.lightFg,
-		ctermfg = 'white',
-		bg = colors.altBg,
-		ctermbg = 'black',
+		fg = colors.white,
+		ctermfg = 'lightgray',
+		bg = colors.brightblack,
+		ctermbg = 'darkgray',
 	})
 
 	local rightSep = lib.mkHlStr(lib.gui('', ' '), lib.hlName(module, 'Right'), {
-		fg = colors.normal,
-		ctermfg = 'blue',
-		bg = colors.bg,
+		fg = colors.blue,
+		ctermfg = 'darkblue',
+		bg = colors.black,
 		ctermbg = 'black',
 	}, {
-		fg = colors.altBg,
-		ctermfg = 'black',
-		bg = colors.bg,
+		fg = colors.brightblack,
+		ctermfg = 'darkgray',
+		bg = colors.black,
 		ctermbg = 'black',
 	})
 

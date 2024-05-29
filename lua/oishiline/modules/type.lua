@@ -3,10 +3,10 @@ return function(colors)
 	local module = 'Type'
 
 	local leftSep = lib.mkHlStr(lib.gui('', ''), lib.hlName(module, 'Left'), {
-		fg = colors.normal,
-		ctermfg = 'blue',
-		bg = colors.altBg,
-		ctermbg = 'black',
+		fg = colors.blue,
+		ctermfg = 'darkblue',
+		bg = colors.brightblack,
+		ctermbg = 'darkgray',
 	})
 
 	return function()

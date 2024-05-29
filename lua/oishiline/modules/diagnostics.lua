@@ -19,22 +19,22 @@ return function(colors)
 	local severityBg = {
 		[severity.ERROR] = {
 			bg = lib.getHl("DiagnosticError").fg,
-			ctermbg = 'red',
+			ctermbg = 'darkred',
 		},
 
 		[severity.WARN] = {
 			bg = lib.getHl("DiagnosticWarn").fg,
-			ctermbg = 'yellow',
+			ctermbg = 'darkyellow',
 		},
 
 		[severity.INFO] = {
 			bg = lib.getHl("DiagnosticInfo").fg,
-			ctermbg = 'blue',
+			ctermbg = 'darkblue',
 		},
 
 		[severity.HINT] = {
 			bg = lib.getHl("DiagnosticHint").fg,
-			ctermbg = 'cyan',
+			ctermbg = 'darkcyan',
 		},
 	}
 
@@ -78,7 +78,7 @@ return function(colors)
 
 			if not init then
 				local initHl = lib.mkHlStr(lib.gui('', ''), lib.hlName(module, 'Init'), {
-					fg = colors.bg,
+					fg = colors.black,
 					ctermfg = 'black',
 					bg = severityBg[i].bg,
 					ctermbg = severityBg[i].ctermbg,
@@ -90,7 +90,7 @@ return function(colors)
 			end
 
 			local sign = lib.mkHlStr(string.format(' %s%d ', signs[i], v), lib.hlName(module, signNames[i]), {
-				fg = colors.bg,
+				fg = colors.black,
 				ctermfg = 'black',
 				bg = severityBg[i].bg,
 				ctermbg = severityBg[i].ctermbg,
@@ -107,7 +107,7 @@ return function(colors)
 		local lastHl = lib.mkHlStr(lib.gui('', ''), lib.hlName(module, 'Last'), {
 			fg = severityBg[last].bg,
 			ctermfg = severityBg[last].ctermbg,
-			bg = colors.bg,
+			bg = colors.black,
 			ctermbg = 'black',
 		})
 

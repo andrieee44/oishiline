@@ -45,17 +45,22 @@ return {
 		}
 
 		local colors = args.colors or {
-			bg = '#3B4252',
-			altBg = '#434C5E',
-			darkFg = '#4C566A',
-			fg = '#D8DEE9',
-			lightFg = '#E5E9F0',
-			normal = '#81A1C1',
-			insert = '#A3BE8C',
-			visual = '#B48EAD',
-			replace = '#D08770',
-			command = '#81A1C1',
-			terminal = '#A3BE8C',
+			black = "#24283b",
+			red = "#c0caf5",
+			green = "#9ece6a",
+			yellow = "#0db9d7",
+			blue = "#2ac3de",
+			magenta = "#bb9af7",
+			cyan = "#b4f9f8",
+			white = "#a9b1d6",
+			brightblack = "#444b6a",
+			brightred = "#c0caf5",
+			brightgreen = "#9ece6a",
+			brightyellow = "#0db9d7",
+			brightblue = "#2ac3de",
+			brightmagenta = "#bb9af7",
+			brightcyan = "#b4f9f8",
+			brightwhite = "#d5d6db",
 		}
 
 		for i, v in ipairs(leftModules) do
