@@ -1,35 +1,35 @@
 return function(colors)
-	local lib = require('oishiline.modules.lib')
-	local module = 'Filename'
+	local lib = require("oishiline.modules.lib")
+	local module = "Filename"
 
-	local fmt = lib.mkHlStr('%f%( %w%h%m%r%)', lib.hlName(module, 'Fmt'), {
+	local fmt = lib.mkHlStr("%f%( %w%h%m%r%)", lib.hlName(module, "Fmt"), {
 		fg = colors.black,
-		ctermfg = 'black',
+		ctermfg = "black",
 		bg = colors.blue,
-		ctermbg = 'darkblue',
+		ctermbg = "darkblue",
 		bold = true,
 	}, {
 		fg = colors.white,
-		ctermfg = 'lightgray',
+		ctermfg = "lightgray",
 		bg = colors.brightblack,
-		ctermbg = 'darkgray',
+		ctermbg = "darkgray",
 	})
 
-	local rightSep = lib.mkHlStr(lib.gui('', ' '), lib.hlName(module, 'Right'), {
+	local rightSep = lib.mkHlStr(lib.gui("", " "), lib.hlName(module, "Right"), {
 		fg = colors.blue,
-		ctermfg = 'darkblue',
+		ctermfg = "darkblue",
 		bg = colors.black,
-		ctermbg = 'black',
+		ctermbg = "black",
 	}, {
 		fg = colors.brightblack,
-		ctermfg = 'darkgray',
+		ctermfg = "darkgray",
 		bg = colors.black,
-		ctermbg = 'black',
+		ctermbg = "black",
 	})
 
 	return function()
 		local right = lib.colorStr(rightSep.str, rightSep)
 
-		return string.format(' %s %s', lib.colorStr(fmt.str, fmt), right)
+		return string.format(" %s %s", lib.colorStr(fmt.str, fmt), right)
 	end
 end

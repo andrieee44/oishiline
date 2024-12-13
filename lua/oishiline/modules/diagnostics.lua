@@ -1,40 +1,40 @@
 return function(colors)
-	local lib = require('oishiline.modules.lib')
-	local module = 'Diagnostics'
+	local lib = require("oishiline.modules.lib")
+	local module = "Diagnostics"
 	local severity = vim.diagnostic.severity
 	local signs = {}
 
 	local signNames = {
-		[severity.ERROR] = 'Error',
-		[severity.WARN] = 'Warn',
-		[severity.INFO] = 'Info',
-		[severity.HINT] = 'Hint',
+		[severity.ERROR] = "Error",
+		[severity.WARN] = "Warn",
+		[severity.INFO] = "Info",
+		[severity.HINT] = "Hint",
 	}
 
 	for k, v in pairs(signNames) do
-		local sign = vim.fn.sign_getdefined(string.format('DiagnosticSign%s', v))
-		signs[k] = sign[1] and sign[1].text or ''
+		local sign = vim.fn.sign_getdefined(string.format("DiagnosticSign%s", v))
+		signs[k] = sign[1] and sign[1].text or ""
 	end
 
 	local severityBg = {
 		[severity.ERROR] = {
 			bg = lib.getHl("DiagnosticError").fg,
-			ctermbg = 'darkred',
+			ctermbg = "darkred",
 		},
 
 		[severity.WARN] = {
 			bg = lib.getHl("DiagnosticWarn").fg,
-			ctermbg = 'darkyellow',
+			ctermbg = "darkyellow",
 		},
 
 		[severity.INFO] = {
 			bg = lib.getHl("DiagnosticInfo").fg,
-			ctermbg = 'darkblue',
+			ctermbg = "darkblue",
 		},
 
 		[severity.HINT] = {
 			bg = lib.getHl("DiagnosticHint").fg,
-			ctermbg = 'darkcyan',
+			ctermbg = "darkcyan",
 		},
 	}
 
@@ -52,7 +52,7 @@ return function(colors)
 		}
 
 		if #diagnostics == 0 then
-			return ''
+			return ""
 		end
 
 		for _, v in pairs(diagnostics) do
@@ -65,7 +65,7 @@ return function(colors)
 			end
 
 			if init then
-				local sep = lib.mkHlStr(lib.gui('', ''), lib.hlName(module, string.format('%sSep', signNames[i])), {
+				local sep = lib.mkHlStr(lib.gui("", ""), lib.hlName(module, string.format("%sSep", signNames[i])), {
 					fg = severityBg[last].bg,
 					ctermfg = severityBg[last].ctermbg,
 					bg = severityBg[i].bg,
@@ -74,12 +74,10 @@ return function(colors)
 
 				results[j] = lib.colorStr(sep.str, sep)
 				j = j + 1
-			end
-
-			if not init then
-				local initHl = lib.mkHlStr(lib.gui('', ''), lib.hlName(module, 'Init'), {
+			else
+				local initHl = lib.mkHlStr(lib.gui("", ""), lib.hlName(module, "Init"), {
 					fg = colors.black,
-					ctermfg = 'black',
+					ctermfg = "black",
 					bg = severityBg[i].bg,
 					ctermbg = severityBg[i].ctermbg,
 				})
@@ -89,9 +87,9 @@ return function(colors)
 				init = true
 			end
 
-			local sign = lib.mkHlStr(string.format(' %s%d ', signs[i], v), lib.hlName(module, signNames[i]), {
+			local sign = lib.mkHlStr(string.format(" %s%d ", signs[i], v), lib.hlName(module, signNames[i]), {
 				fg = colors.black,
-				ctermfg = 'black',
+				ctermfg = "black",
 				bg = severityBg[i].bg,
 				ctermbg = severityBg[i].ctermbg,
 				bold = true,
@@ -104,11 +102,11 @@ return function(colors)
 			::CONTINUE::
 		end
 
-		local lastHl = lib.mkHlStr(lib.gui('', ''), lib.hlName(module, 'Last'), {
+		local lastHl = lib.mkHlStr(lib.gui("", ""), lib.hlName(module, "Last"), {
 			fg = severityBg[last].bg,
 			ctermfg = severityBg[last].ctermbg,
 			bg = colors.black,
-			ctermbg = 'black',
+			ctermbg = "black",
 		})
 
 		results[j] = lib.colorStr(lastHl.str, lastHl)

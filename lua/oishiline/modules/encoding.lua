@@ -1,19 +1,19 @@
 return function(colors)
-	local lib = require('oishiline.modules.lib')
-	local module = 'Encoding'
+	local lib = require("oishiline.modules.lib")
+	local module = "Encoding"
 
-	local fmt = lib.mkHl(lib.hlName(module, 'Fmt'), {
+	local fmt = lib.mkHl(lib.hlName(module, "Fmt"), {
 		fg = colors.white,
-		ctermfg = 'lightgray',
+		ctermfg = "lightgray",
 		bg = colors.brightblack,
-		ctermbg = 'darkgray',
+		ctermbg = "darkgray",
 	})
 
-	local leftSep = lib.mkHlStr(lib.gui('', ''), lib.hlName(module, 'Left'), {
+	local leftSep = lib.mkHlStr(lib.gui("", ""), lib.hlName(module, "Left"), {
 		fg = colors.brightblack,
-		ctermfg = 'darkgray',
+		ctermfg = "darkgray",
 		bg = colors.black,
-		ctermbg = 'black',
+		ctermbg = "black",
 	})
 
 	return function()
@@ -21,10 +21,10 @@ return function(colors)
 
 		local encoding = vim.bo.fileencoding
 
-		if encoding == '' then
-			return string.format('%s%s', left, lib.colorStr('', fmt))
+		if encoding == "" then
+			return string.format("%s%s", left, lib.colorStr("", fmt))
 		end
 
-		return string.format('%s%s %s', left, lib.colorStr(string.format(' %s', encoding), fmt), lib.gui('', '|'))
+		return string.format("%s%s %s", left, lib.colorStr(string.format(" %s", encoding), fmt), lib.gui("", "|"))
 	end
 end
