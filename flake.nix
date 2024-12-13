@@ -29,5 +29,19 @@
       devShells = eachSystem (pkgs: {
         default = pkgs.mkShell { };
       });
+
+      apps = eachSystem (pkgs: {
+        default = {
+          type = "app";
+
+          program = builtins.toString (
+            pkgs.writers.writeDash "nvim" ''
+              	set -eu
+
+              	${pkgs.neovim}/bin/nvim -c 'lua vim.o.rtp = vim.o.rtp .. ",."; require("oishiline").setup({})' -u NONE
+            ''
+          );
+        };
+      });
     };
 }
