@@ -23,6 +23,7 @@
     global.excludes = [
       "LICENSE"
       ".direnv"
+      ".envrc"
     ];
   };
 }

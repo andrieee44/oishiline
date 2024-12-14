@@ -38,7 +38,7 @@
             pkgs.writers.writeDash "nvim" ''
               	set -eu
 
-              	${pkgs.neovim}/bin/nvim -c 'lua vim.o.rtp = vim.o.rtp .. ",."; require("oishiline").setup({})' -u NONE
+              	${pkgs.neovim}/bin/nvim -c 'lua vim.o.rtp = vim.o.rtp .. ",."; require("oishiline").setup({})' -u NONE "$@"
             ''
           );
         };
