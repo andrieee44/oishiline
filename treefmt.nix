@@ -13,11 +13,12 @@
 
   settings = {
     formatter = {
+      nixfmt.options = [ "-s" ];
+
       stylua.options = [
         "--syntax"
         "Lua52"
       ];
-      nixfmt.options = [ "-s" ];
     };
 
     global.excludes = [
