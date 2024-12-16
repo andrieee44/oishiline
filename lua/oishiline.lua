@@ -47,22 +47,22 @@ return {
 
 		local colors = args.colors
 			or {
-				black = "#24283b",
-				red = "#c0caf5",
-				green = "#9ece6a",
-				yellow = "#0db9d7",
-				blue = "#2ac3de",
-				magenta = "#bb9af7",
-				cyan = "#b4f9f8",
-				white = "#a9b1d6",
-				brightblack = "#444b6a",
-				brightred = "#c0caf5",
-				brightgreen = "#9ece6a",
-				brightyellow = "#0db9d7",
-				brightblue = "#2ac3de",
-				brightmagenta = "#bb9af7",
-				brightcyan = "#b4f9f8",
-				brightwhite = "#d5d6db",
+				black = "#2e3440",
+				red = "#bf616a",
+				green = "#a3be8c",
+				yellow = "#ebcb8b",
+				blue = "#81a1c1",
+				magenta = "#b48ead",
+				cyan = "#88c0d0",
+				white = "#e5e9f0",
+				brightblack = "#4c566a",
+				brightred = "#bf616a",
+				brightgreen = "#a3be8c",
+				brightyellow = "#ebcb8b",
+				brightblue = "#81a1c1",
+				brightmagenta = "#b48ead",
+				brightcyan = "#88c0d0",
+				brightwhite = "#8fbcbb",
 			}
 
 		for i, v in ipairs(leftModules) do
