@@ -28,20 +28,14 @@
       });
 
       devShells = eachSystem (pkgs: {
-        default = pkgs.mkShell { };
-      });
-
-      apps = eachSystem (pkgs: {
-        default = {
-          type = "app";
-
-          program = builtins.toString (
-            pkgs.writers.writeDash "nvim" ''
+        default = pkgs.mkShell {
+          packages = [
+            (pkgs.writers.writeDashBin "nvim" ''
               	set -eu
 
-              	${pkgs.neovim}/bin/nvim -c 'lua vim.o.rtp = vim.o.rtp .. ",."; vim.opt.termguicolors = true; require("oishiline").setup({})' -u NONE "$@"
-            ''
-          );
+              	${pkgs.neovim}/bin/nvim -c 'lua vim.o.rtp = vim.o.rtp .. ",."; vim.opt.termguicolors = true; vim.opt.showtabline = 2; require("oishiline").setup({})' -u NONE "$@"
+            '')
+          ];
         };
       });
     };
