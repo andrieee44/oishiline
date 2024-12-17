@@ -11,7 +11,6 @@ return function(colors)
 
 	return function()
 		local left = lib.colorStr(leftSep.str, leftSep)
-
 		local type = vim.bo.filetype
 		local icon = nil
 

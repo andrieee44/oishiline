@@ -18,7 +18,6 @@ return function(colors)
 
 	return function()
 		local left = lib.colorStr(leftSep.str, leftSep)
-
 		local encoding = vim.bo.fileencoding
 
 		if encoding == "" then
