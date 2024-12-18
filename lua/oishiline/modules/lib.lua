@@ -38,7 +38,7 @@ return {
 	end,
 
 	hlName = function(module, name)
-		return string.format("Oishiline%s%s", module, name)
+		return string.format("OishilineStatusline%s%s", module, name)
 	end,
 
 	mkHlStr = function(str, name, args, altArgs)
