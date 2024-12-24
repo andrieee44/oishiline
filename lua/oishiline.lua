@@ -1,47 +1,63 @@
+local M = {}
+
 function initStatusline(args)
 	local oishiline = vim.g.oishiline
+	args.globalArgs = args.globalArgs or {}
+	local colors = args.globalArgs.colors or {}
 
-	local colors = args.colors
+	oishiline.statusline = {
+		leftModules = {},
+		rightModules = {},
+	}
+
+	args.globalArgs.colors = {
+		black = colors.black or "#2e3440",
+		red = colors.red or "#bf616a",
+		green = colors.green or "#a3be8c",
+		yellow = colors.yellow or "#ebcb8b",
+		blue = colors.blue or "#81a1c1",
+		magenta = colors.magenta or "#b48ead",
+		cyan = colors.cyan or "#88c0d0",
+		white = colors.white or "#e5e9f0",
+		brightblack = colors.brightblack or "#4c566a",
+		brightred = colors.brightred or "#bf616a",
+		brightgreen = colors.brightgreen or "#a3be8c",
+		brightyellow = colors.brightyellow or "#ebcb8b",
+		brightblue = colors.brightblue or "#81a1c1",
+		brightmagenta = colors.brightmagenta or "#b48ead",
+		brightcyan = colors.brightcyan or "#88c0d0",
+		brightwhite = colors.brightwhite or "#8fbcbb",
+	}
+
+	args.leftModules = args.leftModules
 		or {
-			black = "#2e3440",
-			red = "#bf616a",
-			green = "#a3be8c",
-			yellow = "#ebcb8b",
-			blue = "#81a1c1",
-			magenta = "#b48ead",
-			cyan = "#88c0d0",
-			white = "#e5e9f0",
-			brightblack = "#4c566a",
-			brightred = "#bf616a",
-			brightgreen = "#a3be8c",
-			brightyellow = "#ebcb8b",
-			brightblue = "#81a1c1",
-			brightmagenta = "#b48ead",
-			brightcyan = "#88c0d0",
-			brightwhite = "#8fbcbb",
-		}
-
-	oishiline.statusline.leftModules = args.leftModules or {
-		"mode",
+			{ name = "branch" },
+			--[=["mode",
 		"branch",
 		"filename",
 		"diagnostics",
-	}
+		]=]
+		}
 
-	oishiline.statusline.rightModules = args.rightModules or {
+	args.rightModules = args.rightModules
+		or {
+			--[=[
 		"encoding",
 		"format",
 		"type",
 		"progress",
 		"location",
-	}
-	
-	for i, v in ipairs(oishiline.statusline.leftModules) do
-		oishiline.statusline.leftModules[i] = require(string.format("oishiline.modules.%s", v))(colors)
+		]=]
+		}
+
+	for i, v in ipairs(args.leftModules) do
+		oishiline.statusline.leftModules[i] = require(string.format("oishiline.modules.%s", v.name))
+		oishiline.statusline.leftModules[i].init(args.globalArgs, v.args or {})
 	end
 
-	for i, v in ipairs(oishiline.statusline.rightModules) do
-		oishiline.statusline.rightModules[i] = require(string.format("oishiline.modules.%s", v))(colors)
+	for i, v in ipairs(args.rightModules) do
+		oishiline.statusline.rightModules[i] = require(string.format("oishiline.modules.%s", v.name))
+		oishiline.statusline.rightModules[i].init(args.globalArgs, v.args or {})
 	end
 
 	vim.g.oishiline = oishiline
@@ -49,48 +65,48 @@ function initStatusline(args)
 end
 
 function initTabline(args)
-	vim.opt_global.tabline = "test"
+	vim.opt_global.tabline = "wip"
 end
 
-return {
-	statusline = function()
-		local results = {}
-		local i = 1
+function M.statusline()
+	local results = {}
+	local i = 1
 
-		for _, v in ipairs(vim.g.oishiline.statusline.leftModules) do
-			results[i] = v()
-			i = i + 1
-		end
-
-		results[i] = "%=%("
+	for _, v in ipairs(vim.g.oishiline.statusline.leftModules) do
+		results[i] = v.run()
 		i = i + 1
+	end
 
-		for _, v in ipairs(vim.g.oishiline.statusline.rightModules) do
-			results[i] = v()
-			i = i + 1
-		end
+	results[i] = "%=%("
+	i = i + 1
 
-		results[i] = "%)"
+	for _, v in ipairs(vim.g.oishiline.statusline.rightModules) do
+		results[i] = v.run()
+		i = i + 1
+	end
 
-		return table.concat(results)
-	end,
+	results[i] = "%)"
 
-	setup = function(args)
-		args = args or {}
-		args.statusline = args.statusline or {}
-		args.tabline = args.tabline or {}
+	return table.concat(results)
+end
 
-		vim.g.oishiline = {
-			statusline = {},
-			tabline = {},
-		}
+function M.setup(args)
+	args = args or {}
+	args.statusline = args.statusline or {}
+	args.tabline = args.tabline or {}
 
-		if args.statusline.enable then
-			initStatusline(args)
-		end
+	vim.g.oishiline = {
+		statusline = {},
+		tabline = {},
+	}
 
-		if args.tabline.enable then
-			initTabline(args)
-		end
-	end,
-}
+	if args.statusline.enable then
+		initStatusline(args)
+	end
+
+	if args.tabline.enable then
+		initTabline(args)
+	end
+end
+
+return M
