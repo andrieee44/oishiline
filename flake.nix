@@ -33,7 +33,7 @@
             (pkgs.writers.writeDashBin "nvim" ''
               	set -eu
 
-              	${pkgs.neovim}/bin/nvim -c 'lua vim.o.rtp = vim.o.rtp .. ",."; vim.opt.termguicolors = true; vim.opt.showtabline = 2; require("oishiline").setup({ statusline = { enable = true }, tabline = { enable = true }})' -u NONE "$@"
+              	${pkgs.neovim}/bin/nvim -u NONE -c 'lua vim.o.rtp = vim.o.rtp .. ",."; vim.opt.termguicolors = true; vim.opt.showtabline = 2; require("oishiline").setup()' "$@"
             '')
           ];
         };

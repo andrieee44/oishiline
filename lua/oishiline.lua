@@ -1,14 +1,18 @@
 local M = {}
 
-function initStatusline(args)
-	local oishiline = vim.g.oishiline
-	args.globalArgs = args.globalArgs or {}
-	local colors = args.globalArgs.colors or {}
+function initArgs(args)
+	local args = args or {}
 
-	oishiline.statusline = {
-		leftModules = {},
-		rightModules = {},
+	args = {
+		globalArgs = args.globalArgs or {},
+		statusline = args.statusline or {},
+		tabline = args.tabline or {},
 	}
+
+	args.statusline.enable = (args.statusline.enable == nil) and true or args.statusline.enable
+	args.tabline.enable = (args.tabline.enable == nil) and true or args.tabline.enable
+
+	local colors = args.globalArgs.colors or {}
 
 	args.globalArgs.colors = {
 		black = colors.black or "#2e3440",
@@ -29,7 +33,7 @@ function initStatusline(args)
 		brightwhite = colors.brightwhite or "#8fbcbb",
 	}
 
-	args.leftModules = args.leftModules
+	args.statusline.leftModules = args.statusline.leftModules
 		or {
 			{ name = "branch" },
 			--[=["mode",
@@ -39,7 +43,7 @@ function initStatusline(args)
 		]=]
 		}
 
-	args.rightModules = args.rightModules
+	args.statusline.rightModules = args.statusline.rightModules
 		or {
 			--[=[
 		"encoding",
@@ -50,12 +54,23 @@ function initStatusline(args)
 		]=]
 		}
 
-	for i, v in ipairs(args.leftModules) do
+	return args
+end
+
+function initStatusline(args)
+	local oishiline = vim.g.oishiline
+
+	oishiline.statusline = {
+		leftModules = {},
+		rightModules = {},
+	}
+
+	for i, v in ipairs(args.statusline.leftModules) do
 		oishiline.statusline.leftModules[i] = require(string.format("oishiline.modules.%s", v.name))
 		oishiline.statusline.leftModules[i].init(args.globalArgs, v.args or {})
 	end
 
-	for i, v in ipairs(args.rightModules) do
+	for i, v in ipairs(args.statusline.rightModules) do
 		oishiline.statusline.rightModules[i] = require(string.format("oishiline.modules.%s", v.name))
 		oishiline.statusline.rightModules[i].init(args.globalArgs, v.args or {})
 	end
@@ -91,9 +106,7 @@ function M.statusline()
 end
 
 function M.setup(args)
-	args = args or {}
-	args.statusline = args.statusline or {}
-	args.tabline = args.tabline or {}
+	args = initArgs(args)
 
 	vim.g.oishiline = {
 		statusline = {},

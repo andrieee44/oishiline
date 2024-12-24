@@ -25,7 +25,6 @@ function M.run()
 
 	if branch == nil then
 		return ""
-		
 	end
 
 	return string.format(" %s%s %s", lib.colorStr(lib.gui(" ", ""), M.fmt), branch, lib.gui("", "|"))
