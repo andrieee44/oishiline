@@ -30,7 +30,7 @@
       devShells = eachSystem (pkgs: {
         default = pkgs.mkShell {
           packages = [
-            (pkgs.writers.writeDashBin "nvim" ''
+            (pkgs.writers.writeDashBin "tnvim" ''
               	set -eu
 
               	${pkgs.neovim}/bin/nvim -u NONE -c 'lua vim.o.rtp = vim.o.rtp .. ",."; vim.opt.termguicolors = true; vim.opt.showtabline = 2; require("oishiline").setup()' "$@"
