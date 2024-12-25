@@ -1,7 +1,7 @@
 local M = {}
 
-function initArgs(args)
-	local args = args or {}
+local function initArgs(args)
+	args = args or {}
 
 	args = {
 		globalArgs = args.globalArgs or {},
@@ -57,7 +57,7 @@ function initArgs(args)
 	return args
 end
 
-function initStatusline(args)
+local function initStatusline(args)
 	local oishiline = vim.g.oishiline
 
 	oishiline.statusline = {
@@ -79,7 +79,7 @@ function initStatusline(args)
 	vim.opt_global.statusline = "%{%v:lua.require('oishiline').statusline()%}"
 end
 
-function initTabline(args)
+local function initTabline(args)
 	vim.opt_global.tabline = "wip"
 end
 

@@ -20,14 +20,18 @@ end
 
 function M.run()
 	local path = string.match(vim.api.nvim_buf_get_name(0), ".*/")
-	local cmd = string.format("git -C '%s' branch --show-current 2> /dev/null", path)
-	local branch = lib.run(cmd)
 
-	if branch == nil then
+	if path ~= M.oldPath then
+		M.branch = lib.run(string.format("git -C '%s' branch --show-current 2> /dev/null", path))
+	end
+
+	M.oldPath = path
+
+	if M.branch == nil then
 		return ""
 	end
 
-	return string.format(" %s%s %s", lib.colorStr(lib.gui(" ", ""), M.fmt), branch, lib.gui("", "|"))
+	return string.format(" %s%s %s", lib.colorStr(lib.gui(" ", ""), M.fmt), M.branch, lib.gui("", "|"))
 end
 
 return M
