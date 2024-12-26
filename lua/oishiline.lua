@@ -1,58 +1,65 @@
 local M = {}
 
-local function initArgs(args)
-	args = args or {}
+local function initArgs(userArgs)
+	local args = vim.tbl_deep_extend("keep", userArgs or {}, {
+		globalArgs = {
+			default = {
+				fg = "#e5e9f0",
+				bg = "#2e3440",
+				ctermfg = "lightgray",
+				ctermbg = "black",
+			},
 
-	args = {
-		globalArgs = args.globalArgs or {},
-		statusline = args.statusline or {},
-		tabline = args.tabline or {},
-	}
+			colors = {
+				black = "#2e3440",
+				darkred = "#bf616a",
+				darkgreen = "#a3be8c",
+				darkyellow = "#ebcb8b",
+				darkblue = "#81a1c1",
+				darkmagenta = "#b48ead",
+				darkcyan = "#88c0d0",
+				lightgray = "#e5e9f0",
+				darkgray = "#4c566a",
+				red = "#bf616a",
+				green = "#a3be8c",
+				yellow = "#ebcb8b",
+				blue = "#81a1c1",
+				magenta = "#b48ead",
+				cyan = "#88c0d0",
+				white = "#8fbcbb",
+			},
+		},
 
-	args.statusline.enable = (args.statusline.enable == nil) and true or args.statusline.enable
-	args.tabline.enable = (args.tabline.enable == nil) and true or args.tabline.enable
+		statusline = {
+			enable = true,
 
-	local colors = args.globalArgs.colors or {}
+			leftModules = {
+				{ name = "branch", args = {}, },
+				--[=[
+					"mode",
+					"branch",
+					"filename",
+					"diagnostics",
+				]=]
+			},
 
-	args.globalArgs.colors = {
-		black = colors.black or "#2e3440",
-		red = colors.red or "#bf616a",
-		green = colors.green or "#a3be8c",
-		yellow = colors.yellow or "#ebcb8b",
-		blue = colors.blue or "#81a1c1",
-		magenta = colors.magenta or "#b48ead",
-		cyan = colors.cyan or "#88c0d0",
-		white = colors.white or "#e5e9f0",
-		brightblack = colors.brightblack or "#4c566a",
-		brightred = colors.brightred or "#bf616a",
-		brightgreen = colors.brightgreen or "#a3be8c",
-		brightyellow = colors.brightyellow or "#ebcb8b",
-		brightblue = colors.brightblue or "#81a1c1",
-		brightmagenta = colors.brightmagenta or "#b48ead",
-		brightcyan = colors.brightcyan or "#88c0d0",
-		brightwhite = colors.brightwhite or "#8fbcbb",
-	}
+			rightModules = {
+				--[=[
+					"encoding",
+					"format",
+					"type",
+					"progress",
+					"location",
+				]=]
+			},
+		},
 
-	args.statusline.leftModules = args.statusline.leftModules
-		or {
-			{ name = "branch" },
-			--[=["mode",
-		"branch",
-		"filename",
-		"diagnostics",
-		]=]
-		}
+		tabline = {
+			enable = true,
+		},
+	})
 
-	args.statusline.rightModules = args.statusline.rightModules
-		or {
-			--[=[
-		"encoding",
-		"format",
-		"type",
-		"progress",
-		"location",
-		]=]
-		}
+	vim.api.nvim_set_hl(0, "OishilineDefault", args.globalArgs.default)
 
 	return args
 end
@@ -79,7 +86,7 @@ local function initStatusline(args)
 	vim.opt_global.statusline = "%{%v:lua.require('oishiline').statusline()%}"
 end
 
-local function initTabline(args)
+local function initTabline(_)
 	vim.opt_global.tabline = "wip"
 end
 
@@ -105,8 +112,8 @@ function M.statusline()
 	return table.concat(results)
 end
 
-function M.setup(args)
-	args = initArgs(args)
+function M.setup(userArgs)
+	local args = initArgs(userArgs)
 
 	vim.g.oishiline = {
 		statusline = {},

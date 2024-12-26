@@ -17,7 +17,7 @@
 
       stylua.options = [
         "--syntax"
-        "Lua52"
+        "LuaJit"
       ];
     };
 
