@@ -33,7 +33,7 @@
             (pkgs.writers.writeDashBin "tnvim" ''
               	set -eu
 
-              	${pkgs.neovim}/bin/nvim -u NONE -c 'lua vim.o.rtp = vim.o.rtp .. ",."; vim.opt.termguicolors = vim.env.XDG_SESSION_TYPE ~= "tty"; vim.opt.showtabline = 2; require("oishiline").setup()' "$@"
+              	${pkgs.neovim}/bin/nvim -u ./init.lua "$@"
             '')
           ];
         };
