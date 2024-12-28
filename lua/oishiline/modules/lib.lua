@@ -32,20 +32,6 @@ function M.mkHl(name, args, altArgs)
 	}
 end
 
-function M.mkHlStr(str, name, args, altArgs)
-	local hl = M.mkHl(name, args, altArgs)
-
-	return {
-		str = str,
-		hl = hl.hl,
-		alt = hl.alt,
-	}
-end
-
-function M.getHl(name)
-	return vim.api.nvim_get_hl(0, { name = name })
-end
-
 function M.colorStr(str, hl)
 	local active = tonumber(vim.g.actual_curwin) == vim.api.nvim_get_current_win()
 

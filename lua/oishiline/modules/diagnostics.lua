@@ -1,116 +1,150 @@
-return function(colors)
-	local lib = require("oishiline.modules.lib")
-	local module = "Diagnostics"
-	local severity = vim.diagnostic.severity
-	local signs = {}
+local sep, default, severityBg
+local M = {}
+local lib = require("oishiline.modules.lib")
+local severity = vim.diagnostic.severity
 
-	local signNames = {
-		[severity.ERROR] = "Error",
-		[severity.WARN] = "Warn",
-		[severity.INFO] = "Info",
-		[severity.HINT] = "Hint",
-	}
+local signNames = {
+	[severity.ERROR] = "Error",
+	[severity.WARN] = "Warn",
+	[severity.INFO] = "Info",
+	[severity.HINT] = "Hint",
+}
 
-	for k, v in pairs(signNames) do
-		local sign = vim.fn.sign_getdefined(string.format("DiagnosticSign%s", v))
-		signs[k] = sign[1] and sign[1].text or ""
-	end
+local signs = {
+	[severity.ERROR] = {
+		gui = " ",
+		tty = "! ",
+	},
 
-	local severityBg = {
+	[severity.WARN] = {
+		gui = " ",
+		tty = "? ",
+	},
+
+	[severity.INFO] = {
+		gui = " ",
+		tty = "* ",
+	},
+
+	[severity.HINT] = {
+		gui = " ",
+		tty = "i ",
+	},
+}
+
+function M.init(globalArgs, moduleArgs)
+	local colors = globalArgs.colors
+
+	default = globalArgs.default
+
+	severityBg = {
 		[severity.ERROR] = {
-			bg = lib.getHl("DiagnosticError").fg,
+			bg = colors.darkred,
 			ctermbg = "darkred",
 		},
 
 		[severity.WARN] = {
-			bg = lib.getHl("DiagnosticWarn").fg,
+			bg = colors.darkyellow,
 			ctermbg = "darkyellow",
 		},
 
 		[severity.INFO] = {
-			bg = lib.getHl("DiagnosticInfo").fg,
+			bg = colors.darkblue,
 			ctermbg = "darkblue",
 		},
 
 		[severity.HINT] = {
-			bg = lib.getHl("DiagnosticHint").fg,
+			bg = colors.darkcyan,
 			ctermbg = "darkcyan",
 		},
 	}
 
-	return function()
-		local diagnostics = vim.diagnostic.get(0)
-		local results = {}
-		local j, last = 1, 0
-		local init = false
+	sep = lib.gui(vim.tbl_deep_extend("keep", moduleArgs.sep or {}, {
+		gui = "",
+		tty = "",
+	}))
 
-		local count = {
-			[severity.ERROR] = 0,
-			[severity.WARN] = 0,
-			[severity.INFO] = 0,
-			[severity.HINT] = 0,
-		}
-
-		if #diagnostics == 0 then
-			return ""
-		end
-
-		for _, v in pairs(diagnostics) do
-			count[v.severity] = count[v.severity] + 1
-		end
-
-		for i, v in ipairs(count) do
-			if v == 0 then
-				goto CONTINUE
-			end
-
-			if init then
-				local sep = lib.mkHlStr(lib.gui("", ""), lib.hlName(module, string.format("%sSep", signNames[i])), {
-					fg = severityBg[last].bg,
-					ctermfg = severityBg[last].ctermbg,
-					bg = severityBg[i].bg,
-					ctermbg = severityBg[i].ctermbg,
-				})
-
-				results[j] = lib.colorStr(sep.str, sep)
-				j = j + 1
-			else
-				local initHl = lib.mkHlStr(lib.gui("", ""), lib.hlName(module, "Init"), {
-					fg = colors.black,
-					ctermfg = "black",
-					bg = severityBg[i].bg,
-					ctermbg = severityBg[i].ctermbg,
-				})
-
-				results[j] = lib.colorStr(initHl.str, initHl)
-				j = j + 1
-				init = true
-			end
-
-			local sign = lib.mkHlStr(string.format(" %s%d ", signs[i], v), lib.hlName(module, signNames[i]), {
-				fg = colors.black,
-				ctermfg = "black",
-				bg = severityBg[i].bg,
-				ctermbg = severityBg[i].ctermbg,
-				bold = true,
-			})
-
-			results[j] = lib.colorStr(sign.str, sign)
-			j = j + 1
-			last = i
-
-			::CONTINUE::
-		end
-
-		local lastHl = lib.mkHlStr(lib.gui("", ""), lib.hlName(module, "Last"), {
-			fg = severityBg[last].bg,
-			ctermfg = severityBg[last].ctermbg,
-			bg = colors.black,
-			ctermbg = "black",
-		})
-
-		results[j] = lib.colorStr(lastHl.str, lastHl)
-
-		return table.concat(results)
+	for k, v in pairs(signNames) do
+		signs[k] = lib.gui(vim.tbl_deep_extend("keep", moduleArgs[v] or {}, signs[k]))
+		severityBg[k] = vim.tbl_deep_extend("keep", moduleArgs[string.format("%sBg", v)] or {}, severityBg[k])
 	end
 end
+
+function M.run()
+	local hl
+	local diagnostics = vim.diagnostic.get(0)
+	local results = {}
+	local j, last = 1, 0
+	local first = true
+
+	local count = {
+		[severity.ERROR] = 0,
+		[severity.WARN] = 0,
+		[severity.INFO] = 0,
+		[severity.HINT] = 0,
+	}
+
+	if #diagnostics == 0 then
+		return ""
+	end
+
+	for _, v in pairs(diagnostics) do
+		count[v.severity] = count[v.severity] + 1
+	end
+
+	for i, v in ipairs(count) do
+		if v == 0 then
+			goto continue
+		end
+
+		if first then
+			first = false
+
+			hl = lib.mkHl("OishilineStatuslineDiagnosticsFirst", {
+				fg = default.bg,
+				bg = severityBg[i].bg,
+				ctermfg = default.ctermbg,
+				ctermbg = severityBg[i].ctermbg,
+			})
+		end
+
+		if not first then
+			hl = lib.mkHl(string.format("OishilineStatuslineDiagnostic%sSep", signNames[i]), {
+				fg = severityBg[last].bg,
+				bg = severityBg[i].bg,
+				ctermfg = severityBg[last].ctermbg,
+				ctermbg = severityBg[i].ctermbg,
+			})
+		end
+
+		results[j] = lib.colorStr(sep, hl)
+		j = j + 1
+
+		hl = lib.mkHl(string.format("OishilineStatuslineDiagnostic%s", signNames[i]), {
+			fg = default.fg,
+			bg = severityBg[i].bg,
+			ctermfg = default.ctermfg,
+			ctermbg = severityBg[i].ctermbg,
+			bold = true,
+		})
+
+		results[j] = lib.colorStr(string.format("%s%d", signs[i], v), hl)
+		j = j + 1
+		last = i
+
+		::continue::
+	end
+
+	local lastHl = lib.mkHl("OishilineStatuslineDiagnosticLast", {
+		fg = severityBg[last].bg,
+		ctermfg = severityBg[last].ctermbg,
+		bg = default.bg,
+		ctermbg = default.ctermbg,
+	})
+
+	results[j] = lib.colorStr(sep, lastHl)
+
+	return table.concat(results)
+end
+
+return M
