@@ -34,7 +34,8 @@ local function initArgs(userArgs)
 			enable = true,
 
 			leftModules = {
-				{ name = "branch", args = {}, },
+				-- { name = "branch", },
+				{ name = "diagnostics" },
 				--[=[
 					"mode",
 					"branch",
@@ -91,12 +92,14 @@ local function initTabline(_)
 
 	vim.g.oishiline = oishiline
 	vim.opt_global.tabline = "%!v:lua.require('oishiline').tabline()"
-
 end
 
 function M.statusline()
 	local results = {}
 	local i = 1
+
+	results[i] = "%#OishilineDefault#"
+	i = i + 1
 
 	for _, v in ipairs(vim.g.oishiline.statusline.leftModules) do
 		results[i] = v.run()

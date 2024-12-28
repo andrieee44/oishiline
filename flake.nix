@@ -33,7 +33,7 @@
             (pkgs.writers.writeDashBin "tnvim" ''
               	set -eu
 
-              	${pkgs.neovim}/bin/nvim -u ${./init.lua} "$@"
+              	${pkgs.neovim}/bin/nvim -u ./init.lua "$@"
             '')
           ];
         };

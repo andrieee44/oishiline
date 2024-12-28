@@ -1,16 +1,17 @@
-vim.diagnostic.set(vim.diagnostic.get_namespace(), vim.api.nvim_get_current_buf(), {
-	{
+local function mkDiagnostic(severity)
+	return {
 		lnum = 0,
 		col = 0,
-		message = "Dummy error message",
-		severity = vim.diagnostic.severity.ERROR,
-	},
-	{
-		lnum = 2,
-		col = 10,
-		message = "Dummy warning message",
-		severity = vim.diagnostic.severity.WARN,
-	},
+		message = "WARN",
+		severity = vim.diagnostic.severity[severity],
+	}
+end
+
+vim.diagnostic.set(vim.api.nvim_create_namespace("test"), 0, {
+	mkDiagnostic("ERROR"),
+	mkDiagnostic("WARN"),
+	mkDiagnostic("INFO"),
+	mkDiagnostic("HINT"),
 })
 
 vim.o.rtp = vim.o.rtp .. ",."

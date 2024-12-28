@@ -12,23 +12,23 @@ local signNames = {
 
 local signs = {
 	[severity.ERROR] = {
-		gui = " ",
-		tty = "! ",
+		gui = "  ",
+		tty = " ! ",
 	},
 
 	[severity.WARN] = {
-		gui = " ",
-		tty = "? ",
+		gui = "  ",
+		tty = " ? ",
 	},
 
 	[severity.INFO] = {
-		gui = " ",
-		tty = "* ",
+		gui = "  ",
+		tty = " * ",
 	},
 
 	[severity.HINT] = {
-		gui = " ",
-		tty = "i ",
+		gui = "  ",
+		tty = " i ",
 	},
 }
 
@@ -85,7 +85,7 @@ function M.run()
 	}
 
 	if #diagnostics == 0 then
-		return ""
+		return "empty"
 	end
 
 	for _, v in pairs(diagnostics) do
@@ -106,9 +106,7 @@ function M.run()
 				ctermfg = default.ctermbg,
 				ctermbg = severityBg[i].ctermbg,
 			})
-		end
-
-		if not first then
+		else
 			hl = lib.mkHl(string.format("OishilineStatuslineDiagnostic%sSep", signNames[i]), {
 				fg = severityBg[last].bg,
 				bg = severityBg[i].bg,
@@ -121,14 +119,14 @@ function M.run()
 		j = j + 1
 
 		hl = lib.mkHl(string.format("OishilineStatuslineDiagnostic%s", signNames[i]), {
-			fg = default.fg,
+			fg = default.bg,
 			bg = severityBg[i].bg,
-			ctermfg = default.ctermfg,
+			ctermfg = default.ctermbg,
 			ctermbg = severityBg[i].ctermbg,
 			bold = true,
 		})
 
-		results[j] = lib.colorStr(string.format("%s%d", signs[i], v), hl)
+		results[j] = lib.colorStr(string.format("%s%d ", signs[i], v), hl)
 		j = j + 1
 		last = i
 

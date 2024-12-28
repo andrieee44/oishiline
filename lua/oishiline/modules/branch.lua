@@ -5,19 +5,22 @@ local lib = require("oishiline.modules.lib")
 function M.init(globalArgs, moduleArgs)
 	local colors = globalArgs.colors
 
-	fmt = lib.mkHl("OishilineStatuslineBranch",
+	fmt = lib.mkHl(
+		"OishilineStatuslineBranch",
 		vim.tbl_deep_extend("keep", moduleArgs.fmt or {}, {
 			fg = colors.black,
 			bg = colors.darkblue,
 			ctermfg = "black",
 			ctermbg = "darkblue",
 			bold = true,
-		}), vim.tbl_deep_extend("keep", moduleArgs.fmtAlt or {}, {
+		}),
+		vim.tbl_deep_extend("keep", moduleArgs.fmtAlt or {}, {
 			fg = colors.lightgray,
 			bg = colors.darkgray,
 			ctermfg = "lightgray",
 			ctermbg = "darkgray",
-		}))
+		})
+	)
 
 	icon = lib.gui(vim.tbl_deep_extend("keep", moduleArgs.icon or {}, {
 		gui = "",
