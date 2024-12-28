@@ -87,7 +87,11 @@ local function initStatusline(args)
 end
 
 local function initTabline(_)
-	vim.opt_global.tabline = "wip"
+	local oishiline = vim.g.oishiline
+
+	vim.g.oishiline = oishiline
+	vim.opt_global.tabline = "%!v:lua.require('oishiline').tabline()"
+
 end
 
 function M.statusline()
@@ -110,6 +114,10 @@ function M.statusline()
 	results[i] = "%)"
 
 	return table.concat(results)
+end
+
+function M.tabline()
+	return "wip"
 end
 
 function M.setup(userArgs)
