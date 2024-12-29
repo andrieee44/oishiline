@@ -38,4 +38,30 @@ function M.colorStr(str, hl)
 	return string.format("%%#%s#%s", active and hl.hl or hl.alt, str)
 end
 
+function M.stdModule(moduleName, moduleArgs, defaultArgs)
+	local args = vim.tbl_deep_extend("keep", moduleArgs, defaultArgs)
+
+	return {
+		leftSep = M.gui(args.leftSep),
+		icon = M.gui(args.icon),
+		rightSep = M.gui(args.rightSep),
+
+		leftSepHl = M.mkHl(
+			string.format("OishilineStatusline%sLeftSep", moduleName),
+			args.leftSepHl,
+			args.leftSepHlAlt
+		),
+
+		iconHl = M.mkHl(string.format("OishilineStatusline%sIcon", moduleName), args.iconHl, args.iconHlAlt),
+
+		fmtHl = M.mkHl(string.format("OishilineStatusline%sFmt", moduleName), args.fmtHl, args.fmtHlAlt),
+
+		rightSepHl = M.mkHl(
+			string.format("OishilineStatusline%sRightSep", moduleName),
+			args.rightSepHl,
+			args.rightSepHlAlt
+		),
+	}
+end
+
 return M

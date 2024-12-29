@@ -1,7 +1,8 @@
 local lib = require("oishiline.modules.lib")
+local leftSepHl, iconHl, encodingHl, rightSepHl, leftSep, icon, rightSep
 
 function M.init(globalArgs, moduleArgs)
-	local fmt = lib.mkHl("OishilineStatuslineBranchFmt", {
+	fmt = lib.mkHl("OishilineStatuslineEncodingFmt", {
 		fg = colors.white,
 		ctermfg = "lightgray",
 		bg = colors.brightblack,
