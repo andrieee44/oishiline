@@ -1,8 +1,7 @@
-return function(colors)
-	local lib = require("oishiline.modules.lib")
-	local module = "Encoding"
+local lib = require("oishiline.modules.lib")
 
-	local fmt = lib.mkHl(lib.hlName(module, "Fmt"), {
+function M.init(globalArgs, moduleArgs)
+	local fmt = lib.mkHl("OishilineStatuslineBranchFmt", {
 		fg = colors.white,
 		ctermfg = "lightgray",
 		bg = colors.brightblack,
@@ -15,15 +14,15 @@ return function(colors)
 		bg = colors.black,
 		ctermbg = "black",
 	})
+end
 
-	return function()
-		local left = lib.colorStr(leftSep.str, leftSep)
-		local encoding = vim.bo.fileencoding
+function M.run()
+	local left = lib.colorStr(leftSep.str, leftSep)
+	local encoding = vim.bo.fileencoding
 
-		if encoding == "" then
-			return string.format("%s%s", left, lib.colorStr("", fmt))
-		end
-
-		return string.format("%s%s %s", left, lib.colorStr(string.format(" %s", encoding), fmt), lib.gui("", "|"))
+	if encoding == "" then
+		return string.format("%s%s", left, lib.colorStr("", fmt))
 	end
+
+	return string.format("%s%s %s", left, lib.colorStr(string.format(" %s", encoding), fmt), lib.gui("", "|"))
 end
