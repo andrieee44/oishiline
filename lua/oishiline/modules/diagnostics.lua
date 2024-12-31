@@ -1,5 +1,6 @@
 local sep, default, severityBg
-local M = {}
+local M, oldCount = {}, {}
+local oldOutput = ""
 local lib = require("oishiline.modules.lib")
 local severity = vim.diagnostic.severity
 
@@ -31,6 +32,30 @@ local signs = {
 		tty = " i ",
 	},
 }
+
+local function eqTbl(a, b)
+	if #a ~= #b then
+		return false
+	end
+
+	for i in pairs(a) do
+		if a[i] ~= b[i] then
+			return false
+		end
+	end
+
+	return true
+end
+
+local function shallowCopy(a)
+	local b = {}
+
+	for i in pairs(a) do
+		b[i] = a[i]
+	end
+
+	return b
+end
 
 function M.init(globalArgs, moduleArgs)
 	local colors = globalArgs.colors
@@ -73,7 +98,6 @@ end
 function M.run()
 	local hl
 	local diagnostics = vim.diagnostic.get(0)
-	local results = {}
 	local j, last = 1, 0
 	local first = true
 
@@ -84,35 +108,37 @@ function M.run()
 		[severity.HINT] = 0,
 	}
 
-	if #diagnostics == 0 then
-		return "empty"
-	end
-
 	for _, v in pairs(diagnostics) do
 		count[v.severity] = count[v.severity] + 1
 	end
+
+	if eqTbl(count, oldCount) then
+		return oldOutput
+	end
+
+	results = {}
 
 	for i, v in ipairs(count) do
 		if v == 0 then
 			goto continue
 		end
 
-		if first then
-			first = false
-
-			hl = lib.mkHl("OishilineStatuslineDiagnosticsFirst", {
-				fg = default.bg,
-				bg = severityBg[i].bg,
-				ctermfg = default.ctermbg,
-				ctermbg = severityBg[i].ctermbg,
-			})
-		else
-			hl = lib.mkHl(string.format("OishilineStatuslineDiagnostic%sSep", signNames[i]), {
+		hl = first
+				and lib.mkHl("OishilineStatuslineDiagnosticsFirst", {
+					fg = default.bg,
+					bg = severityBg[i].bg,
+					ctermfg = default.ctermbg,
+					ctermbg = severityBg[i].ctermbg,
+				})
+			or lib.mkHl(string.format("OishilineStatuslineDiagnostic%sSep", signNames[i]), {
 				fg = severityBg[last].bg,
 				bg = severityBg[i].bg,
 				ctermfg = severityBg[last].ctermbg,
 				ctermbg = severityBg[i].ctermbg,
 			})
+
+		if first then
+			first = false
 		end
 
 		results[j] = lib.colorStr(sep, hl)
@@ -141,8 +167,10 @@ function M.run()
 	})
 
 	results[j] = lib.colorStr(sep, lastHl)
+	oldCount = shallowCopy(count)
+	oldOutput = table.concat(results)
 
-	return table.concat(results)
+	return oldOutput
 end
 
 return M
