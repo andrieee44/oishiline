@@ -5,15 +5,15 @@ local lib = require("oishiline.modules.lib")
 function M.init(globalArgs, moduleArgs)
 	local colors = globalArgs.colors
 
-	local fmtHl = {
-		fg = colors.black,
+	local dataHl = {
+		fg = globalArgs.default.bg,
 		bg = colors.darkblue,
-		ctermfg = "black",
+		ctermfg = globalArgs.default.ctermbg,
 		ctermbg = "darkblue",
 		bold = true,
 	}
 
-	local fmtHlAlt = {
+	local dataHlAlt = {
 		fg = colors.lightgray,
 		bg = colors.darkgray,
 		ctermfg = "lightgray",
@@ -21,14 +21,14 @@ function M.init(globalArgs, moduleArgs)
 	}
 
 	branch = lib.stdModule("Branch", moduleArgs, {
-		leftSepHl = fmtHl,
-		leftSepHlAlt = fmtHlAlt,
-		iconHl = fmtHl,
-		iconHlAlt = fmtHlAlt,
-		fmtHl = fmtHl,
-		fmtHlAlt = fmtHlAlt,
-		rightSepHl = fmtHl,
-		rightSepHlAlt = fmtHlAlt,
+		leftSepHl = dataHl,
+		leftSepHlAlt = dataHlAlt,
+		iconHl = dataHl,
+		iconHlAlt = dataHlAlt,
+		dataHl = dataHl,
+		dataHlAlt = dataHlAlt,
+		rightSepHl = dataHl,
+		rightSepHlAlt = dataHlAlt,
 
 		leftSep = {
 			gui = "",
@@ -56,18 +56,7 @@ function M.run()
 
 	oldPath = path
 
-	if branchName == nil then
-		return ""
-	end
-
-	return string.format(
-		"%s%s%s%s%s",
-		lib.colorStr(branch.leftSep, branch.leftSepHl),
-		lib.colorStr(branch.icon, branch.iconHl),
-		lib.colorStr(branchName, branch.fmtHl),
-		lib.colorStr(branch.rightSep, branch.rightSepHl),
-		lib.default
-	)
+	return branchName == nil and "" or lib.stdFormat(branch, branchName)
 end
 
 return M

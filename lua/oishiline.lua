@@ -6,8 +6,8 @@ local function initArgs(userArgs)
 			default = {
 				fg = "#e5e9f0",
 				bg = "#2e3440",
-				ctermfg = "lightgray",
-				ctermbg = "black",
+				ctermfg = 7,
+				ctermbg = 0,
 			},
 
 			colors = {
@@ -35,7 +35,8 @@ local function initArgs(userArgs)
 
 			leftModules = {
 				-- { name = "branch" },
-				{ name = "diagnostics" },
+				-- { name = "diagnostics" },
+				{ name = "encoding" },
 				--[=[
 					"mode",
 					"branch",

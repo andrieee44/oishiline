@@ -54,7 +54,7 @@ function M.stdModule(moduleName, moduleArgs, defaultArgs)
 
 		iconHl = M.mkHl(string.format("OishilineStatusline%sIcon", moduleName), args.iconHl, args.iconHlAlt),
 
-		fmtHl = M.mkHl(string.format("OishilineStatusline%sFmt", moduleName), args.fmtHl, args.fmtHlAlt),
+		dataHl = M.mkHl(string.format("OishilineStatusline%sFmt", moduleName), args.dataHl, args.dataHlAlt),
 
 		rightSepHl = M.mkHl(
 			string.format("OishilineStatusline%sRightSep", moduleName),
@@ -62,6 +62,17 @@ function M.stdModule(moduleName, moduleArgs, defaultArgs)
 			args.rightSepHlAlt
 		),
 	}
+end
+
+function M.stdFormat(stdModule, data)
+	return string.format(
+		"%s%s%s%s%s",
+		M.colorStr(stdModule.leftSep, stdModule.leftSepHl),
+		M.colorStr(stdModule.icon, stdModule.iconHl),
+		M.colorStr(data, stdModule.dataHl),
+		M.colorStr(stdModule.rightSep, stdModule.rightSepHl),
+		M.default
+	)
 end
 
 return M
