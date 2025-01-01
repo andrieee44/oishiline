@@ -7,44 +7,55 @@ function M.init(globalArgs, moduleArgs)
 
 	local dataHl = {
 		fg = colors.black,
-		ctermfg = "black",
-		bg = colors.blue,
-		ctermbg = "darkblue",
+		bg = colors.darkblue,
+		ctermfg = 0,
+		ctermbg = 4,
 		bold = true,
 	}
 
 	local dataHlAlt = {
-		fg = colors.white,
-		ctermfg = "lightgray",
-		bg = colors.brightblack,
-		ctermbg = "darkgray",
+		fg = colors.lightgray,
+		bg = colors.darkgray,
+		ctermfg = 7,
+		ctermbg = 8,
 	}
 
 	filename = lib.stdModule("Filename", moduleArgs, {
 		leftSepHl = dataHl,
-		leftSepHlAlt = dataHlAlt,
 		iconHl = dataHl,
 		iconHlAlt = dataHlAlt,
 		dataHl = dataHl,
 		dataHlAlt = dataHlAlt,
 
+		leftSepHlAlt = {
+			fg = globalArgs.default.bg,
+			bg = colors.lightgray,
+			ctermfg = globalArgs.default.ctermbg,
+			ctermbg = 7,
+		},
+
 		rightSepHl = {
-			fg = colors.blue,
-			ctermfg = "darkblue",
+			fg = colors.darkblue,
 			bg = colors.black,
-			ctermbg = "black",
+			ctermfg = 1,
+			ctermbg = 0,
 		},
 
 		rightSepHlAlt = {
-			fg = colors.brightblack,
-			ctermfg = "darkgray",
+			fg = colors.darkgray,
 			bg = colors.black,
-			ctermbg = "black",
+			ctermfg = 8,
+			ctermbg = 0,
 		},
 
 		leftSep = {
-			gui = "",
-			tty = "⠀",
+			gui = "",
+			tty = "",
+		},
+
+		leftPad = {
+			gui = " ",
+			tty = " ",
 		},
 
 		icon = {
@@ -52,9 +63,14 @@ function M.init(globalArgs, moduleArgs)
 			tty = "",
 		},
 
+		rightPad = {
+			gui = " ",
+			tty = " ",
+		},
+
 		rightSep = {
 			gui = "",
-			tty = "",
+			tty = " ",
 		},
 	})
 end

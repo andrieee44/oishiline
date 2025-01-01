@@ -5,7 +5,7 @@ return function(colors)
 	local commonColors = {
 		["normal"] = {
 			bg = colors.blue,
-			ctermbg = "darkblue",
+			ctermbg = 1,
 		},
 
 		["visual"] = {
@@ -20,12 +20,12 @@ return function(colors)
 
 		["replace"] = {
 			bg = colors.red,
-			ctermbg = "darkred",
+			ctermbg = 4,
 		},
 
 		["command"] = {
 			bg = colors.blue,
-			ctermbg = "darkblue",
+			ctermbg = 1,
 		},
 
 		["terminal"] = {
@@ -56,15 +56,15 @@ return function(colors)
 
 	local rightSep2 = lib.mkHlStr(lib.gui("", ""), lib.hlName(module, "Right2"), {
 		fg = colors.black,
-		ctermfg = "black",
+		ctermfg = 0,
 		bg = colors.blue,
-		ctermbg = "darkblue",
+		ctermbg = 1,
 		bold = true,
 	}, {
 		fg = colors.black,
-		ctermfg = "black",
+		ctermfg = 0,
 		bg = colors.brightblack,
-		ctermbg = "darkgray",
+		ctermbg = 8,
 	})
 
 	local modes = {
@@ -113,7 +113,7 @@ return function(colors)
 
 		local fmt = lib.mkHl(lib.hlName(module, "Fmt"), {
 			fg = colors.black,
-			ctermfg = "black",
+			ctermfg = 0,
 			bg = modeColors[mode].bg,
 			ctermbg = modeColors[mode].ctermbg,
 			bold = true,
@@ -123,7 +123,7 @@ return function(colors)
 			fg = modeColors[mode].bg,
 			ctermfg = modeColors[mode].ctermbg,
 			bg = colors.black,
-			ctermbg = "black",
+			ctermbg = 0,
 		})
 
 		local right = lib.colorStr(rightSep.str, rightSep)

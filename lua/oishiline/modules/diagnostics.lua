@@ -65,22 +65,22 @@ function M.init(globalArgs, moduleArgs)
 	severityBg = {
 		[severity.ERROR] = {
 			bg = colors.darkred,
-			ctermbg = "darkred",
+			ctermbg = 1,
 		},
 
 		[severity.WARN] = {
 			bg = colors.darkyellow,
-			ctermbg = "darkyellow",
+			ctermbg = 3,
 		},
 
 		[severity.INFO] = {
 			bg = colors.darkblue,
-			ctermbg = "darkblue",
+			ctermbg = 4,
 		},
 
 		[severity.HINT] = {
 			bg = colors.darkcyan,
-			ctermbg = "darkcyan",
+			ctermbg = 6,
 		},
 	}
 
@@ -107,6 +107,10 @@ function M.run()
 		[severity.INFO] = 0,
 		[severity.HINT] = 0,
 	}
+
+	if #diagnostics == 0 then
+		return ""
+	end
 
 	for _, v in pairs(diagnostics) do
 		count[v.severity] = count[v.severity] + 1
@@ -161,8 +165,8 @@ function M.run()
 
 	local lastHl = lib.mkHl("OishilineStatuslineDiagnosticLast", {
 		fg = severityBg[last].bg,
-		ctermfg = severityBg[last].ctermbg,
 		bg = default.bg,
+		ctermfg = severityBg[last].ctermbg,
 		ctermbg = default.ctermbg,
 	})
 

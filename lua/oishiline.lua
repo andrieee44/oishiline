@@ -35,9 +35,8 @@ local function initArgs(userArgs)
 
 			leftModules = {
 				{ name = "branch" },
-				-- { name = "diagnostics" },
-				-- { name = "encoding" },
-				-- { name = "filename" },
+				{ name = "filename" },
+				{ name = "diagnostics" },
 				--[=[
 					"mode",
 					"branch",
@@ -47,6 +46,7 @@ local function initArgs(userArgs)
 			},
 
 			rightModules = {
+				{ name = "encoding" },
 				--[=[
 					"encoding",
 					"format",

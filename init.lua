@@ -2,7 +2,7 @@ local function mkDiagnostic(severity)
 	return {
 		lnum = 0,
 		col = 0,
-		message = "WARN",
+		message = "test",
 		severity = vim.diagnostic.severity[severity],
 	}
 end

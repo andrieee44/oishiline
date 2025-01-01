@@ -8,16 +8,16 @@ function M.init(globalArgs, moduleArgs)
 	local dataHl = {
 		fg = colors.black,
 		bg = colors.darkblue,
-		ctermfg = "black",
-		ctermbg = "darkblue",
+		ctermfg = 0,
+		ctermbg = 4,
 		bold = true,
 	}
 
 	local dataHlAlt = {
 		fg = colors.lightgray,
 		bg = colors.darkgray,
-		ctermfg = "lightgray",
-		ctermbg = "darkgray",
+		ctermfg = 7,
+		ctermbg = 8,
 	}
 
 	branch = lib.stdModule("Branch", moduleArgs, {
@@ -33,7 +33,7 @@ function M.init(globalArgs, moduleArgs)
 			fg = globalArgs.default.bg,
 			bg = colors.darkgray,
 			ctermfg = globalArgs.default.ctermbg,
-			ctermbg = "darkgray",
+			ctermbg = 8,
 		},
 
 		leftSep = {

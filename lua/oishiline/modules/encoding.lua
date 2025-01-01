@@ -13,9 +13,9 @@ function M.init(globalArgs, moduleArgs)
 	}
 
 	local dataHl = {
-		fg = globalArgs.default.fg,
+		fg = colors.lightgray,
 		bg = colors.darkgray,
-		ctermfg = globalArgs.default.ctermfg,
+		ctermfg = 7,
 		ctermbg = 8,
 	}
 
@@ -30,7 +30,12 @@ function M.init(globalArgs, moduleArgs)
 		rightSepHlAlt = dataHl,
 
 		leftSep = {
-			gui = " ",
+			gui = "",
+			tty = "",
+		},
+
+		leftPad = {
+			gui = " ",
 			tty = " ",
 		},
 
@@ -39,9 +44,14 @@ function M.init(globalArgs, moduleArgs)
 			tty = "",
 		},
 
+		rightPad = {
+			gui = " ",
+			tty = " ",
+		},
+
 		rightSep = {
-			gui = " ",
-			tty = " |",
+			gui = "",
+			tty = "|",
 		},
 	})
 end
