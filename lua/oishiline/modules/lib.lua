@@ -43,7 +43,9 @@ function M.stdModule(moduleName, moduleArgs, defaultArgs)
 
 	return {
 		leftSep = M.gui(args.leftSep),
+		leftPad = M.gui(args.leftPad),
 		icon = M.gui(args.icon),
+		rightPad = M.gui(args.rightPad),
 		rightSep = M.gui(args.rightSep),
 
 		leftSepHl = M.mkHl(
@@ -69,7 +71,7 @@ function M.stdFormat(stdModule, data)
 		"%s%s%s%s%s",
 		M.colorStr(stdModule.leftSep, stdModule.leftSepHl),
 		M.colorStr(stdModule.icon, stdModule.iconHl),
-		M.colorStr(data, stdModule.dataHl),
+		M.colorStr(string.format("%s%s%s", stdModule.leftPad, data, stdModule.rightPad), stdModule.dataHl),
 		M.colorStr(stdModule.rightSep, stdModule.rightSepHl),
 		M.default
 	)

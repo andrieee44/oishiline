@@ -6,9 +6,9 @@ function M.init(globalArgs, moduleArgs)
 	local colors = globalArgs.colors
 
 	local dataHl = {
-		fg = globalArgs.default.bg,
+		fg = colors.black,
 		bg = colors.darkblue,
-		ctermfg = globalArgs.default.ctermbg,
+		ctermfg = "black",
 		ctermbg = "darkblue",
 		bold = true,
 	}
@@ -22,7 +22,6 @@ function M.init(globalArgs, moduleArgs)
 
 	branch = lib.stdModule("Branch", moduleArgs, {
 		leftSepHl = dataHl,
-		leftSepHlAlt = dataHlAlt,
 		iconHl = dataHl,
 		iconHlAlt = dataHlAlt,
 		dataHl = dataHl,
@@ -30,19 +29,36 @@ function M.init(globalArgs, moduleArgs)
 		rightSepHl = dataHl,
 		rightSepHlAlt = dataHlAlt,
 
+		leftSepHlAlt = {
+			fg = globalArgs.default.bg,
+			bg = colors.darkgray,
+			ctermfg = globalArgs.default.ctermbg,
+			ctermbg = "darkgray",
+		},
+
 		leftSep = {
 			gui = "",
+			tty = "",
+		},
+
+		leftPad = {
+			gui = " ",
 			tty = " ",
 		},
 
 		icon = {
-			gui = "  ",
+			gui = " ",
 			tty = "",
 		},
 
+		rightPad = {
+			gui = " ",
+			tty = " ",
+		},
+
 		rightSep = {
-			gui = " ",
-			tty = " |",
+			gui = "",
+			tty = "|",
 		},
 	})
 end

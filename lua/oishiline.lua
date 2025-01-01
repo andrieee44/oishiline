@@ -34,9 +34,10 @@ local function initArgs(userArgs)
 			enable = true,
 
 			leftModules = {
-				-- { name = "branch" },
+				{ name = "branch" },
 				-- { name = "diagnostics" },
-				{ name = "encoding" },
+				-- { name = "encoding" },
+				-- { name = "filename" },
 				--[=[
 					"mode",
 					"branch",
