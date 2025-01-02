@@ -97,6 +97,7 @@ end
 
 function M.run()
 	local hl
+	local results = {}
 	local diagnostics = vim.diagnostic.get(0)
 	local j, last = 1, 0
 	local first = true
@@ -119,8 +120,6 @@ function M.run()
 	if eqTbl(count, oldCount) then
 		return oldOutput
 	end
-
-	results = {}
 
 	for i, v in ipairs(count) do
 		if v == 0 then
