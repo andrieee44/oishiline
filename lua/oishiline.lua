@@ -48,6 +48,7 @@ local function initArgs(userArgs)
 			rightModules = {
 				{ name = "encoding" },
 				{ name = "format" },
+				{ name = "location" },
 				--[=[
 					"encoding",
 					"format",

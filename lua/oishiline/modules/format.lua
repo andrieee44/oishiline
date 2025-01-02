@@ -18,20 +18,6 @@ function M.init(globalArgs, moduleArgs)
 		ctermbg = 8,
 	}
 
-	local rightSepHl = {
-		fg = colors.lightgray,
-		bg = colors.darkgray,
-		ctermfg = 7,
-		ctermbg = 8,
-	}
-
-	local dataHlAlt = {
-		fg = colors.lightgray,
-		bg = colors.darkgray,
-		ctermfg = 7,
-		ctermbg = 8,
-	}
-
 	format = lib.stdModule("Format", moduleArgs, {
 		leftSepHl = dataHl,
 		leftSepHlAlt = dataHl,
@@ -39,8 +25,8 @@ function M.init(globalArgs, moduleArgs)
 		iconHlAlt = dataHl,
 		dataHl = dataHl,
 		dataHlAlt = dataHl,
-		rightSepHl = rightSepHl,
-		rightSepHlAlt = rightSepHl,
+		rightSepHl = dataHl,
+		rightSepHlAlt = dataHl,
 
 		leftSep = {
 			gui = "",
