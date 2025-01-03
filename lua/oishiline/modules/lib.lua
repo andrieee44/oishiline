@@ -56,7 +56,7 @@ function M.stdModule(moduleName, moduleArgs, defaultArgs)
 
 		iconHl = M.mkHl(string.format("OishilineStatusline%sIcon", moduleName), args.iconHl, args.iconHlAlt),
 
-		dataHl = M.mkHl(string.format("OishilineStatusline%sFmt", moduleName), args.dataHl, args.dataHlAlt),
+		dataHl = M.mkHl(string.format("OishilineStatusline%sData", moduleName), args.dataHl, args.dataHlAlt),
 
 		rightSepHl = M.mkHl(
 			string.format("OishilineStatusline%sRightSep", moduleName),

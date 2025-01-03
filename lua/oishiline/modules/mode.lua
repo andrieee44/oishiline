@@ -1,141 +1,78 @@
-local mode, allModes
+local mode, colors, modeColors, suffix
 local M = {}
 local lib = require("oishiline.modules.lib")
 
 local modes = {
-	["n"] = "NORMAL",
-	["niI"] = "NORMAL",
-	["niR"] = "NORMAL",
-	["niV"] = "NORMAL",
-	["nt"] = "NORMAL",
-	["ntT"] = "NORMAL",
-	["no"] = "O-PENDING",
-	["nov"] = "O-PENDING",
-	["noV"] = "O-PENDING",
+	n = "NORMAL",
+	niI = "NORMAL",
+	niR = "NORMAL",
+	niV = "NORMAL",
+	nt = "NORMAL",
+	ntT = "NORMAL",
+	no = "O-PENDING",
+	nov = "O-PENDING",
+	noV = "O-PENDING",
 	["no\22"] = "O-PENDING",
-	["v"] = "VISUAL",
-	["vs"] = "VISUAL",
-	["V"] = "V-LINE",
-	["Vs"] = "V-LINE",
+	v = "VISUAL",
+	vs = "VISUAL",
+	V = "V-LINE",
+	Vs = "V-LINE",
 	["\22"] = "V-BLOCK",
 	["\22s"] = "V-BLOCK",
-	["s"] = "SELECT",
-	["S"] = "S-LINE",
+	s = "SELECT",
+	S = "S-LINE",
 	["\19"] = "S-BLOCK",
-	["i"] = "INSERT",
-	["ic"] = "INSERT",
-	["ix"] = "INSERT",
-	["R"] = "REPLACE",
-	["Rc"] = "REPLACE",
-	["Rx"] = "REPLACE",
-	["Rv"] = "V-REPLACE",
-	["Rvc"] = "V-REPLACE",
-	["Rvx"] = "V-REPLACE",
-	["c"] = "COMMAND",
-	["cv"] = "EX",
-	["ce"] = "EX",
-	["r"] = "REPLACE",
-	["rm"] = "MORE",
+	i = "INSERT",
+	ic = "INSERT",
+	ix = "INSERT",
+	R = "REPLACE",
+	Rc = "REPLACE",
+	Rx = "REPLACE",
+	Rv = "V-REPLACE",
+	Rvc = "V-REPLACE",
+	Rvx = "V-REPLACE",
+	c = "COMMAND",
+	cv = "EX",
+	ce = "EX",
+	r = "REPLACE",
+	rm = "MORE",
 	["r?"] = "CONFIRM",
 	["!"] = "SHELL",
-	["t"] = "TERMINAL",
+	t = "TERMINAL",
 }
 
 function M.init(globalArgs, moduleArgs)
-	local colors = globalArgs.colors
+	colors = globalArgs.colors
 
-	local commonModes = {
-		["normal"] = {
+	local args = vim.tbl_deep_extend("keep", moduleArgs, {
+		normal = {
 			bg = colors.darkblue,
 			ctermbg = 4,
 		},
 
-		["visual"] = {
+		visual = {
 			bg = colors.darkmagenta,
 			ctermbg = 5,
 		},
 
-		["insert"] = {
+		insert = {
 			bg = colors.darkgreen,
 			ctermbg = 2,
 		},
 
-		["replace"] = {
+		replace = {
 			bg = colors.darkred,
 			ctermbg = 1,
 		},
 
-		["command"] = {
+		command = {
 			bg = colors.darkblue,
 			ctermbg = 4,
 		},
 
-		["terminal"] = {
+		terminal = {
 			bg = colors.darkgreen,
 			ctermbg = 2,
-		},
-	}
-
-	allModes = {
-		["NORMAL"] = commonModes.normal,
-		["O-PENDING"] = commonModes.normal,
-		["VISUAL"] = commonModes.visual,
-		["V-LINE"] = commonModes.visual,
-		["V-BLOCK"] = commonModes.visual,
-		["SELECT"] = commonModes.visual,
-		["S-LINE"] = commonModes.visual,
-		["S-BLOCK"] = commonModes.visual,
-		["INSERT"] = commonModes.insert,
-		["REPLACE"] = commonModes.replace,
-		["V-REPLACE"] = commonModes.replace,
-		["COMMAND"] = commonModes.command,
-		["EX"] = commonModes.command,
-		["MORE"] = commonModes.command,
-		["CONFIRM"] = commonModes.command,
-		["SHELL"] = commonModes.normal,
-		["TERMINAL"] = commonModes.terminal,
-	}
-
-	local dataHl = {
-		fg = colors.black,
-		bg = colors.darkblue,
-		ctermfg = 0,
-		ctermbg = 4,
-		bold = true,
-	}
-
-	local dataHlAlt = {
-		fg = colors.lightgray,
-		bg = colors.darkgray,
-		ctermfg = 7,
-		ctermbg = 8,
-	}
-
-	mode = lib.stdModule("Mode", moduleArgs, {
-		leftSepHl = dataHl,
-		leftSepHlAlt = dataHlAlt,
-		iconHl = dataHl,
-		iconHlAlt = dataHlAlt,
-		dataHl = dataHl,
-		dataHlAlt = dataHlAlt,
-
-		rightSepHl = {
-			fg = colors.darkblue,
-			bg = globalArgs.default.bg,
-			ctermfg = 4,
-			ctermbg = globalArgs.default.ctermbg,
-		},
-
-		rightSepHlAlt = {
-			fg = colors.darkgray,
-			bg = globalArgs.default.bg,
-			ctermfg = 8,
-			ctermbg = globalArgs.default.ctermbg,
-		},
-
-		leftSep = {
-			gui = "",
-			tty = "",
 		},
 
 		leftPad = {
@@ -143,27 +80,55 @@ function M.init(globalArgs, moduleArgs)
 			tty = " ",
 		},
 
-		icon = {
-			gui = "",
-			tty = "",
-		},
-
 		rightPad = {
 			gui = " ",
 			tty = " ",
 		},
-
-		rightSep = {
-			gui = "",
-			tty = "",
-		},
 	})
+
+	modeColors = {
+		NORMAL = args.normal,
+		["O-PENDING"] = args.normal,
+		VISUAL = args.visual,
+		["V-LINE"] = args.visual,
+		["V-BLOCK"] = args.visual,
+		SELECT = args.visual,
+		["S-LINE"] = args.visual,
+		["S-BLOCK"] = args.visual,
+		INSERT = args.insert,
+		REPLACE = args.replace,
+		["V-REPLACE"] = args.replace,
+		COMMAND = args.command,
+		EX = args.command,
+		MORE = args.command,
+		CONFIRM = args.command,
+		SHELL = args.normal,
+		TERMINAL = args.terminal,
+	}
+
+	mode = {
+		leftPad = lib.gui(args.leftPad),
+		rightPad = lib.gui(args.rightPad),
+	}
 end
 
 function M.run()
 	local modeCode = vim.api.nvim_get_mode().mode
 
-	return lib.stdFormat(mode, modes[modeCode])
+	local dataHl = lib.mkHl(string.format("OishilineStatuslineMode%sData", suffix), {
+		fg = colors.black,
+		bg = modeColors[modes[modeCode]].bg,
+		ctermfg = 0,
+		ctermbg = modeColors[modes[modeCode]].ctermbg,
+		bold = true,
+	}, {
+		fg = colors.lightgray,
+		bg = colors.darkgray,
+		ctermfg = 7,
+		ctermbg = 8,
+	})
+
+	return lib.colorStr(string.format("%s%s%s", mode.leftPad, modes[modeCode], mode.rightPad), dataHl)
 end
 
 return M
