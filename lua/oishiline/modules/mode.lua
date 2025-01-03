@@ -1,4 +1,4 @@
-local mode, colors, modeColors, suffix
+local mode, colors, default, modeColors, suffix
 local M = {}
 local lib = require("oishiline.modules.lib")
 
@@ -43,6 +43,7 @@ local modes = {
 
 function M.init(globalArgs, moduleArgs)
 	colors = globalArgs.colors
+	default = globalArgs.default
 
 	local args = vim.tbl_deep_extend("keep", moduleArgs, {
 		normal = {
@@ -75,6 +76,11 @@ function M.init(globalArgs, moduleArgs)
 			ctermbg = 2,
 		},
 
+		leftSep = {
+			gui = "",
+			tty = "",
+		},
+
 		leftPad = {
 			gui = " ",
 			tty = " ",
@@ -83,6 +89,11 @@ function M.init(globalArgs, moduleArgs)
 		rightPad = {
 			gui = " ",
 			tty = " ",
+		},
+
+		rightSep = {
+			gui = "",
+			tty = "",
 		},
 	})
 
@@ -107,13 +118,22 @@ function M.init(globalArgs, moduleArgs)
 	}
 
 	mode = {
+		leftSep = lib.gui(args.leftSep),
 		leftPad = lib.gui(args.leftPad),
 		rightPad = lib.gui(args.rightPad),
+		rightSep = lib.gui(args.rightSep),
 	}
 end
 
 function M.run()
 	local modeCode = vim.api.nvim_get_mode().mode
+
+	local altHl = {
+		fg = colors.lightgray,
+		bg = colors.darkgray,
+		ctermfg = 7,
+		ctermbg = 8,
+	}
 
 	local dataHl = lib.mkHl(string.format("OishilineStatuslineMode%sData", suffix), {
 		fg = colors.black,
@@ -121,14 +141,37 @@ function M.run()
 		ctermfg = 0,
 		ctermbg = modeColors[modes[modeCode]].ctermbg,
 		bold = true,
+	}, altHl)
+
+	local leftSepHl = lib.mkHl(string.format("OishilineStatuslineMode%sLeftSep", suffix), {
+		fg = default.bg,
+		bg = modeColors[modes[modeCode]].bg,
+		ctermfg = default.ctermbg,
+		ctermbg = modeColors[modes[modeCode]].ctermbg,
 	}, {
-		fg = colors.lightgray,
+		fg = default.bg,
 		bg = colors.darkgray,
+		ctermbg = default.ctermbg,
 		ctermfg = 7,
-		ctermbg = 8,
 	})
 
-	return lib.colorStr(string.format("%s%s%s", mode.leftPad, modes[modeCode], mode.rightPad), dataHl)
+	local rightSepHl = lib.mkHl(string.format("OishilineStatuslineMode%sRightSep", suffix), {
+		fg = modeColors[modes[modeCode]].bg,
+		bg = default.bg,
+		ctermfg = modeColors[modes[modeCode]].ctermbg,
+		ctermbg = default.ctermbg,
+	}, {
+		fg = colors.darkgray,
+		bg = default.bg,
+		ctermbg = 7,
+		ctermfg = default.ctermbg,
+	})
+
+	return string.format(
+		"%s%s%s",
+		lib.colorStr(mode.leftSep, leftSepHl),
+		lib.colorStr(string.format("%s%s%s", mode.leftPad, modes[modeCode], mode.rightPad), dataHl),
+		lib.colorStr(mode.rightSep, rightSepHl))
 end
 
 return M

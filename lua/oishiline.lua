@@ -35,6 +35,7 @@ local function initArgs(userArgs)
 
 			leftModules = {
 				{ name = "mode" },
+				{ name = "separator" },
 				{ name = "branch" },
 				{ name = "filename" },
 				{ name = "diagnostics" },
@@ -44,6 +45,19 @@ local function initArgs(userArgs)
 				{ name = "encoding" },
 				{ name = "format" },
 				{ name = "type" },
+
+				--[[
+				{
+					name = "separator",
+
+					args = {
+						suffix = "Right",
+						active = { gui = "", },
+						inactive = { gui = "", },
+					},
+				},
+				]]
+
 				{ name = "progress" },
 				{ name = "location" },
 			},

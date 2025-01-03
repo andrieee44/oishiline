@@ -32,10 +32,12 @@ function M.mkHl(name, args, altArgs)
 	}
 end
 
-function M.colorStr(str, hl)
-	local active = tonumber(vim.g.actual_curwin) == vim.api.nvim_get_current_win()
+function M.active(a, b)
+	return tonumber(vim.g.actual_curwin) == vim.api.nvim_get_current_win() and a or b
+end
 
-	return string.format("%%#%s#%s", active and hl.hl or hl.alt, str)
+function M.colorStr(str, hl)
+	return string.format("%%#%s#%s", M.active(hl.hl, hl.alt), str)
 end
 
 function M.stdModule(moduleName, moduleArgs, defaultArgs)

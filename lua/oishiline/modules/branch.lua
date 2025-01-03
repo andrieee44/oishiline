@@ -37,7 +37,7 @@ function M.init(globalArgs, moduleArgs)
 		},
 
 		leftSep = {
-			gui = "",
+			gui = "",
 			tty = "",
 		},
 
