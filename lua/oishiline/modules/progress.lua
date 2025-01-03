@@ -1,16 +1,76 @@
-return function(colors)
-	local lib = require("oishiline.modules.lib")
-	local module = "Progress"
+local progress
+local M = {}
+local lib = require("oishiline.modules.lib")
 
-	local fmt = lib.mkHlStr(" %P", lib.hlName(module, "Fmt"), {
+function M.init(globalArgs, moduleArgs)
+	local colors = globalArgs.colors
+
+	local dataHl = {
 		fg = colors.black,
+		bg = colors.darkblue,
 		ctermfg = 0,
-		bg = colors.blue,
-		ctermbg = 1,
+		ctermbg = 4,
 		bold = true,
-	})
+	}
 
-	return function()
-		return string.format("%s %s", lib.colorStr(fmt.str, fmt), lib.gui("", "|"))
-	end
+	local dataHlAlt = {
+		fg = colors.lightgray,
+		bg = colors.darkgray,
+		ctermfg = 7,
+		ctermbg = 8,
+	}
+
+	progress = lib.stdModule("Progress", moduleArgs, {
+		iconHl = dataHl,
+		iconHlAlt = dataHlAlt,
+		dataHl = dataHl,
+		dataHlAlt = dataHlAlt,
+		rightSepHl = dataHl,
+		rightSepHlAlt = dataHlAlt,
+
+		leftSepHl = {
+			fg = colors.darkblue,
+			bg = colors.darkgray,
+			ctermfg = 4,
+			ctermbg = 8,
+		},
+
+		leftSepHlAlt = {
+			fg = colors.darkgray,
+			bg = colors.darkgray,
+			ctermfg = 8,
+			ctermbg = 8,
+		},
+
+		leftSep = {
+			gui = "",
+			tty = "",
+		},
+
+		leftPad = {
+			gui = " ",
+			tty = " ",
+		},
+
+		icon = {
+			gui = "",
+			tty = "",
+		},
+
+		rightPad = {
+			gui = " ",
+			tty = " ",
+		},
+
+		rightSep = {
+			gui = "",
+			tty = "",
+		},
+	})
 end
+
+function M.run()
+	return lib.stdFormat(progress, "%P")
+end
+
+return M

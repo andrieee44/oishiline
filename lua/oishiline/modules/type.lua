@@ -1,33 +1,79 @@
-return function(colors)
-	local lib = require("oishiline.modules.lib")
-	local module = "Type"
+local type, oldBasename, oldIcon
+local M = {}
+local lib = require("oishiline.modules.lib")
 
-	local leftSep = lib.mkHlStr(lib.gui("", ""), lib.hlName(module, "Left"), {
-		fg = colors.blue,
-		ctermfg = 1,
-		bg = colors.brightblack,
+function M.init(globalArgs, moduleArgs)
+	local colors = globalArgs.colors
+
+	local dataHl = {
+		fg = colors.lightgray,
+		bg = colors.darkgray,
+		ctermfg = 7,
 		ctermbg = 8,
+	}
+
+	type = lib.stdModule("Type", moduleArgs, {
+		leftSepHl = dataHl,
+		leftSepHlAlt = dataHl,
+		iconHl = dataHl,
+		iconHlAlt = dataHl,
+		dataHl = dataHl,
+		dataHlAlt = dataHl,
+		rightSepHl = dataHl,
+		rightSepHlAlt = dataHl,
+
+		leftSep = {
+			gui = "",
+			tty = "",
+		},
+
+		leftPad = {
+			gui = " ",
+			tty = " ",
+		},
+
+		icon = {
+			gui = "",
+			tty = "",
+		},
+
+		rightPad = {
+			gui = " ",
+			tty = " ",
+		},
+
+		rightSep = {
+			gui = "",
+			tty = "",
+		},
 	})
-
-	return function()
-		local left = lib.colorStr(leftSep.str, leftSep)
-		local type = vim.bo.filetype
-		local icon = nil
-
-		if type == "" then
-			return left
-		end
-
-		if vim.opt.termguicolors._value and package.loaded["nvim-web-devicons"] then
-			local basename = string.gsub(vim.api.nvim_buf_get_name(0), ".*/", "")
-
-			icon = require("nvim-web-devicons").get_icon(basename, type)
-		end
-
-		if icon ~= nil then
-			type = string.format("%s %s", icon, type)
-		end
-
-		return string.format("%s %s %s", lib.gui("", "|"), type, left)
-	end
 end
+
+function M.run()
+	local icon
+	local ft = vim.bo.filetype
+
+	if ft == "" then
+		return ""
+	end
+
+	if vim.opt.termguicolors._value and package.loaded["nvim-web-devicons"] then
+		local basename = string.gsub(vim.api.nvim_buf_get_name(0), ".*/", "")
+
+		if basename == oldBasename then
+			return lib.stdFormat(type, string.format("%s %s", oldIcon, ft))
+		end
+
+		icon = require("nvim-web-devicons").get_icon(basename, ft)
+		oldBasename = basename
+		oldIcon = icon
+	end
+
+	if icon ~= nil then
+		ft = string.format("%s %s", icon, ft)
+	end
+
+	return lib.stdFormat(type, ft)
+end
+
+return M
