@@ -29,7 +29,7 @@ function M.init(globalArgs, moduleArgs)
 		ctermbg = 8,
 	}
 
-	format = lib.stdModule("Format", moduleArgs, {
+	format = lib.stdModule(string.format("Format%s", moduleArgs.suffix or ""), moduleArgs, {
 		leftSepHl = dataHl,
 		leftSepHlAlt = dataHl,
 		iconHl = dataHl,

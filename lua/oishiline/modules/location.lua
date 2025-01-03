@@ -20,7 +20,7 @@ function M.init(globalArgs, moduleArgs)
 		ctermbg = 8,
 	}
 
-	location = lib.stdModule("Location", moduleArgs, {
+	location = lib.stdModule(string.format("Location%s", moduleArgs.suffix or ""), moduleArgs, {
 		leftSepHl = dataHl,
 		leftSepHlAlt = dataHlAlt,
 		iconHl = dataHl,

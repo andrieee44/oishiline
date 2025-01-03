@@ -20,7 +20,7 @@ function M.init(globalArgs, moduleArgs)
 		ctermbg = 8,
 	}
 
-	filename = lib.stdModule("Filename", moduleArgs, {
+	filename = lib.stdModule(string.format("Filename%s", moduleArgs.suffix or ""), moduleArgs, {
 		leftSepHl = dataHl,
 		iconHl = dataHl,
 		iconHlAlt = dataHlAlt,

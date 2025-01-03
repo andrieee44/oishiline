@@ -20,7 +20,7 @@ function M.init(globalArgs, moduleArgs)
 		ctermbg = 8,
 	}
 
-	progress = lib.stdModule("Progress", moduleArgs, {
+	progress = lib.stdModule(string.format("Progress%s", moduleArgs.suffix or ""), moduleArgs, {
 		iconHl = dataHl,
 		iconHlAlt = dataHlAlt,
 		dataHl = dataHl,

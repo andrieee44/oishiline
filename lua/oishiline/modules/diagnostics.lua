@@ -1,4 +1,4 @@
-local sep, default, severityBg
+local sep, default, severityBg, suffix
 local M, oldCount = {}, {}
 local oldOutput = ""
 local lib = require("oishiline.modules.lib")
@@ -59,8 +59,8 @@ end
 
 function M.init(globalArgs, moduleArgs)
 	local colors = globalArgs.colors
-
 	default = globalArgs.default
+	suffix = moduleArgs.suffix or ""
 
 	severityBg = {
 		[severity.ERROR] = {
@@ -127,13 +127,13 @@ function M.run()
 		end
 
 		hl = first
-				and lib.mkHl("OishilineStatuslineDiagnosticsFirst", {
+				and lib.mkHl(string.format("OishilineStatuslineDiagnostics%sFirst", suffix), {
 					fg = default.bg,
 					bg = severityBg[i].bg,
 					ctermfg = default.ctermbg,
 					ctermbg = severityBg[i].ctermbg,
 				})
-			or lib.mkHl(string.format("OishilineStatuslineDiagnostic%sSep", signNames[i]), {
+			or lib.mkHl(string.format("OishilineStatuslineDiagnostics%s%sSep", suffix, signNames[i]), {
 				fg = severityBg[last].bg,
 				bg = severityBg[i].bg,
 				ctermfg = severityBg[last].ctermbg,
@@ -147,7 +147,7 @@ function M.run()
 		results[j] = lib.colorStr(sep, hl)
 		j = j + 1
 
-		hl = lib.mkHl(string.format("OishilineStatuslineDiagnostic%s", signNames[i]), {
+		hl = lib.mkHl(string.format("OishilineStatuslineDiagnostics%s%s", suffix, signNames[i]), {
 			fg = default.bg,
 			bg = severityBg[i].bg,
 			ctermfg = default.ctermbg,
@@ -162,7 +162,7 @@ function M.run()
 		::continue::
 	end
 
-	local lastHl = lib.mkHl("OishilineStatuslineDiagnosticLast", {
+	local lastHl = lib.mkHl(string.format("OishilineStatuslineDiagnostics%sLast", suffix), {
 		fg = severityBg[last].bg,
 		bg = default.bg,
 		ctermfg = severityBg[last].ctermbg,

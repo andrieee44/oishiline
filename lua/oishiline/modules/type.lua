@@ -12,7 +12,7 @@ function M.init(globalArgs, moduleArgs)
 		ctermbg = 8,
 	}
 
-	type = lib.stdModule("Type", moduleArgs, {
+	type = lib.stdModule(string.format("Type%s", moduleArgs.suffix or ""), moduleArgs, {
 		leftSepHl = dataHl,
 		leftSepHlAlt = dataHl,
 		iconHl = dataHl,

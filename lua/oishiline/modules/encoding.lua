@@ -19,7 +19,7 @@ function M.init(globalArgs, moduleArgs)
 		ctermbg = 8,
 	}
 
-	encoding = lib.stdModule("Encoding", moduleArgs, {
+	encoding = lib.stdModule(string.format("Encoding%s", moduleArgs.suffix or ""), moduleArgs, {
 		leftSepHl = leftSepHl,
 		leftSepHlAlt = leftSepHl,
 		iconHl = dataHl,

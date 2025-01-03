@@ -20,7 +20,7 @@ function M.init(globalArgs, moduleArgs)
 		ctermbg = 8,
 	}
 
-	branch = lib.stdModule("Branch", moduleArgs, {
+	branch = lib.stdModule(string.format("Branch%s", moduleArgs.suffix or ""), moduleArgs, {
 		leftSepHl = dataHl,
 		iconHl = dataHl,
 		iconHlAlt = dataHlAlt,
