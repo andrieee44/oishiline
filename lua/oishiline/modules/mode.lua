@@ -45,6 +45,7 @@ return function()
 	function M.init(globalArgs, moduleArgs)
 		colors = globalArgs.colors
 		default = globalArgs.default
+		suffix = moduleArgs.suffix or ""
 
 		local args = vim.tbl_deep_extend("keep", moduleArgs, {
 			normal = {
