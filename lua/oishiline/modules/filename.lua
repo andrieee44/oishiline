@@ -1,82 +1,84 @@
-local filename
-local M = {}
-local lib = require("oishiline.modules.lib")
+return function()
+	local filename
+	local M = {}
+	local lib = require("oishiline.modules.lib")
 
-function M.init(globalArgs, moduleArgs)
-	local colors = globalArgs.colors
+	function M.init(globalArgs, moduleArgs)
+		local colors = globalArgs.colors
 
-	local dataHl = {
-		fg = colors.black,
-		bg = colors.darkblue,
-		ctermfg = 0,
-		ctermbg = 4,
-		bold = true,
-	}
+		local dataHl = {
+			fg = colors.black,
+			bg = colors.darkblue,
+			ctermfg = 0,
+			ctermbg = 4,
+			bold = true,
+		}
 
-	local dataHlAlt = {
-		fg = colors.lightgray,
-		bg = colors.darkgray,
-		ctermfg = 7,
-		ctermbg = 8,
-	}
+		local dataHlAlt = {
+			fg = colors.lightgray,
+			bg = colors.darkgray,
+			ctermfg = 7,
+			ctermbg = 8,
+		}
 
-	filename = lib.stdModule(string.format("Filename%s", moduleArgs.suffix or ""), moduleArgs, {
-		leftSepHl = dataHl,
-		iconHl = dataHl,
-		iconHlAlt = dataHlAlt,
-		dataHl = dataHl,
-		dataHlAlt = dataHlAlt,
+		filename = lib.stdModule(string.format("Filename%s", moduleArgs.suffix or ""), moduleArgs, {
+			leftSepHl = dataHl,
+			iconHl = dataHl,
+			iconHlAlt = dataHlAlt,
+			dataHl = dataHl,
+			dataHlAlt = dataHlAlt,
 
-		leftSepHlAlt = {
-			fg = globalArgs.default.bg,
-			bg = colors.lightgray,
-			ctermfg = globalArgs.default.ctermbg,
-			ctermbg = 7,
-		},
+			leftSepHlAlt = {
+				fg = globalArgs.default.bg,
+				bg = colors.lightgray,
+				ctermfg = globalArgs.default.ctermbg,
+				ctermbg = 7,
+			},
 
-		rightSepHl = {
-			fg = colors.darkblue,
-			bg = colors.black,
-			ctermfg = 1,
-			ctermbg = 0,
-		},
+			rightSepHl = {
+				fg = colors.darkblue,
+				bg = colors.black,
+				ctermfg = 1,
+				ctermbg = 0,
+			},
 
-		rightSepHlAlt = {
-			fg = colors.darkgray,
-			bg = colors.black,
-			ctermfg = 8,
-			ctermbg = 0,
-		},
+			rightSepHlAlt = {
+				fg = colors.darkgray,
+				bg = colors.black,
+				ctermfg = 8,
+				ctermbg = 0,
+			},
 
-		leftSep = {
-			gui = "",
-			tty = "",
-		},
+			leftSep = {
+				gui = "",
+				tty = "",
+			},
 
-		leftPad = {
-			gui = " ",
-			tty = " ",
-		},
+			leftPad = {
+				gui = " ",
+				tty = " ",
+			},
 
-		icon = {
-			gui = "",
-			tty = "",
-		},
+			icon = {
+				gui = "",
+				tty = "",
+			},
 
-		rightPad = {
-			gui = " ",
-			tty = " ",
-		},
+			rightPad = {
+				gui = " ",
+				tty = " ",
+			},
 
-		rightSep = {
-			gui = "",
-			tty = " ",
-		},
-	})
+			rightSep = {
+				gui = "",
+				tty = " ",
+			},
+		})
+	end
+
+	function M.run()
+		return lib.stdFormat(filename, "%f%( %w%h%m%r%)")
+	end
+
+	return M
 end
-
-function M.run()
-	return lib.stdFormat(filename, "%f%( %w%h%m%r%)")
-end
-
-return M

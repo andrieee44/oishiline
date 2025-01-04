@@ -1,76 +1,78 @@
-local progress
-local M = {}
-local lib = require("oishiline.modules.lib")
+return function()
+	local progress
+	local M = {}
+	local lib = require("oishiline.modules.lib")
 
-function M.init(globalArgs, moduleArgs)
-	local colors = globalArgs.colors
+	function M.init(globalArgs, moduleArgs)
+		local colors = globalArgs.colors
 
-	local dataHl = {
-		fg = colors.black,
-		bg = colors.darkblue,
-		ctermfg = 0,
-		ctermbg = 4,
-		bold = true,
-	}
+		local dataHl = {
+			fg = colors.black,
+			bg = colors.darkblue,
+			ctermfg = 0,
+			ctermbg = 4,
+			bold = true,
+		}
 
-	local dataHlAlt = {
-		fg = colors.lightgray,
-		bg = colors.darkgray,
-		ctermfg = 7,
-		ctermbg = 8,
-	}
-
-	progress = lib.stdModule(string.format("Progress%s", moduleArgs.suffix or ""), moduleArgs, {
-		iconHl = dataHl,
-		iconHlAlt = dataHlAlt,
-		dataHl = dataHl,
-		dataHlAlt = dataHlAlt,
-		rightSepHl = dataHl,
-		rightSepHlAlt = dataHlAlt,
-
-		leftSepHl = {
-			fg = colors.darkblue,
+		local dataHlAlt = {
+			fg = colors.lightgray,
 			bg = colors.darkgray,
-			ctermfg = 4,
+			ctermfg = 7,
 			ctermbg = 8,
-		},
+		}
 
-		leftSepHlAlt = {
-			fg = colors.darkgray,
-			bg = colors.darkgray,
-			ctermfg = 8,
-			ctermbg = 8,
-		},
+		progress = lib.stdModule(string.format("Progress%s", moduleArgs.suffix or ""), moduleArgs, {
+			iconHl = dataHl,
+			iconHlAlt = dataHlAlt,
+			dataHl = dataHl,
+			dataHlAlt = dataHlAlt,
+			rightSepHl = dataHl,
+			rightSepHlAlt = dataHlAlt,
 
-		leftSep = {
-			gui = "",
-			tty = "",
-		},
+			leftSepHl = {
+				fg = colors.darkblue,
+				bg = colors.darkgray,
+				ctermfg = 4,
+				ctermbg = 8,
+			},
 
-		leftPad = {
-			gui = " ",
-			tty = " ",
-		},
+			leftSepHlAlt = {
+				fg = colors.darkgray,
+				bg = colors.darkgray,
+				ctermfg = 8,
+				ctermbg = 8,
+			},
 
-		icon = {
-			gui = "",
-			tty = "",
-		},
+			leftSep = {
+				gui = "",
+				tty = "",
+			},
 
-		rightPad = {
-			gui = " ",
-			tty = " ",
-		},
+			leftPad = {
+				gui = " ",
+				tty = " ",
+			},
 
-		rightSep = {
-			gui = "",
-			tty = "",
-		},
-	})
+			icon = {
+				gui = "",
+				tty = "",
+			},
+
+			rightPad = {
+				gui = " ",
+				tty = " ",
+			},
+
+			rightSep = {
+				gui = "",
+				tty = "|",
+			},
+		})
+	end
+
+	function M.run()
+		return lib.stdFormat(progress, "%P")
+	end
+
+	return M
 end
-
-function M.run()
-	return lib.stdFormat(progress, "%P")
-end
-
-return M
