@@ -128,13 +128,13 @@ return function()
 			end
 
 			hl = first
-					and lib.mkHl(string.format("OishilineStatuslineDiagnostics%sFirst", suffix), {
+					and lib.mkHl(string.format("OishilineDiagnostics%sFirst", suffix), {
 						fg = default.bg,
 						bg = severityBg[i].bg,
 						ctermfg = default.ctermbg,
 						ctermbg = severityBg[i].ctermbg,
 					})
-				or lib.mkHl(string.format("OishilineStatuslineDiagnostics%s%sSep", suffix, signNames[i]), {
+				or lib.mkHl(string.format("OishilineDiagnostics%s%sSep", suffix, signNames[i]), {
 					fg = severityBg[last].bg,
 					bg = severityBg[i].bg,
 					ctermfg = severityBg[last].ctermbg,
@@ -148,7 +148,7 @@ return function()
 			results[j] = lib.colorStr(sep, hl)
 			j = j + 1
 
-			hl = lib.mkHl(string.format("OishilineStatuslineDiagnostics%s%s", suffix, signNames[i]), {
+			hl = lib.mkHl(string.format("OishilineDiagnostics%s%s", suffix, signNames[i]), {
 				fg = default.bg,
 				bg = severityBg[i].bg,
 				ctermfg = default.ctermbg,
@@ -163,7 +163,7 @@ return function()
 			::continue::
 		end
 
-		local lastHl = lib.mkHl(string.format("OishilineStatuslineDiagnostics%sLast", suffix), {
+		local lastHl = lib.mkHl(string.format("OishilineDiagnostics%sLast", suffix), {
 			fg = severityBg[last].bg,
 			bg = default.bg,
 			ctermfg = severityBg[last].ctermbg,

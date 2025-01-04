@@ -41,7 +41,7 @@ return function()
 		})
 
 		dataHl = lib.mkHl(
-			string.format("OishilineStatuslineSeparator%sData", moduleArgs.suffix or ""),
+			string.format("OishilineSeparator%sData", moduleArgs.suffix or ""),
 			gui and separator.dataHl or separator.dataHlTty,
 			gui and separator.dataHlAlt or separator.dataHlAltTty
 		)

@@ -51,17 +51,17 @@ function M.stdModule(moduleName, moduleArgs, defaultArgs)
 		rightSep = M.gui(args.rightSep),
 
 		leftSepHl = M.mkHl(
-			string.format("OishilineStatusline%sLeftSep", moduleName),
+			string.format("Oishiline%sLeftSep", moduleName),
 			args.leftSepHl,
 			args.leftSepHlAlt
 		),
 
-		iconHl = M.mkHl(string.format("OishilineStatusline%sIcon", moduleName), args.iconHl, args.iconHlAlt),
+		iconHl = M.mkHl(string.format("Oishiline%sIcon", moduleName), args.iconHl, args.iconHlAlt),
 
-		dataHl = M.mkHl(string.format("OishilineStatusline%sData", moduleName), args.dataHl, args.dataHlAlt),
+		dataHl = M.mkHl(string.format("Oishiline%sData", moduleName), args.dataHl, args.dataHlAlt),
 
 		rightSepHl = M.mkHl(
-			string.format("OishilineStatusline%sRightSep", moduleName),
+			string.format("Oishiline%sRightSep", moduleName),
 			args.rightSepHl,
 			args.rightSepHlAlt
 		),

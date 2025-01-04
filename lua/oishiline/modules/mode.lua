@@ -136,7 +136,7 @@ return function()
 			ctermbg = 8,
 		}
 
-		local dataHl = lib.mkHl(string.format("OishilineStatuslineMode%sData", suffix), {
+		local dataHl = lib.mkHl(string.format("OishilineMode%sData", suffix), {
 			fg = colors.black,
 			bg = modeColors[modes[modeCode]].bg,
 			ctermfg = 0,
@@ -144,7 +144,7 @@ return function()
 			bold = true,
 		}, altHl)
 
-		local leftSepHl = lib.mkHl(string.format("OishilineStatuslineMode%sLeftSep", suffix), {
+		local leftSepHl = lib.mkHl(string.format("OishilineMode%sLeftSep", suffix), {
 			fg = default.bg,
 			bg = modeColors[modes[modeCode]].bg,
 			ctermfg = default.ctermbg,
@@ -156,7 +156,7 @@ return function()
 			ctermfg = 7,
 		})
 
-		local rightSepHl = lib.mkHl(string.format("OishilineStatuslineMode%sRightSep", suffix), {
+		local rightSepHl = lib.mkHl(string.format("OishilineMode%sRightSep", suffix), {
 			fg = modeColors[modes[modeCode]].bg,
 			bg = default.bg,
 			ctermfg = modeColors[modes[modeCode]].ctermbg,
