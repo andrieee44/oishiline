@@ -19,13 +19,13 @@ local function initArgs(userArgs)
 		cyan = "#88c0d0",
 		white = "#8fbcbb",
 	}
-	
+
 	local default = {
-				fg = colors.lightgray,
-				bg = colors.black,
-				ctermfg = 7,
-				ctermbg = 0,
-			}
+		fg = colors.lightgray,
+		bg = colors.black,
+		ctermfg = 7,
+		ctermbg = 0,
+	}
 
 	local args = vim.tbl_deep_extend("keep", userArgs or {}, {
 		globalArgs = {
