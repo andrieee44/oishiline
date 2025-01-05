@@ -177,6 +177,8 @@ function M.statusline()
 end
 
 function M.tabline()
+	for i = 1, vim.fn.tabpagenr("$") do
+	end
 	return "wip"
 end
 
