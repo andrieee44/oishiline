@@ -1,10 +1,11 @@
 return function()
-	local type, oldBasename, oldIcon
+	local type, hasDevicons, oldBasename, oldIcon
 	local M = {}
 	local lib = require("oishiline.modules.lib")
 
 	function M.init(globalArgs, moduleArgs)
 		local colors = globalArgs.colors
+		hasDevicons = vim.opt.termguicolors._value and package.loaded["nvim-web-devicons"]
 
 		local dataHl = {
 			fg = colors.lightgray,
@@ -58,7 +59,7 @@ return function()
 			return ""
 		end
 
-		if vim.opt.termguicolors._value and package.loaded["nvim-web-devicons"] then
+		if hasDevicons then
 			local basename = string.gsub(vim.api.nvim_buf_get_name(0), ".*/", "")
 
 			if basename == oldBasename then
