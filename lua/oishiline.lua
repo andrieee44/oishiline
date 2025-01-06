@@ -28,6 +28,8 @@ local function initArgs(userArgs)
 	}
 
 	local args = vim.tbl_deep_extend("keep", userArgs or {}, {
+		tabline = { enable = true },
+
 		globalArgs = {
 			default = default,
 			colors = colors,
@@ -111,10 +113,6 @@ local function initArgs(userArgs)
 				{ name = "location" },
 			},
 		},
-
-		tabline = {
-			enable = true,
-		},
 	})
 
 	vim.api.nvim_set_hl(0, "OishilineDefault", args.globalArgs.default)
@@ -146,7 +144,6 @@ end
 
 local function initTabline(_)
 	local oishiline = vim.g.oishiline
-
 	vim.g.oishiline = oishiline
 	vim.opt_global.tabline = "%!v:lua.require('oishiline').tabline()"
 end
@@ -177,9 +174,19 @@ function M.statusline()
 end
 
 function M.tabline()
+	local currentTab = vim.fn.tabpagenr()
+	local results = {}
+	local j = 1
+
 	for i = 1, vim.fn.tabpagenr("$") do
+		local basename =
+			string.gsub(vim.api.nvim_buf_get_name(vim.fn.tabpagebuflist(i)[vim.fn.tabpagewinnr(i)]), ".*/", "")
+
+		results[j] = basename == "" and "[No Name]" or basename
+		j = j + 1
 	end
-	return "wip"
+
+	return table.concat(results)
 end
 
 function M.setup(userArgs)
