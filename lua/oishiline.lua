@@ -28,8 +28,6 @@ local function initArgs(userArgs)
 	}
 
 	local args = vim.tbl_deep_extend("keep", userArgs or {}, {
-		tabline = { enable = true },
-
 		globalArgs = {
 			default = default,
 			colors = colors,
@@ -60,11 +58,16 @@ local function initArgs(userArgs)
 						},
 
 						inactive = {
-							gui = "",
+							gui = "",
 							tty = "",
 						},
 
 						dataHl = {
+							fg = colors.darkgray,
+							bg = default.bg,
+						},
+
+						dataHlAlt = {
 							fg = colors.darkgray,
 							bg = default.bg,
 						},
@@ -80,7 +83,6 @@ local function initArgs(userArgs)
 
 					args = {
 						suffix = "Right2",
-						dataHlAlt = { fg = colors.lightgray },
 
 						active = {
 							gui = "",
@@ -95,14 +97,12 @@ local function initArgs(userArgs)
 						dataHl = {
 							fg = colors.darkblue,
 							bg = colors.darkgray,
-						},
-
-						dataHlTty = {
 							ctermfg = 4,
 							ctermbg = 8,
 						},
 
-						dataHlAltTty = {
+						dataHlAlt = {
+							fg = colors.lightgray,
 							ctermfg = 7,
 							ctermbg = 8,
 						},
@@ -111,6 +111,86 @@ local function initArgs(userArgs)
 
 				{ name = "progress" },
 				{ name = "location" },
+			},
+		},
+
+		tabline = {
+			enable = true,
+
+			leftActive = {
+				gui = "",
+				tty = "",
+			},
+
+			leftInactive = {
+				gui = "",
+				tty = "|",
+			},
+
+			rightActive = {
+				gui = "",
+				tty = "",
+			},
+
+			rightInactive = {
+				gui = "",
+				tty = "|",
+			},
+
+			leftSepHl = {
+				fg = colors.darkblue,
+				bg = colors.darkgray,
+				ctermfg = 4,
+				ctermbg = 8,
+			},
+
+			leftSepHlAlt = {
+				fg = default.bg,
+				bg = colors.darkgray,
+				ctermfg = 7,
+				ctermbg = 8,
+			},
+
+			iconHl = {
+				fg = colors.darkblue,
+				bg = colors.darkgray,
+				ctermfg = 4,
+				ctermbg = 8,
+			},
+
+			iconHlAlt = {
+				fg = default.bg,
+				bg = colors.darkgray,
+				ctermfg = 7,
+				ctermbg = 8,
+			},
+
+			dataHl = {
+				fg = colors.darkblue,
+				bg = colors.darkgray,
+				ctermfg = 4,
+				ctermbg = 8,
+			},
+
+			dataHlAlt = {
+				fg = default.bg,
+				bg = colors.darkgray,
+				ctermfg = 7,
+				ctermbg = 8,
+			},
+
+			rightSepHl = {
+				fg = colors.darkblue,
+				bg = colors.darkgray,
+				ctermfg = 4,
+				ctermbg = 8,
+			},
+
+			rightSepHlAlt = {
+				fg = default.bg,
+				bg = colors.darkgray,
+				ctermfg = 7,
+				ctermbg = 8,
 			},
 		},
 	})
@@ -142,8 +222,10 @@ local function initStatusline(args)
 	vim.opt_global.statusline = "%{%v:lua.require('oishiline').statusline()%}"
 end
 
-local function initTabline(_)
+local function initTabline(args)
 	local oishiline = vim.g.oishiline
+	oishiline.tabline = require("oishiline.tabline")
+	oishiline.tabline.init(args.globalArgs, args.tabline)
 	vim.g.oishiline = oishiline
 	vim.opt_global.tabline = "%!v:lua.require('oishiline').tabline()"
 end
@@ -174,16 +256,12 @@ function M.statusline()
 end
 
 function M.tabline()
-	return require("oishiline.tabline")
+	return require("oishiline.tabline").run()
 end
 
 function M.setup(userArgs)
 	local args = initArgs(userArgs)
-
-	vim.g.oishiline = {
-		statusline = {},
-		tabline = {},
-	}
+	vim.g.oishiline = { statusline = {} }
 
 	if args.statusline.enable then
 		initStatusline(args)

@@ -22,19 +22,13 @@ return function()
 			dataHl = {
 				fg = default.bg,
 				bg = colors.darkblue,
+				ctermfg = 7,
+				ctermbg = default.ctermbg,
 			},
 
 			dataHlAlt = {
 				fg = default.bg,
 				bg = colors.darkgray,
-			},
-
-			dataHlTty = {
-				ctermfg = 7,
-				ctermbg = default.ctermbg,
-			},
-
-			dataHlAltTty = {
 				ctermfg = 7,
 				ctermbg = default.ctermbg,
 			},
@@ -42,8 +36,8 @@ return function()
 
 		dataHl = lib.mkHl(
 			string.format("OishilineSeparator%sData", moduleArgs.suffix or ""),
-			gui and separator.dataHl or separator.dataHlTty,
-			gui and separator.dataHlAlt or separator.dataHlAltTty
+			separator.dataHl,
+			separator.dataHlAlt
 		)
 	end
 
