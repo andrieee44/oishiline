@@ -1,7 +1,7 @@
 return function()
+	local lib = require("oishiline.modules.lib")
 	local type, hasDevicons, oldBasename, oldIcon
 	local M = {}
-	local lib = require("oishiline.modules.lib")
 
 	function M.init(globalArgs, moduleArgs)
 		local colors = globalArgs.colors

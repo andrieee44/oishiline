@@ -1,7 +1,7 @@
 return function()
+	local lib = require("oishiline.modules.lib")
 	local separator, dataHl
 	local M = {}
-	local lib = require("oishiline.modules.lib")
 
 	function M.init(globalArgs, moduleArgs)
 		local colors = globalArgs.colors

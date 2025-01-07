@@ -1,7 +1,7 @@
 return function()
+	local lib = require("oishiline.modules.lib")
 	local format
 	local M = {}
-	local lib = require("oishiline.modules.lib")
 
 	local icons = {
 		unix = lib.gui({

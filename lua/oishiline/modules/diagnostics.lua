@@ -1,8 +1,8 @@
 return function()
+	local lib = require("oishiline.modules.lib")
 	local sep, default, severityBg, suffix
 	local M, oldCount = {}, {}
 	local oldOutput = ""
-	local lib = require("oishiline.modules.lib")
 	local severity = vim.diagnostic.severity
 
 	local signNames = {

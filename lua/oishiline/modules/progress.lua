@@ -1,7 +1,7 @@
 return function()
+	local lib = require("oishiline.modules.lib")
 	local progress
 	local M = {}
-	local lib = require("oishiline.modules.lib")
 
 	function M.init(globalArgs, moduleArgs)
 		local colors = globalArgs.colors

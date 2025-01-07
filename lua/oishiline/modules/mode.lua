@@ -1,7 +1,7 @@
 return function()
+	local lib = require("oishiline.modules.lib")
 	local mode, colors, default, modeColors, suffix
 	local M = {}
-	local lib = require("oishiline.modules.lib")
 
 	local modes = {
 		n = "NORMAL",
