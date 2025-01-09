@@ -22,12 +22,21 @@ return function()
 		}
 
 		progress = lib.stdModule(string.format("Progress%s", moduleArgs.suffix or ""), moduleArgs, {
+			leftSep = lib.empty,
+			leftPad = lib.pad,
+			icon = lib.empty,
+			rightPad = lib.pad,
 			iconHl = dataHl,
 			iconHlAlt = dataHlAlt,
 			dataHl = dataHl,
 			dataHlAlt = dataHlAlt,
 			rightSepHl = dataHl,
 			rightSepHlAlt = dataHlAlt,
+
+			rightSep = {
+				gui = "",
+				tty = "|",
+			},
 
 			leftSepHl = {
 				fg = colors.darkblue,
@@ -41,31 +50,6 @@ return function()
 				bg = colors.darkgray,
 				ctermfg = 8,
 				ctermbg = 8,
-			},
-
-			leftSep = {
-				gui = "",
-				tty = "",
-			},
-
-			leftPad = {
-				gui = " ",
-				tty = " ",
-			},
-
-			icon = {
-				gui = "",
-				tty = "",
-			},
-
-			rightPad = {
-				gui = " ",
-				tty = " ",
-			},
-
-			rightSep = {
-				gui = "",
-				tty = "|",
 			},
 		})
 	end

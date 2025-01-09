@@ -2,6 +2,16 @@ local M = {}
 
 M.default = "%#OishilineDefault#"
 
+M.pad = {
+	gui = " ",
+	tty = " ",
+}
+
+M.empty = {
+	gui = "",
+	tty = "",
+}
+
 function M.run(cmd)
 	local stdout = io.popen(cmd)
 

@@ -48,6 +48,15 @@ return function()
 		suffix = moduleArgs.suffix or ""
 
 		local args = vim.tbl_deep_extend("keep", moduleArgs, {
+			leftSep = lib.empty,
+			leftPad = lib.pad,
+			rightPad = lib.pad,
+
+			rightSep = {
+				gui = "",
+				tty = "",
+			},
+
 			normal = {
 				bg = colors.darkblue,
 				ctermbg = 4,
@@ -76,26 +85,6 @@ return function()
 			terminal = {
 				bg = colors.darkgreen,
 				ctermbg = 2,
-			},
-
-			leftSep = {
-				gui = "",
-				tty = "",
-			},
-
-			leftPad = {
-				gui = " ",
-				tty = " ",
-			},
-
-			rightPad = {
-				gui = " ",
-				tty = " ",
-			},
-
-			rightSep = {
-				gui = "",
-				tty = "",
 			},
 		})
 

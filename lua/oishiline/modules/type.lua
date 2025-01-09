@@ -15,6 +15,10 @@ return function()
 		}
 
 		type = lib.stdModule(string.format("Type%s", moduleArgs.suffix or ""), moduleArgs, {
+			leftPad = lib.pad,
+			icon = lib.empty,
+			rightPad = lib.pad,
+			rightSep = lib.empty,
 			leftSepHl = dataHl,
 			leftSepHlAlt = dataHl,
 			iconHl = dataHl,
@@ -27,26 +31,6 @@ return function()
 			leftSep = {
 				gui = "",
 				tty = "|",
-			},
-
-			leftPad = {
-				gui = " ",
-				tty = " ",
-			},
-
-			icon = {
-				gui = "",
-				tty = "",
-			},
-
-			rightPad = {
-				gui = " ",
-				tty = " ",
-			},
-
-			rightSep = {
-				gui = "",
-				tty = "",
 			},
 		})
 	end

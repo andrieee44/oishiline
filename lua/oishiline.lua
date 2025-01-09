@@ -28,6 +28,8 @@ local function initArgs(userArgs)
 	}
 
 	local args = vim.tbl_deep_extend("keep", userArgs or {}, {
+		tabline = { enable = true },
+
 		globalArgs = {
 			default = default,
 			colors = colors,
@@ -113,86 +115,6 @@ local function initArgs(userArgs)
 				{ name = "location" },
 			},
 		},
-
-		tabline = {
-			enable = true,
-
-			leftActive = {
-				gui = "",
-				tty = "",
-			},
-
-			leftInactive = {
-				gui = "",
-				tty = "|",
-			},
-
-			rightActive = {
-				gui = "",
-				tty = "",
-			},
-
-			rightInactive = {
-				gui = "",
-				tty = "|",
-			},
-
-			leftSepHl = {
-				fg = colors.darkblue,
-				bg = colors.darkgray,
-				ctermfg = 4,
-				ctermbg = 8,
-			},
-
-			leftSepHlAlt = {
-				fg = default.bg,
-				bg = colors.darkgray,
-				ctermfg = 7,
-				ctermbg = 8,
-			},
-
-			iconHl = {
-				fg = colors.darkblue,
-				bg = colors.darkgray,
-				ctermfg = 4,
-				ctermbg = 8,
-			},
-
-			iconHlAlt = {
-				fg = default.bg,
-				bg = colors.darkgray,
-				ctermfg = 7,
-				ctermbg = 8,
-			},
-
-			dataHl = {
-				fg = colors.darkblue,
-				bg = colors.darkgray,
-				ctermfg = 4,
-				ctermbg = 8,
-			},
-
-			dataHlAlt = {
-				fg = default.bg,
-				bg = colors.darkgray,
-				ctermfg = 7,
-				ctermbg = 8,
-			},
-
-			rightSepHl = {
-				fg = colors.darkblue,
-				bg = colors.darkgray,
-				ctermfg = 4,
-				ctermbg = 8,
-			},
-
-			rightSepHlAlt = {
-				fg = default.bg,
-				bg = colors.darkgray,
-				ctermfg = 7,
-				ctermbg = 8,
-			},
-		},
 	})
 
 	vim.api.nvim_set_hl(0, "OishilineDefault", args.globalArgs.default)
@@ -256,7 +178,7 @@ function M.statusline()
 end
 
 function M.tabline()
-	return require("oishiline.tabline").run()
+	return vim.g.oishiline.tabline.run()
 end
 
 function M.setup(userArgs)

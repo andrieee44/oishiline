@@ -22,11 +22,20 @@ return function()
 		}
 
 		filename = lib.stdModule(string.format("Filename%s", moduleArgs.suffix or ""), moduleArgs, {
+			leftSep = lib.empty,
+			leftPad = lib.pad,
+			icon = lib.empty,
+			rightPad = lib.pad,
 			leftSepHl = dataHl,
 			iconHl = dataHl,
 			iconHlAlt = dataHlAlt,
 			dataHl = dataHl,
 			dataHlAlt = dataHlAlt,
+
+			rightSep = {
+				gui = "",
+				tty = " ",
+			},
 
 			leftSepHlAlt = {
 				fg = globalArgs.default.bg,
@@ -47,31 +56,6 @@ return function()
 				bg = colors.black,
 				ctermfg = 8,
 				ctermbg = 0,
-			},
-
-			leftSep = {
-				gui = "",
-				tty = "",
-			},
-
-			leftPad = {
-				gui = " ",
-				tty = " ",
-			},
-
-			icon = {
-				gui = "",
-				tty = "",
-			},
-
-			rightPad = {
-				gui = " ",
-				tty = " ",
-			},
-
-			rightSep = {
-				gui = "",
-				tty = " ",
 			},
 		})
 	end

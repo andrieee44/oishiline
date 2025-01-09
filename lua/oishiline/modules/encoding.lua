@@ -21,6 +21,10 @@ return function()
 		}
 
 		encoding = lib.stdModule(string.format("Encoding%s", moduleArgs.suffix or ""), moduleArgs, {
+			leftSep = lib.empty,
+			leftPad = lib.pad,
+			icon = lib.empty,
+			rightPad = lib.pad,
 			leftSepHl = leftSepHl,
 			leftSepHlAlt = leftSepHl,
 			iconHl = dataHl,
@@ -29,26 +33,6 @@ return function()
 			dataHlAlt = dataHl,
 			rightSepHl = dataHl,
 			rightSepHlAlt = dataHl,
-
-			leftSep = {
-				gui = "",
-				tty = "",
-			},
-
-			leftPad = {
-				gui = " ",
-				tty = " ",
-			},
-
-			icon = {
-				gui = "",
-				tty = "",
-			},
-
-			rightPad = {
-				gui = " ",
-				tty = " ",
-			},
 
 			rightSep = {
 				gui = "",

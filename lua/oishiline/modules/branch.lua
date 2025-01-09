@@ -22,6 +22,9 @@ return function()
 		}
 
 		branch = lib.stdModule(string.format("Branch%s", moduleArgs.suffix or ""), moduleArgs, {
+			leftSep = lib.empty,
+			leftPad = lib.pad,
+			rightPad = lib.pad,
 			leftSepHl = dataHl,
 			iconHl = dataHl,
 			iconHlAlt = dataHlAlt,
@@ -37,24 +40,9 @@ return function()
 				ctermbg = 8,
 			},
 
-			leftSep = {
-				gui = "",
-				tty = "",
-			},
-
-			leftPad = {
-				gui = " ",
-				tty = " ",
-			},
-
 			icon = {
 				gui = " ",
 				tty = "",
-			},
-
-			rightPad = {
-				gui = " ",
-				tty = " ",
 			},
 
 			rightSep = {
