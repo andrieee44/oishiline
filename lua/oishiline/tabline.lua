@@ -96,6 +96,7 @@ function M.run()
 	while i <= vim.fn.tabpagenr("$") do
 		local buf = vim.fn.tabpagebuflist(i)[vim.fn.tabpagewinnr(i)]
 		local basename = string.gsub(vim.api.nvim_buf_get_name(buf), ".*/", "")
+		local icon = hasDevicons and require("nvim-web-devicons").get_icon(basename, vim.bo[buf].filetype)
 
 		j = lib.insert(
 			results,
@@ -103,22 +104,7 @@ function M.run()
 			activeTabline(activeTab, i, i == 1 and tabline.start or tabline.leftSep, tabline.leftSepHl)
 		)
 
-		j = lib.insert(
-			results,
-			j,
-			activeTabline(
-				activeTab,
-				i,
-				hasDevicons
-						and string.format(
-							" %s",
-							require("nvim-web-devicons").get_icon(basename, vim.bo[buf].filetype) or ""
-						)
-					or "",
-				tabline.iconHl
-			)
-		)
-
+		j = lib.insert(results, j, activeTabline(activeTab, i, icon and icon or "", tabline.iconHl))
 		j = lib.insert(results, j, tabline.leftPad)
 
 		j = lib.insert(
