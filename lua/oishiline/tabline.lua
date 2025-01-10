@@ -109,7 +109,9 @@ function M.run()
 			activeTabline(
 				activeTab,
 				i,
-				hasDevicons and require("nvim-web-devicons").get_icon(basename, vim.bo[buf].filetype) or "",
+				hasDevicons and
+				string.format(" %s", require("nvim-web-devicons").get_icon(basename, vim.bo[buf].filetype)) or
+				"",
 				tabline.iconHl
 			)
 		)

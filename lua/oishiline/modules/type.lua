@@ -46,7 +46,7 @@ return function()
 		if hasDevicons then
 			local basename = string.gsub(vim.api.nvim_buf_get_name(0), ".*/", "")
 
-			if basename == oldBasename then
+			if icon and basename == oldBasename then
 				return lib.stdFormat(type, string.format("%s %s", oldIcon, ft))
 			end
 
