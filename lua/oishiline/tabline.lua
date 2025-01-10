@@ -104,7 +104,7 @@ function M.run()
 			activeTabline(activeTab, i, i == 1 and tabline.start or tabline.leftSep, tabline.leftSepHl)
 		)
 
-		j = lib.insert(results, j, activeTabline(activeTab, i, icon and icon or "", tabline.iconHl))
+		j = lib.insert(results, j, activeTabline(activeTab, i, icon and string.format(" %s", icon) or "", tabline.iconHl))
 		j = lib.insert(results, j, tabline.leftPad)
 
 		j = lib.insert(
