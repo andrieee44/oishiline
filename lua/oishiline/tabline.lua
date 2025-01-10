@@ -1,15 +1,16 @@
 local lib = require("oishiline.modules.lib")
+local tabline, hasDevicons
 local M = {}
 
-function M.init(globalArgs, moduleArgs)
-	colors = globalArgs.colors
-	default = globalArgs.default
-	suffix = moduleArgs.suffix or ""
+local function activeTabline(activeTab, tab, str, hl)
+	return string.format("%%#%s#%s", activeTab == tab and hl.hl or hl.alt, str)
+end
 
-	local sep = {
-		gui = "",
-		tty = "",
-	}
+function M.init(globalArgs, moduleArgs)
+	local colors = globalArgs.colors
+	local default = globalArgs.default
+	local suffix = moduleArgs.suffix or ""
+	hasDevicons = vim.opt.termguicolors._value and package.loaded["nvim-web-devicons"]
 
 	local dataHl = {
 		fg = colors.black,
@@ -27,36 +28,106 @@ function M.init(globalArgs, moduleArgs)
 	}
 
 	local args = vim.tbl_deep_extend("keep", moduleArgs, {
-		start = sep,
-		leftSep = sep,
+		start = lib.empty,
 		leftPad = lib.pad,
 		rightPad = lib.pad,
-		rightSep = sep,
-		startHl = dataHl,
-		startHlAlt = dataHlAlt,
-		leftSepHl = dataHl,
-		leftSepHlAlt = dataHlAlt,
 		iconHl = dataHl,
 		iconHlAlt = dataHlAlt,
 		dataHl = dataHl,
 		dataHlAlt = dataHlAlt,
-		rightSepHl = dataHl,
-		rightSepHlAlt = dataHlAlt,
+
+		leftSep = {
+			gui = "",
+			tty = "",
+		},
+
+		rightSep = {
+			gui = "",
+			tty = " ",
+		},
+
+		leftSepHl = {
+			fg = default.bg,
+			bg = colors.darkblue,
+			ctermfg = default.ctermbg,
+			ctermbg = 4,
+		},
+
+		leftSepHlAlt = {
+			fg = default.bg,
+			bg = colors.darkgray,
+			ctermfg = default.ctermbg,
+			ctermbg = 8,
+		},
+
+		rightSepHl = {
+			fg = colors.darkblue,
+			bg = colors.black,
+			ctermfg = 4,
+			ctermbg = 0,
+		},
+
+		rightSepHlAlt = {
+			fg = colors.darkgray,
+			bg = default.bg,
+			ctermfg = 8,
+			ctermbg = default.ctermbg,
+		},
 	})
+
+	tabline = {
+		start = lib.gui(args.start),
+		leftSep = lib.gui(args.leftSep),
+		leftPad = lib.gui(args.leftPad),
+		rightPad = lib.gui(args.rightPad),
+		rightSep = lib.gui(args.rightSep),
+		leftSepHl = lib.mkHl(string.format("Oishiline%sLeftSep", suffix), args.leftSepHl, args.leftSepHlAlt),
+		iconHl = lib.mkHl(string.format("Oishiline%sIcon", suffix), args.iconHl, args.iconHlAlt),
+		dataHl = lib.mkHl(string.format("Oishiline%sData", suffix), args.dataHl, args.dataHlAlt),
+		rightSepHl = lib.mkHl(string.format("Oishiline%sRightSep", suffix), args.rightSepHl, args.rightSepHlAlt),
+	}
 end
 
 function M.run()
-	local currentTab = vim.fn.tabpagenr()
+	local activeTab = vim.fn.tabpagenr()
 	local results = {}
-	local j = 1
+	local i, j = 1, 1
 
-	for i = 1, vim.fn.tabpagenr("$") do
-		local basename =
-			string.gsub(vim.api.nvim_buf_get_name(vim.fn.tabpagebuflist(i)[vim.fn.tabpagewinnr(i)]), ".*/", "")
+	while i <= vim.fn.tabpagenr("$") do
+		local buf = vim.fn.tabpagebuflist(i)[vim.fn.tabpagewinnr(i)]
+		local basename = string.gsub(vim.api.nvim_buf_get_name(buf), ".*/", "")
 
-		results[j] = basename == "" and "[No Name]" or basename
-		j = j + 1
+		j = lib.insert(
+			results,
+			j,
+			activeTabline(activeTab, i, i == 1 and tabline.start or tabline.leftSep, tabline.leftSepHl)
+		)
+
+		j = lib.insert(
+			results,
+			j,
+			activeTabline(
+				activeTab,
+				i,
+				hasDevicons and require("nvim-web-devicons").get_icon(basename, vim.bo[buf].filetype) or "",
+				tabline.iconHl
+			)
+		)
+
+		j = lib.insert(results, j, tabline.leftPad)
+
+		j = lib.insert(
+			results,
+			j,
+			activeTabline(activeTab, i, basename == "" and "[No Name]" or basename, tabline.dataHl)
+		)
+
+		j = lib.insert(results, j, tabline.rightPad)
+		j = lib.insert(results, j, activeTabline(activeTab, i, tabline.rightSep, tabline.rightSepHl))
+		i = i + 1
 	end
+
+	j = lib.insert(results, j, lib.default)
 
 	return table.concat(results)
 end

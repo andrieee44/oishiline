@@ -1,3 +1,4 @@
+local lib = require("oishiline.modules.lib")
 local M = {}
 
 local function initArgs(userArgs)
@@ -52,7 +53,6 @@ local function initArgs(userArgs)
 
 					args = {
 						suffix = "Right",
-						dataHlAlt = { fg = colors.lightgray },
 
 						active = {
 							gui = "",
@@ -156,23 +156,19 @@ function M.statusline()
 	local results = {}
 	local i = 1
 
-	results[i] = "%#OishilineDefault#"
-	i = i + 1
+	i = lib.insert(results, i, "%#OishilineDefault#")
 
 	for _, v in ipairs(vim.g.oishiline.statusline.leftModules) do
-		results[i] = v.run()
-		i = i + 1
+		i = lib.insert(results, i, v.run())
 	end
 
-	results[i] = "%=%("
-	i = i + 1
+	i = lib.insert(results, i, "%=%(")
 
 	for _, v in ipairs(vim.g.oishiline.statusline.rightModules) do
-		results[i] = v.run()
-		i = i + 1
+		i = lib.insert(results, i, v.run())
 	end
 
-	results[i] = "%)"
+	i = lib.insert(results, i, "%)")
 
 	return table.concat(results)
 end

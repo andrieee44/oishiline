@@ -54,15 +54,15 @@ function M.stdModule(moduleName, moduleArgs, defaultArgs)
 	local args = vim.tbl_deep_extend("keep", moduleArgs, defaultArgs)
 
 	return {
-		leftSepHl = M.mkHl(string.format("Oishiline%sLeftSep", moduleName), args.leftSepHl, args.leftSepHlAlt),
-		iconHl = M.mkHl(string.format("Oishiline%sIcon", moduleName), args.iconHl, args.iconHlAlt),
-		dataHl = M.mkHl(string.format("Oishiline%sData", moduleName), args.dataHl, args.dataHlAlt),
-		rightSepHl = M.mkHl(string.format("Oishiline%sRightSep", moduleName), args.rightSepHl, args.rightSepHlAlt),
 		leftSep = M.gui(args.leftSep),
 		leftPad = M.gui(args.leftPad),
 		icon = M.gui(args.icon),
 		rightPad = M.gui(args.rightPad),
 		rightSep = M.gui(args.rightSep),
+		leftSepHl = M.mkHl(string.format("Oishiline%sLeftSep", moduleName), args.leftSepHl, args.leftSepHlAlt),
+		iconHl = M.mkHl(string.format("Oishiline%sIcon", moduleName), args.iconHl, args.iconHlAlt),
+		dataHl = M.mkHl(string.format("Oishiline%sData", moduleName), args.dataHl, args.dataHlAlt),
+		rightSepHl = M.mkHl(string.format("Oishiline%sRightSep", moduleName), args.rightSepHl, args.rightSepHlAlt),
 	}
 end
 
@@ -75,6 +75,12 @@ function M.stdFormat(stdModule, data)
 		M.colorStr(stdModule.rightSep, stdModule.rightSepHl),
 		M.default
 	)
+end
+
+function M.insert(tbl, index, data)
+	tbl[index] = data
+
+	return index + 1
 end
 
 return M

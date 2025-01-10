@@ -6,7 +6,6 @@ return function()
 	function M.init(globalArgs, moduleArgs)
 		local colors = globalArgs.colors
 		local default = globalArgs.default
-		local gui = vim.opt.termguicolors._value
 
 		separator = vim.tbl_deep_extend("keep", moduleArgs, {
 			active = {

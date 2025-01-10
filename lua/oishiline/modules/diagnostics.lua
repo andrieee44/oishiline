@@ -145,8 +145,7 @@ return function()
 				first = false
 			end
 
-			results[j] = lib.colorStr(sep, hl)
-			j = j + 1
+			j = lib.insert(results, j, lib.colorStr(sep, hl))
 
 			hl = lib.mkHl(string.format("OishilineDiagnostics%s%s", suffix, signNames[i]), {
 				fg = default.bg,
@@ -156,8 +155,7 @@ return function()
 				bold = true,
 			})
 
-			results[j] = lib.colorStr(string.format("%s%d ", signs[i], v), hl)
-			j = j + 1
+			j = lib.insert(results, j, lib.colorStr(string.format("%s%d ", signs[i], v), hl))
 			last = i
 
 			::continue::
@@ -170,7 +168,7 @@ return function()
 			ctermbg = default.ctermbg,
 		})
 
-		results[j] = lib.colorStr(sep, lastHl)
+		j = lib.insert(results, j, lib.colorStr(sep, lastHl))
 		oldCount = shallowCopy(count)
 		oldOutput = table.concat(results)
 
