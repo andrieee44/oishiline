@@ -25,6 +25,7 @@
       "LICENSE"
       ".direnv"
       ".envrc"
+      "oishiline.3"
     ];
   };
 }

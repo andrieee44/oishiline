@@ -1,0 +1,163 @@
+.TH OISHILINE 3
+.SH NAME
+oishiline \- statusline and tabline for
+.IR nvim (1).
+.SH SYNOPSIS
+.EX
+.B require(\(dqoishiline\(dq).setup()
+.EE
+.SH DESCRIPTION
+.B oishiline
+is a statusline and tabline for
+.IR nvim (1).
+.SH DEFAULT SETUP CONFIGURATION
+.EX
+{
+  tabline = { enable = true },
+
+  globalArgs = {
+    default = {
+      fg = "#e5e9f0",
+      bg = "#2e3440",
+      ctermfg = 7,
+      ctermbg = 0,
+    },
+
+    colors = {
+      black = "#2e3440",
+      darkred = "#bf616a",
+      darkgreen = "#a3be8c",
+      darkyellow = "#ebcb8b",
+      darkblue = "#81a1c1",
+      darkmagenta = "#b48ead",
+      darkcyan = "#88c0d0",
+      lightgray = "#e5e9f0",
+      darkgray = "#4c566a",
+      red = "#bf616a",
+      green = "#a3be8c",
+      yellow = "#ebcb8b",
+      blue = "#81a1c1",
+      magenta = "#b48ead",
+      cyan = "#88c0d0",
+      white = "#8fbcbb",
+    },
+  },
+
+  statusline = {
+    enable = true,
+
+    leftModules = {
+      { name = "mode" },
+      { name = "separator" },
+      { name = "branch" },
+      { name = "filename" },
+      { name = "diagnostics" },
+    },
+
+    rightModules = {
+      {
+        name = "separator",
+
+        args = {
+          suffix = "Right",
+
+          active = {
+            gui = "",
+            tty = "",
+          },
+
+          inactive = {
+            gui = "",
+            tty = "",
+          },
+
+          dataHl = {
+            fg = "#4c566a",
+            bg = "#2e3440",
+          },
+
+          dataHlAlt = {
+            fg = "#e5e9f0",
+            bg = "#2e3440",
+          },
+        },
+      },
+
+      { name = "encoding" },
+      { name = "format" },
+      { name = "type" },
+
+      {
+        name = "separator",
+
+        args = {
+          suffix = "Right2",
+
+          active = {
+            gui = "",
+            tty = "",
+          },
+
+          inactive = {
+            gui = "",
+            tty = "|",
+          },
+
+          dataHl = {
+            fg = "#81a1c1",
+            bg = "#4c566a",
+            ctermfg = 4,
+            ctermbg = 8,
+          },
+
+          dataHlAlt = {
+            fg = "#e5e9f0",
+            ctermfg = 7,
+            ctermbg = 8,
+          },
+        },
+      },
+
+      { name = "progress" },
+      { name = "location" },
+    },
+  },
+}
+.EE
+.SH DEFAULT MODULE CONFIGURATION
+.SS BRANCH
+{
+  leftSep = lib.empty,
+  leftPad = lib.pad,
+  rightPad = lib.pad,
+  leftSepHl = dataHl,
+  iconHl = dataHl,
+  iconHlAlt = dataHlAlt,
+  dataHl = dataHl,
+  dataHlAlt = dataHlAlt,
+  rightSepHl = dataHl,
+  rightSepHlAlt = dataHlAlt,
+
+  leftSepHlAlt = {
+    fg = globalArgs.default.bg,
+    bg = colors.darkgray,
+    ctermfg = globalArgs.default.ctermbg,
+    ctermbg = 8,
+  },
+
+  icon = {
+    gui = " ",
+    tty = "",
+  },
+
+  rightSep = {
+    gui = "",
+    tty = "|",
+  },
+}
+.EX
+.EE
+.SH SEE ALSO
+.IR nvim (1)
+.SH AUTHOR
+andrieee44 (andrieee44@gmail.com)
