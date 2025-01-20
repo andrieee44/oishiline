@@ -12,28 +12,6 @@ M.empty = {
 	tty = "",
 }
 
-local function printObj(obj, indent)
-	if type(obj) == "table" then
-		local s = "{ "
-		for k, v in pairs(obj) do
-			s = s .. k .. " = " .. printObj(v, 0) .. ","
-		end
-		return s .. "}"
-	else
-		return tostring(obj)
-	end
-end
-
-function M.print2buf(obj)
-	vim.api.nvim_buf_set_lines(
-		vim.api.nvim_get_current_buf(),
-		0,
-		0,
-		false,
-		vim.split(printObj(obj, 0), "\n", { plain = true })
-	)
-end
-
 function M.run(cmd)
 	local stdout = io.popen(cmd)
 

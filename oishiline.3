@@ -125,24 +125,113 @@ is a statusline and tabline for
 }
 .EE
 .SH DEFAULT MODULE CONFIGURATION
-.SS BRANCH
+.SS tabline
+.EX
 {
-  leftSep = lib.empty,
-  leftPad = lib.pad,
-  rightPad = lib.pad,
-  leftSepHl = dataHl,
-  iconHl = dataHl,
-  iconHlAlt = dataHlAlt,
-  dataHl = dataHl,
-  dataHlAlt = dataHlAlt,
-  rightSepHl = dataHl,
-  rightSepHlAlt = dataHlAlt,
+  suffix = "",
+
+  dataHl = {
+    bg = "#81a1c1",
+    bold = true,
+    ctermbg = 4,
+    ctermfg = 0,
+    fg = "#2e3440",
+  },
+
+  dataHlAlt = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
+  },
+
+  iconHl = {
+    bg = "#81a1c1",
+    bold = true,
+    ctermbg = 4,
+    ctermfg = 0,
+    fg = "#2e3440",
+  },
+
+  iconHlAlt = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
+  },
+
+  leftPad = {
+    gui = " ",
+    tty = " ",
+  },
+
+  leftSep = {
+    gui = "",
+    tty = "",
+  },
+
+  leftSepHl = {
+    bg = "#81a1c1",
+    ctermbg = 4,
+    ctermfg = 0,
+    fg = "#2e3440",
+  },
 
   leftSepHlAlt = {
-    fg = globalArgs.default.bg,
-    bg = colors.darkgray,
-    ctermfg = globalArgs.default.ctermbg,
+    bg = "#4c566a",
     ctermbg = 8,
+    ctermfg = 0,
+    fg = "#2e3440",
+  },
+
+  rightPad = {
+    gui = " ",
+    tty = " ",
+  },
+
+  rightSep = {
+    gui = "",
+    tty = " ",
+  },
+
+  rightSepHl = {
+    bg = "#2e3440",
+    ctermbg = 0,
+    ctermfg = 4,
+    fg = "#81a1c1",
+  },
+
+  rightSepHlAlt = {
+    bg = "#2e3440",
+    ctermbg = 0,
+    ctermfg = 8,
+    fg = "#4c566a",
+  },
+
+  start = {
+    gui = "",
+    tty = "",
+  },
+}
+.EE
+.SS branch
+.EX
+{
+  suffix = "",
+
+  dataHl = {
+    bg = "#81a1c1",
+    bold = true,
+    ctermbg = 4,
+    ctermfg = 0,
+    fg = "#2e3440",
+  },
+
+  dataHlAlt = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
   },
 
   icon = {
@@ -150,12 +239,740 @@ is a statusline and tabline for
     tty = "",
   },
 
+  iconHl = {
+    bg = "#81a1c1",
+    bold = true,
+    ctermbg = 4,
+    ctermfg = 0,
+    fg = "#2e3440",
+  },
+
+  iconHlAlt = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
+  },
+
+  leftPad = {
+    gui = " ",
+    tty = " ",
+  },
+
+  leftSep = {
+    gui = "",
+    tty = "",
+  },
+
+  leftSepHl = {
+    bg = "#81a1c1",
+    bold = true,
+    ctermbg = 4,
+    ctermfg = 0,
+    fg = "#2e3440",
+  },
+
+  leftSepHlAlt = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 0,
+    fg = "#2e3440",
+  },
+
+  rightPad = {
+    gui = " ",
+    tty = " ",
+  },
+
   rightSep = {
     gui = "",
     tty = "|",
   },
+
+  rightSepHl = {
+    bg = "#81a1c1",
+    bold = true,
+    ctermbg = 4,
+    ctermfg = 0,
+    fg = "#2e3440",
+  },
+
+  rightSepHlAlt = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
+  },
 }
+.EE
+.SS diagnostics
 .EX
+{
+  suffix = "",
+
+  sep = {
+    gui = "",
+    tty = "",
+  },
+
+  Error = {
+    bg = "#bf616a",
+    ctermbg = 1,
+  },
+
+  ErrorBg = {
+    bg = "#bf616a",
+    ctermbg = 1,
+  },
+
+  Warn = {
+    bg = "#ebcb8b",
+    ctermbg = 3,
+  },
+
+  WarnBg = {
+    bg = "#ebcb8b",
+    ctermbg = 3,
+  },
+
+  Info = {
+    bg = "#81a1c1",
+    ctermbg = 4,
+  },
+
+  InfoBg = {
+    bg = "#81a1c1",
+    ctermbg = 4,
+  },
+
+  Hint = {
+    bg = "#88c0d0",
+    ctermbg = 6,
+  },
+
+  HintBg = {
+    bg = "#88c0d0",
+    ctermbg = 6,
+  },
+}
+.EE
+.SS encoding
+.EX
+{
+  suffix = "",
+
+  dataHl = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
+  },
+
+  dataHlAlt = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
+  },
+
+  icon = {
+    gui = "",
+    tty = "",
+  },
+
+  iconHl = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
+  },
+
+  iconHlAlt = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
+  },
+
+  leftPad = {
+    gui = " ",
+    tty = " ",
+  },
+
+  leftSep = {
+    gui = "",
+    tty = "",
+  },
+
+  leftSepHl = {
+    bg = "#2e3440",
+    ctermbg = 0,
+    ctermfg = 8,
+    fg = "#4c566a",
+  },
+
+  leftSepHlAlt = {
+    bg = "#2e3440",
+    ctermbg = 0,
+    ctermfg = 8,
+    fg = "#4c566a",
+  },
+
+  rightPad = {
+    gui = " ",
+    tty = " ",
+  },
+
+  rightSep = {
+    gui = "",
+    tty = "|",
+  },
+
+  rightSepHl = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
+  },
+
+  rightSepHlAlt = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
+  },
+}
+.EE
+.SS filename
+.EX
+{
+  suffix = "",
+
+  dataHl = {
+    bg = "#81a1c1",
+    bold = true,
+    ctermbg = 4,
+    ctermfg = 0,
+    fg = "#2e3440",
+  },
+
+  dataHlAlt = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
+  },
+
+  icon = {
+    gui = "",
+    tty = "",
+  },
+
+  iconHl = {
+    bg = "#81a1c1",
+    bold = true,
+    ctermbg = 4,
+    ctermfg = 0,
+    fg = "#2e3440",
+  },
+
+  iconHlAlt = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
+  },
+
+  leftPad = {
+    gui = " ",
+    tty = " ",
+  },
+
+  leftSep = {
+    gui = "",
+    tty = "",
+  },
+
+  leftSepHl = {
+    bg = "#81a1c1",
+    bold = true,
+    ctermbg = 4,
+    ctermfg = 0,
+    fg = "#2e3440",
+  },
+
+  leftSepHlAlt = {
+    bg = "#e5e9f0",
+    ctermbg = 7,
+    ctermfg = 0,
+    fg = "#2e3440",
+  },
+
+  rightPad = {
+    gui = " ",
+    tty = " ",
+  },
+
+  rightSep = {
+    gui = "",
+    tty = " ",
+  },
+
+  rightSepHl = {
+    bg = "#2e3440",
+    ctermbg = 0,
+    ctermfg = 1,
+    fg = "#81a1c1",
+  },
+
+  rightSepHlAlt = {
+    bg = "#2e3440",
+    ctermbg = 0,
+    ctermfg = 8,
+    fg = "#4c566a",
+  },
+}
+.EE
+.SS format
+.EX
+{
+  suffix = "",
+
+  dataHl = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
+  },
+
+  dataHlAlt = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
+  },
+
+  icon = {
+    gui = "",
+    tty = "",
+  },
+
+  iconHl = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
+  },
+
+  iconHlAlt = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
+  },
+
+  leftPad = {
+    gui = " ",
+    tty = " ",
+  },
+
+  leftSep = {
+    gui = "",
+    tty = "",
+  },
+
+  leftSepHl = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
+  },
+
+  leftSepHlAlt = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
+  },
+
+  rightPad = {
+    gui = " ",
+    tty = " ",
+  },
+
+  rightSep = {
+    gui = "",
+    tty = "",
+  },
+
+  rightSepHl = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
+  },
+
+  rightSepHlAlt = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
+  },
+}
+.EE
+.SS location
+.EX
+{
+  suffix = "",
+
+  dataHl = {
+    bg = "#81a1c1",
+    bold = true,
+    ctermbg = 4,
+    ctermfg = 0,
+    fg = "#2e3440",
+  },
+
+  dataHlAlt = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
+  },
+
+  icon = {
+    gui = "",
+    tty = "",
+  },
+
+  iconHl = {
+    bg = "#81a1c1",
+    bold = true,
+    ctermbg = 4,
+    ctermfg = 0,
+    fg = "#2e3440",
+  },
+
+  iconHlAlt = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
+  },
+
+  leftPad = {
+    gui = " ",
+    tty = " ",
+  },
+
+  leftSep = {
+    gui = "",
+    tty = "",
+  },
+
+  leftSepHl = {
+    bg = "#81a1c1",
+    bold = true,
+    ctermbg = 4,
+    ctermfg = 0,
+    fg = "#2e3440",
+  },
+
+  leftSepHlAlt = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
+  },
+
+  rightPad = {
+    gui = " ",
+    tty = " ",
+  },
+
+  rightSep = {
+    gui = "",
+    tty = "",
+  },
+
+  rightSepHl = {
+    bg = "#81a1c1",
+    bold = true,
+    ctermbg = 4,
+    ctermfg = 0,
+    fg = "#2e3440",
+  },
+
+  rightSepHlAlt = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
+  },
+}
+.EE
+.SS mode
+.EX
+{
+  suffix = "",
+
+  command = {
+    bg = "#81a1c1",
+    ctermbg = 4,
+  },
+
+  insert = {
+    bg = "#a3be8c",
+    ctermbg = 2,
+  },
+
+  leftPad = {
+    gui = " ",
+    tty = " ",
+  },
+
+  leftSep = {
+    gui = "",
+    tty = "",
+  },
+
+  normal = {
+    bg = "#81a1c1",
+    ctermbg = 4,
+  },
+
+  replace = {
+    bg = "#bf616a",
+    ctermbg = 1,
+  },
+
+  rightPad = {
+    gui = " ",
+    tty = " ",
+  },
+
+  rightSep = {
+    gui = "",
+    tty = "",
+  },
+
+  terminal = {
+    bg = "#a3be8c",
+    ctermbg = 2,
+  },
+
+  visual = {
+    bg = "#b48ead",
+    ctermbg = 5,
+  },
+}
+.EE
+.SS progress
+.EX
+{
+  suffix = "",
+
+  dataHl = {
+    bg = "#81a1c1",
+    bold = true,
+    ctermbg = 4,
+    ctermfg = 0,
+    fg = "#2e3440",
+  },
+
+  dataHlAlt = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
+  },
+
+  icon = {
+    gui = "",
+    tty = "",
+  },
+
+  iconHl = {
+    bg = "#81a1c1",
+    bold = true,
+    ctermbg = 4,
+    ctermfg = 0,
+    fg = "#2e3440",
+  },
+
+  iconHlAlt = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
+  },
+
+  leftPad = {
+    gui = " ",
+    tty = " ",
+  },
+
+  leftSep = {
+    gui = "",
+    tty = "",
+  },
+
+  leftSepHl = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 4,
+    fg = "#81a1c1",
+  },
+
+  leftSepHlAlt = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 8,
+    fg = "#4c566a",
+  },
+
+  rightPad = {
+    gui = " ",
+    tty = " ",
+  },
+
+  rightSep = {
+    gui = "",
+    tty = "|",
+  },
+
+  rightSepHl = {
+    bg = "#81a1c1",
+    bold = true,
+    ctermbg = 4,
+    ctermfg = 0,
+    fg = "#2e3440",
+  },
+
+  rightSepHlAlt = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
+  },
+}
+.EE
+.SS separator
+.EX
+{
+  suffix = "",
+
+  active = {
+    gui = "",
+    tty = " ",
+  },
+
+  dataHl = {
+    bg = "#81a1c1",
+    ctermbg = 0,
+    ctermfg = 7,
+    fg = "#2e3440",
+  },
+
+  dataHlAlt = {
+    bg = "#4c566a",
+    ctermbg = 0,
+    ctermfg = 7,
+    fg = "#2e3440",
+  },
+
+  inactive = {
+    gui = "",
+    tty = " ",
+  },
+}
+.EE
+.SS type
+.EX
+{
+  suffix = "",
+
+  dataHl = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
+  },
+
+  dataHlAlt = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
+  },
+
+  icon = {
+    gui = "",
+    tty = "",
+  },
+
+  iconHl = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
+  },
+
+  iconHlAlt = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
+  },
+
+  leftPad = {
+    gui = " ",
+    tty = " ",
+  },
+
+  leftSep = {
+    gui = "",
+    tty = "|",
+  },
+
+  leftSepHl = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
+  },
+
+  leftSepHlAlt = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
+  },
+
+  rightPad = {
+    gui = " ",
+    tty = " ",
+  },
+
+  rightSep = {
+    gui = "",
+    tty = "",
+  },
+
+  rightSepHl = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
+  },
+
+  rightSepHlAlt = {
+    bg = "#4c566a",
+    ctermbg = 8,
+    ctermfg = 7,
+    fg = "#e5e9f0",
+  },
+}
 .EE
 .SH SEE ALSO
 .IR nvim (1)

@@ -21,36 +21,6 @@ return function()
 			ctermbg = 8,
 		}
 
-		lib.print2buf({
-			leftSep = lib.empty,
-			leftPad = lib.pad,
-			rightPad = lib.pad,
-			leftSepHl = dataHl,
-			iconHl = dataHl,
-			iconHlAlt = dataHlAlt,
-			dataHl = dataHl,
-			dataHlAlt = dataHlAlt,
-			rightSepHl = dataHl,
-			rightSepHlAlt = dataHlAlt,
-
-			leftSepHlAlt = {
-				fg = globalArgs.default.bg,
-				bg = colors.darkgray,
-				ctermfg = globalArgs.default.ctermbg,
-				ctermbg = 8,
-			},
-
-			icon = {
-				gui = " ",
-				tty = "",
-			},
-
-			rightSep = {
-				gui = "",
-				tty = "|",
-			},
-		})
-
 		branch = lib.stdModule(string.format("Branch%s", moduleArgs.suffix or ""), moduleArgs, {
 			leftSep = lib.empty,
 			leftPad = lib.pad,
