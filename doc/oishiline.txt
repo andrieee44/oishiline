@@ -1,4 +1,5 @@
-OISHILINE(3)		    Library Functions Manual		    OISHILINE(3)
+*oishiline*
+OISHILINE(3)		    Library Functions Manual		   OISHILINE(3)
 
 NAME
        oishiline - statusline and tabline for nvim(1).
@@ -967,4 +968,4 @@ SEE ALSO
 AUTHOR
        andrieee44 (andrieee44@gmail.com)
 
-								    OISHILINE(3)
+								   OISHILINE(3)
